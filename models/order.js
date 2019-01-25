@@ -6,9 +6,18 @@ const orderSchema = new Schema({
   requestor: { type: String, required: true },
   quantity: { type: Number, required: true },
   description: { type: String, required: false},
+  ordered: {b: Boolean},
+  products: [
+    {
+      // Store ObjectIds in the array
+      type: Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Note model
+      ref: "Product"
+    }
+  ],
   date: { type: Date, default: Date.now }
 });
 
-const Product = mongoose.model("Product", productSchema);
+const Order = mongoose.model("Order", orderSchema);
 
-module.exports = Product;
+module.exports = Order;
