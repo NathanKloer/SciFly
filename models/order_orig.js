@@ -2,11 +2,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-  product: { type: String, required: true },
-  requestor: { type: String, required: true },
-  quantity: { type: Number, required: true },
-  description: { type: String, required: false},
-  ordered: {b: Boolean},
+  // product: { type: String, required: true },
+  // requestor: { type: String, required: true },
+  // quantity: { type: Number, required: true },
+  // description: { type: String, required: false},
+  ordered: {
+    type: Boolean
+  },
+  users: {
+    type: Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Note model
+      ref: "User"
+  },
   products: [
     {
       // Store ObjectIds in the array
