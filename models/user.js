@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: { type: String, required: true },
+  userName: { type: String, required: true },
   email: { type: String, match:[/.+@.+\..+/, "Please enter a valid e-mail address"],
   required: true },
   password: { type: String, required: true },
   phone: { type: String, required: true },
-  orders: [
+  //I want to see a user's orders when a query a user _id
+  order:[
     {
-      // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
       // The ObjectIds will refer to the ids in the Note model
       ref: "Order"
