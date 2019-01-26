@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Seed Database",
-            "program": "${workspaceFolder}/scripts/seedDB.js"
+            "program": "${workspaceFolder}/scripts/seedDB2.js"
         }
     ]
 }

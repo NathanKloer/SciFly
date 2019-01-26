@@ -16,13 +16,13 @@ const orderSchema = new Schema({
   },
   products: [
     {
-      orderedQuantity: { type: Number, required: true}
-    },
-    {
-      // Store ObjectIds in the array
-      type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the Note model
-      ref: "Product"
+      quantity: { type: Number, required: true},
+      product: {
+        // Store ObjectIds in the array
+        type: Schema.Types.ObjectId,
+        // The ObjectIds will refer to the ids in the Note model
+        ref: "Product"
+      }
     }
   ],
   date: { type: Date, default: Date.now }
