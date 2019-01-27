@@ -162,10 +162,10 @@ function main(){
         },
         {
           $push: {
-            users:  userIdArr[0],
+            user:  userIdArr[0],
             products: [
               {
-                quantity: 1,
+                productQuantity: 1,
                 product: productIdArr[0]._id
               }
             ]
@@ -184,7 +184,7 @@ function main(){
   populateOrder = () => {
     db.Order.find({"_id": orderId})
           // Specify that we want to populate the retrieved orders with any associated users and products
-          .populate("users")
+          .populate("user")
           .populate("products.product")
           .then(function(data){
               //console.log("htmlRoutes.js -/saved: "+data.length);

@@ -2,6 +2,6 @@
 module.exports = {
   Product: require("./product"),
   // Order: require("./order_orig"),
-  Order: require("./order2"),
+  Order: require("./order"),
   User: require("./user")
 };
