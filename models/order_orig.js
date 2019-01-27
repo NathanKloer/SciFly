@@ -9,20 +9,17 @@ const orderSchema = new Schema({
   ordered: {
     type: Boolean
   },
-  user: {
+  users: {
     type: Schema.Types.ObjectId,
       // The ObjectIds will refer to the ids in the Note model
       ref: "User"
   },
   products: [
     {
-      productQuantity: { type: Number, required: true},
-      product: {
-        // Store ObjectIds in the array
-        type: Schema.Types.ObjectId,
-        // The ObjectIds will refer to the ids in the Note model
-        ref: "Product"
-      }
+      // Store ObjectIds in the array
+      type: Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Note model
+      ref: "Product"
     }
   ],
   date: { type: Date, default: Date.now }

@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import HomeContainer from "./pages/HomeContainer";
+import SearchContainer from "./pages/SearchContainer";
+import ConfirmationContainer from "./pages/ConfirmationContainer";
+import DonateContainer from "./pages/DonateContainer";
+import NoMatchContainer from "./pages/NoMatchContainer";
+// import Header from "./components/Header";
+import NavBar from "./components/NavBar";
+import "./style.css";
+// import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        {/* Router must have one and only one child tag */}
+        <div>
+          <NavBar />
+          <Switch>
+            {/* Route just registers which component should displayed depending on the url path*/}
+            <Route exact path="/" component={HomeContainer} />
+            <Route exact path="/home/:organization" component={HomeContainer} />
+            <Route exact path="/search" component={SearchContainer} />
+            <Route exact path="/search/:category" component={SearchContainer} />
+            <Route exact path="/confirmation" component={ConfirmationContainer} />
+            <Route exact path="/donate" component={DonateContainer} />
+            <Route component={NoMatchContainer} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
