@@ -124,10 +124,11 @@ function main(){
         {
           userIdArr[i] = users[i]._id;
           console.log("USERID-" + i + " " + userIdArr[i]);
+          if(i === users.length-1){
+            createOrder();
+          }
         }
-        if(i >= users.length-1){
-          createOrder();
-        }
+
       });
     }
     catch(e){
@@ -151,24 +152,31 @@ function main(){
       console.log("IN THENABALE");
 
       //IMPORTANT: CREATE AN ARRAY OF YOUR OBJECT IDS
-      var objIds = [productIdArr[0], productIdArr[1], productIdArr[2], productIdArr[3]];
+      // var objIds = [productIdArr[0], productIdArr[1], productIdArr[2], productIdArr[3]];
 
       // return db.Order.findOneAndUpdate(
-      return db.Order.update(
+      // return db.Order.update(
+        db.Order.update(
         {
           "_id": newOrder._id
         },
         {
-          $push:
-          {
+          $push: {
             users:  userIdArr[0],
-            // products: {$each: orderQuantity, objIds},
-
-              products: [1,productIdArr[0]]
+            products: [
+              {
+                quantity: 1,
+                product: productIdArr[0]._id
+              }
+            ]
+            // ,products: [1, productIdArr[1]],
+            // products: [1, productIdArr[2]],
+            // products: [1, productIdArr[3]]
           },//define user
         },
         populateOrder
       );//return
+      // populateOrder();
     });//thenable
   }//function
 
@@ -177,12 +185,14 @@ function main(){
     db.Order.find({"_id": orderId})
           // Specify that we want to populate the retrieved orders with any associated users and products
           .populate("users")
-          .populate("products")
+          .populate("products.product")
           .then(function(data){
               //console.log("htmlRoutes.js -/saved: "+data.length);
               if(data.length > 0){
                   //send the data back to the front end that called the get
                   //res.json(data);
+                  // console.log("DATA =", data);
+                  console.log(JSON.stringify(data));
                   // console.log("Populated DATA = ", JSON.stringify(data));
               }
               else{
