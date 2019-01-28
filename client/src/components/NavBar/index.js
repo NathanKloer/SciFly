@@ -1,32 +1,76 @@
-import React from "react";
+import React, { Component } from "react";
+import { Navbar, Nav, NavItem } from "react-bootstrap";
+import Login from "../logIn";
 // import { Link } from "react-router-dom";
-// import "./style.css";
+import "./style.css";
 
-function NavBar() {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a className="navbar-brand" href="#">
-        Welcome to Parts to Purpose
-      </a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-      </button>
+class NavBar extends Component {
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <a className="nav-link" href="#">About <span className="sr-only">(current)</span></a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Search <span className="sr-only">(current)</span></a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Login <span className="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  );
-}
+  state = {
+    show: false,
+    registerUser: false
+  };
+
+  componentDidMount = () => {
+    // this.loadBooks();
+  }
+
+  handleClose = () => {
+    this.setState({ show: false,
+                    registerUser: false });
+  }
+
+  handleShow = () => {
+    this.setState({ show: true });
+  }
+
+  handleSubmit = () => {
+    this.handleClose();
+  }
+
+  handleRegister = () => {
+    this.setState({ registerUser: true });
+  }
+  handleRegisterSubmit = () => {
+    this.handleClose();
+  }
+  handleUserLogIn = () => {
+    this.setState({ registerUser: false});
+  }
+
+  render() {
+      return (
+        <div>
+<Navbar  staticTop collapseOnSelect id="nav-bar">
+        <Navbar.Header >
+          <Navbar.Brand>
+            <a href="/">Parts-To-Purpose</a>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem eventKey={1} href="/search">
+              Search
+            </NavItem>
+            <NavItem eventKey={2} onClick={this.handleShow}>
+              Login/Regiser
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Login
+            show={this.state.show}
+            registerUser={this.state.registerUser}
+            handleClose={this.handleClose}
+            handleSubmit={this.handleSubmit}
+            handleRegister={this.handleRegister}
+            handleRegisterSubmit={this.handleRegisterSubmit}
+            handleUserLogIn={this.handleUserLogIn}
+        />
+        </div>
+      )
+    }
+    }
 
 export default NavBar;

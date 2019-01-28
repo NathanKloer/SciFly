@@ -15,6 +15,7 @@ const userSchema = new Schema({
       ref: "Order"
     }
   ],
+  isAdmin: { type: Boolean, required: true, default: false },
   date: { type: Date, default: Date.now }
 });
 
