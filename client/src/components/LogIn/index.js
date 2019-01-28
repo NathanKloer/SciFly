@@ -1,29 +1,41 @@
-import React from "react";
-import {Modal} from "react-bootstrap";
-import LoginModal from "./Login";
-import RegisterModal from "./Register";
+import React, { Component } from "react";
+import {Modal, Button,OverlayTrigger, Tooltip} from "react-bootstrap";
+import "./style.css";
 
+class LoginModal extends Component {
 
-function Login(props){
-
+    render(props) {
+      const tooltip = <Tooltip id="modal-tooltip">
+                      Click here to register new user.
+                      </Tooltip>;
       return (
         <div>
-          <Modal show={props.show} onHide={props.handleClose} className={props.registerUser ? ("modal-Container"):("")}>
-            {props.registerUser ? (
-            <RegisterModal
-            handleClose={props.handleClose}
-            handleRegister={props.handleRegister}
-            handleRegisterSubmit={props.handleRegisterSubmit}
-            handleUserLogIn={props.handleUserLogIn}/>
-            ) : (
-            <LoginModal
-            handleClose={props.handleClose}
-            handleSubmit={props.handleSubmit}
-            handleRegister={props.handleRegister}/>
-            )}
-          </Modal>
+            <Modal.Header>
+            <Modal.Title>Please Enter Password</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <form>
+                <div className="form-group">
+                  <label>Email address</label>
+                  <input pattern="[/.+@.+\..+/" required type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email"/>
+                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div className="form-group">
+                  <label>Password</label>
+                  <input type="password" className="form-control" id="inputPassword" placeholder="Password"/>
+                </div>
+            </form>
+            </Modal.Body>
+            <Modal.Footer>
+            <OverlayTrigger placement="top" overlay={tooltip}>
+              <Button bsStyle="link" onClick={this.props.handleRegister}>Register?</Button>
+            </OverlayTrigger>
+              <Button onClick={this.props.handleSubmit} type="submit" className="btn btn-primary">Submit</Button>
+              <Button onClick={this.props.handleClose}>Close</Button>
+            </Modal.Footer>
         </div>
       );
     }
+  }
+  export default LoginModal;
 
-  export default Login;

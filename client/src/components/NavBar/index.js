@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
-import Login from "../logIn";
+import { Navbar, Nav, NavItem, Modal } from "react-bootstrap";
+import LoginModal from "../LogIn";
+import RegisterModal from "../Register";
 // import { Link } from "react-router-dom";
 import "./style.css";
 
@@ -59,7 +60,21 @@ class NavBar extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Login
+      <Modal show={this.state.show} onHide={this.handleClose} className={this.state.registerUser ? ("modal-Container"):("")}>
+            {this.state.registerUser ? (
+            <RegisterModal
+            handleClose={this.handleClose}
+            handleRegister={this.handleRegister}
+            handleRegisterSubmit={this.handleRegisterSubmit}
+            handleUserLogIn={this.handleUserLogIn}/>
+            ) : (
+            <LoginModal
+            handleClose={this.handleClose}
+            handleSubmit={this.handleSubmit}
+            handleRegister={this.handleRegister}/>
+            )}
+          </Modal>
+      {/* <Login
             show={this.state.show}
             registerUser={this.state.registerUser}
             handleClose={this.handleClose}
@@ -67,7 +82,7 @@ class NavBar extends Component {
             handleRegister={this.handleRegister}
             handleRegisterSubmit={this.handleRegisterSubmit}
             handleUserLogIn={this.handleUserLogIn}
-        />
+        /> */}
         </div>
       )
     }
