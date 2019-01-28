@@ -19,7 +19,7 @@ class Register extends Component {
             <form>
                 <div className="form-group">
                   <label>User Name</label>
-                  <input type="email" className="form-control" id="inputUserName" aria-describedby="emailHelp" placeholder="Enter email"/>
+                  <input type="text" className="form-control" id="inputUserName" aria-describedby="emailHelp" placeholder="Enter email"/>
                   <small id="userNameHelp" className="form-text text-muted">UserName</small>
                 </div>
                 <div className="form-group">

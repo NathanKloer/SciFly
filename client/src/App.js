@@ -8,7 +8,7 @@ import NoMatchContainer from "./pages/NoMatchContainer";
 // import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import "./style.css";
-// import './App.css';
+import './App.css';
 
 class App extends Component {
   render() {
