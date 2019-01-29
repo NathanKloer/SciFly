@@ -1,46 +1,69 @@
 import React, { Component } from "react";
-// import DeleteBtn from "../components/DeleteBtn";
 // import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
-import NavBar from "../components/NavBar";
 import OrgSearchForm from "../components/OrgSearchForm";
-// import { Col, Row, Container } from "../components/Grid";
-// import { List, ListItem } from "../components/List";
-// import { Input, TextArea, FormBtn } from "../components/Form";
+import history from "../history"
 
 class HomeContainer extends Component {
   state = {
     products: [],
     product: {},
-    organization: "",
-    title: "",
-    author: "",
-    synopsis: ""
+    organization: ""
   };
 
   componentDidMount() {
     // this.loadBooks();
   }
 
-  callback = (res) => {
-    this.setState({ products: res.data.items});
-  }
+  // callback = (res) => {
+  //   this.setState({ products: res.data.items});
+  // }
 
-  // handleFormSearch = event =>{
-  //   var ddlElem = document.getElementById("ddlList");
-  //   var strUser = e.options[e.selectedIndex].text;
-
-  //   if (this.state.organization){
-  //     event.preventDefault();
-  //     //Search for all books in Google Books API
-  //     this.searchProducts(this.state.organization, this.callback);
-  //   }//if
-  // };
+  handleOrgSearch = event =>{
+    var ddlOrgElem = document.getElementById("ddlOrgList");
+    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
+    // console.log("Organization to Search = "+organization);
+    this.setState({organization: organization});
+    if (organization){
+      event.preventDefault();
+      const baseURL = "/products";
+      this.loadByOrganization(baseURL, this.callback);
+    }//if
+  };
 
   //Initialize the state variables with search results
-  searchProducts = (query, cb) => {
-    API.search(query)
+  loadByOrganization = (baseURL, cb) => {
+    API.getOrganization(baseURL)
+      .then(res => {
+        // console.log("API CALL HAS STARTED!");
+        //callback to store state variables
+        cb(res);//01122019:SaveAndDisplay the Data:
+        // history.push('/search');
+        this.props.history.push({
+          pathname: '/search',
+          state: {products: res.data}
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  handleCatSearch = event =>{
+    var ddlCatElem = document.getElementById("ddlCatList");
+    var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
+    // console.log("Category to Search = "+category);
+    this.setState({category: category});
+    if (category){
+      event.preventDefault();
+      const baseURL = "/products";
+      const parameter = '/'+category;
+      //Search for all books in Google Books API
+      this.loadByCategory(baseURL, parameter, this.callback);
+    }//if
+  };
+
+  //Initialize the state variables with search results
+  loadByCategory = (baseURL, parameter, cb) => {
+    API.getCategory(baseURL, parameter)
       .then(res => {
         // console.log("API CALL HAS STARTED!");
         //callback to store state variables
@@ -49,11 +72,22 @@ class HomeContainer extends Component {
       .catch(err => console.log(err));
   };
 
+  callback = (res) => {
+    // console.log();
+    // console.log("API CALL HAS ENDED!");
+    // console.log();
+    // console.log("Res = "+JSON.stringify(res));
+    if(res){
+      this.setState({ products: res.data.items});
+    }
+  }
   render() {
     return (
       <React.Fragment>
         <h1>I AM THE HOME PAGE</h1>
-        <OrgSearchForm onClick={this.handleFormSearch}/>
+        <br/>
+        <h5>Search by Organization</h5>
+        <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
       </React.Fragment>
     );
   }
