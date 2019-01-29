@@ -6,7 +6,7 @@ import {Modal, Button,OverlayTrigger, Tooltip,
 class Register extends Component {
 
 
-    render() {
+    render(props) {
       const tooltip = <Tooltip id="modal-tooltip">
                       Click here for user login.
                       </Tooltip>;
@@ -44,7 +44,7 @@ class Register extends Component {
                 </div>
                 <FormGroup id="formControlsSelect">
                 <ControlLabel>Select</ControlLabel>
-                <FormControl componentClass="select" placeholder="select" id="inputClass">
+                <FormControl {...props}>
                   <option value="select">select</option>
                   <option value="Biotechnology">Biotechnology</option>
                   <option value="Biology">Biology</option>

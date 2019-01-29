@@ -16,14 +16,15 @@ export function FormBtn(props) {
           <Button bsStyle={props.bsstyle} {...props} >{props.children}</Button>
           );
 }
-export function Dropdown({props, children}) {
+export function Dropdown(props) {
   return (
-        <FormGroup id="formControlsSelect">
+        <FormGroup  id="formControlsSelect">
         <ControlLabel>Select</ControlLabel>
         <FormControl componentClass="select" {...props}>
-          <option value="select">select</option>
-            {children}
+          <option >Select</option>
+            {props.children}
         </FormControl>
+        <small className={props.smallname}>{props.smalltext}</small>
       </FormGroup>
           );
 }

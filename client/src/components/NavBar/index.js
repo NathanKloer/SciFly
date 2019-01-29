@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Navbar, Nav, NavItem, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Input, FormBtn, Dropdown, DropdownList } from "../LogIn";
-import RegisterModal from "../Register";
+import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import "./style.css";
 
@@ -26,7 +26,8 @@ class NavBar extends Component {
       "Life Sciences (middle grades)",
       "Chemistry",
       "Other"
-              ]
+              ],
+    users: []
   };
 
   componentDidMount = () => {
@@ -41,15 +42,41 @@ class NavBar extends Component {
   handleShow = () => {
     this.setState({ show: true });
   }
-
-  handleSubmit = () => {
-    this.handleClose();
+  loadUsers = () => {
+    API.getBooks()
+    .then(res =>
+      this.setState({ savedBooks: res.data})
+    )
+    .catch(err => console.log(err));
   }
+  handleSubmit = data => {
+
+    this.handleClose();
+  };
 
   handleRegister = () => {
     this.setState({ registerUser: true });
   }
   handleRegisterSubmit = () => {
+    API.getUser(this.state.userName)
+    .then(res => {
+      if(res.user === this.state.userName){
+
+      }else{
+      const newUser = {   email: this.state.email,
+                          password: this.state.password,
+                          userName:this.state.userName,
+                          firstName: this.state.firstName,
+                          lastName: this.state.lastName,
+                          school: this.state.school,
+                          district: this.state.district,
+                          selectedCourse: this.state.selectedCourse
+                          }
+        API.createUser(newUser)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+      }
+    })
     this.handleClose();
   }
   handleUserLogIn = () => {
@@ -148,13 +175,10 @@ class NavBar extends Component {
             <Dropdown
               value={this.state.selectedCourse}
               onChange={this.handleInputChange}
-              name="select"
-              placeholder="Courses Taught"
-              label="courses"
+              name="selectedCourse"
               smallname="form-text text-muted"
-              smalltext="courses"
+              smalltext="select a Course"
               required="required"
-              courses={this.state.courses}
             >
                   {this.state.courses.map(course => (
                   <DropdownList
@@ -198,7 +222,7 @@ class NavBar extends Component {
                 disabled={!(this.state.email && this.state.password && this.state.userName
                             && this.state.firstName && this.state.lastName && this.state.school
                             && this.state.district && this.state.selectedCourse)}
-                onClick={this.handleSubmit}
+                onClick={this.handleRegisterSubmit}
                 className="btn btn-primary"
                 type="submit"
               >

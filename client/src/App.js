@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeContainer from "./pages/HomeContainer";
 import SearchContainer from "./pages/SearchContainer";
@@ -10,8 +10,7 @@ import NavBar from "./components/NavBar";
 import "./style.css";
 import './App.css';
 
-class App extends Component {
-  render() {
+function App() {
     return (
       <Router>
         {/* Router must have one and only one child tag */}
@@ -31,6 +30,5 @@ class App extends Component {
       </Router>
     );
   }
-}
 
 export default App;
