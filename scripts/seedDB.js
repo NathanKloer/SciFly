@@ -20,37 +20,37 @@ let productIdArr = [];
 const productSeed = [
   {
     productName: "petri dishes",
-    description: "100 x 15 mm Round, Beveled ridge, polystyrene",
+    description: "100 x 15 mm Round",
     stockQuantity: 1000,
     uom: "Unit",
-    category: "Dishes, Plates, and Flasks",
+    category: "Culturing",
     organization: "Georgia BioEd",
     date: new Date(Date.now())
   },
   {
     productName: "conical tubes",
-    description: "Falcon 50 mL conical centrifuge tubes",
+    description: "50 mL",
     stockQuantity: 50,
     uom: "Bag",
-    category: "Centrifuge Tubes",
+    category: "Culturing",
     organization: "Georgia BioEd",
     date: new Date(Date.now())
   },
   {
     productName: "microcentrifuge tubes (0.2 mL, 1.5 mL)",
-    description: "1.5mL flat top snap cap microcentrifuge tubes",
+    description: "1.5mL",
     stockQuantity: 500,
     uom: "Unit",
-    category: "Microcentrifuge Tubes",
+    category: "Storage",
     organization: "Georgia BioEd",
     date: new Date(Date.now())
   },
   {
     productName: "sterile serological pipettes",
-    description: "Paper-and-Plastic Wrapped, Polystyrene Serological Pipettes",
+    description: "10 uL",
     stockQuantity: 200,
     uom: "Unit",
-    category: "Pipet",
+    category: "Pipettes",
     organization: "Georgia BioEd",
     date: new Date(Date.now())
   }
