@@ -7,8 +7,7 @@ router.route("/")
   .post(loginController.create);
 
 // Matches with "/api/users/:id"
-router
-  .route("/:id")
+router.route("/:id")
   .get(loginController.findById)
   .put(loginController.update)
   .delete(loginController.remove);

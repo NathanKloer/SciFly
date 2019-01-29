@@ -1,6 +1,10 @@
-/* body { padding-top: 110px !important;} */
-
-@font-face {
+.custom-view-btn, .custom-save-btn{
+  background-color: #cde0dc!important;
+  border-color: #cecfd5!important;
+  color: black!important;
+  box-shadow: none!important;
+}
+/* @font-face {
     font-family: blkchcry;
     src: url(/fonts/BLKCHCRY.TTF);
 }
@@ -48,7 +52,7 @@ h5 {
     margin-bottom: 1rem;
 }
 .jumbotron {
-    background: linear-gradient( rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02) ), url(/images/stripes2.png); 
+    background: linear-gradient( rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02) ), url(/images/stripes2.png);
     border: 1px solid #cecfd5;
     background-size: 10% 100%;
     background-repeat: repeat-x;
@@ -70,18 +74,11 @@ h5 {
     border-color: #cecfd5!important;
     box-shadow: none!important;
   }
-
-  .custom-view-btn, .custom-save-btn{
-    background-color: #cde0dc!important;
-    border-color: #cecfd5!important;
-    color: black!important;
-    box-shadow: none!important; 
-  }
   .custom-delete-btn{
     background-color: salmon!important;
     border-color: #cecfd5!important;
     color: black!important;
-    box-shadow: none!important; 
+    box-shadow: none!important;
   }
   input.custom-form-control{
     border: 1px solid #cecfd5;
@@ -92,7 +89,7 @@ h5 {
     margin-top:0;
     width:100%;
     background-color: white;
-   
+
   }
   input{
     background-color: white;
@@ -101,7 +98,7 @@ h5 {
   input[type='text']:active:focus{
     background-color: white;
   }
- input{   
+ input{
     outline: 0 none;
     background-color: white;
     box-shadow: #ededda;
@@ -110,8 +107,7 @@ h5 {
     navbar ul li p:hover { color: black; }
 }
 @media (min-width:150px) and (max-width: 767px){
-    body { 
-        /* padding-top: 100px !important;  */
+    body {
         min-width:360px;
     }
     .header {
@@ -123,11 +119,11 @@ h5 {
             display:block;
             margin-left:0;
             margin-top:.25rem;
-        }   
+        }
     }
     @media (max-width:375px){
-        body { 
+        body {
             min-width:360px;
         }
     }
-}
+} */

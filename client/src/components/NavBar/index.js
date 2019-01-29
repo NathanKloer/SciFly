@@ -108,7 +108,10 @@ class NavBar extends Component {
             <NavItem eventKey={1} href="/search">
               Search
             </NavItem>
-            <NavItem eventKey={2} onClick={this.handleShow}>
+            <NavItem eventKey={2} href="/donate">
+              Donate
+            </NavItem>
+            <NavItem eventKey={3} onClick={this.handleShow}>
               Login/Regiser
             </NavItem>
           </Nav>
