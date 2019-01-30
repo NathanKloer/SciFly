@@ -3,14 +3,17 @@ import { Col, Row, Container } from "../components/Grid";
 import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
+import {CartList, CartItem, QtyInput, CheckoutBtn} from "../components/Cart";
 class SearchContainer extends Component {
   constructor(){
     super();
-    let isCatBtnClicked = false;
-    let products = [];
+    this.isCatBtnClicked = false;
+    this.products = [];
+    this.orders = [];
   }
   state = {
     products: [],
+    order: [],
     product: {},
     category: ""
   };
@@ -57,6 +60,21 @@ class SearchContainer extends Component {
       this.setState({ products: res.data.items});
     }
   }
+
+  createOrderArr = (event, orders) => {
+    event.preventDefault();
+    let productIdClicked = event.target.getAttribute('data-productid')
+    let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
+    let cartRecord =
+    {
+      id: productIdClicked,
+      name: productNameClicked
+    };
+    {this.orders.push(cartRecord)};
+    console.log("CLICK ID = "+ productIdClicked+" CLICKED NAME = "+productNameClicked);
+    console.log(JSON.stringify(cartRecord));
+    console.log()
+  }
   /*****************************/
 
   // callback = () => {
@@ -87,18 +105,24 @@ class SearchContainer extends Component {
         <h5>Search by Category</h5>
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>
           <Row>
-            <Col size="md-12">
+            <Col size="md-7">
               {!this.isCatBtnClicked && this.props.location.state.products.length ? (
-                <InvTblHdr products = {this.props.location.state.products} ></InvTblHdr>
+                <InvTblHdr products = {this.props.location.state.products} createOrderArr = {this.createOrderArr}></InvTblHdr>
               ) : (
                 !this.isCatBtnClicked && <h3>No Results to Display</h3>
               )}
               {/* {this.products && "Products= " +this.products.length} */}
                 {this.isCatBtnClicked && this.products && this.products.length ? (
-                <InvTblHdr products = {this.products} ></InvTblHdr>
+                <InvTblHdr products = {this.products} createOrderArr = {this.createOrderArr}></InvTblHdr>
               ) : (
                 this.isCatBtnClicked && <h3>No Results to Display</h3>
               )}
+            </Col>
+            <Col size="md-4">
+             <CartList>
+              <h5>Invalid user id or password</h5>
+             </CartList>
+             <CheckoutBtn></CheckoutBtn>
             </Col>
           </Row>
         </Container>
