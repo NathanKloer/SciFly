@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Modal, Navbar, Nav, NavItem, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Input, FormBtn, Dropdown, DropdownList } from "../LogIn";
 import API from "../../utils/API";
+
 // import { Link } from "react-router-dom";
 import "./style.css";
 
@@ -58,25 +59,26 @@ class NavBar extends Component {
     this.setState({ registerUser: true });
   }
   handleRegisterSubmit = () => {
-    API.getUser(this.state.userName)
+    const newUser = {   email: this.state.email,
+      password: this.state.password,
+      userName:this.state.userName,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      school: this.state.school,
+      district: this.state.district,
+      course: this.state.selectedCourse
+      }
+    API.getUser("/" + newUser.userName)
     .then(res => {
       if(res.user === this.state.userName){
 
       }else{
-      const newUser = {   email: this.state.email,
-                          password: this.state.password,
-                          userName:this.state.userName,
-                          firstName: this.state.firstName,
-                          lastName: this.state.lastName,
-                          school: this.state.school,
-                          district: this.state.district,
-                          selectedCourse: this.state.selectedCourse
-                          }
         API.createUser(newUser)
         .then(res => console.log(res))
         .catch(err => console.log(err));
       }
     })
+    .catch(err => console.log(err));
     this.handleClose();
   }
   handleUserLogIn = () => {
@@ -120,7 +122,7 @@ class NavBar extends Component {
          <Modal show={this.state.show} onHide={this.handleClose} className={this.state.registerUser ? ("modal-Container"):("")}>
          <Modal.Header>
               <Modal.Title className="text-center">
-              {this.state.registerUser ? ("Please Register"):("Please Enter Password")}
+              {this.state.registerUser ? ("Please Register"):("Please Login")}
               </Modal.Title>
           </Modal.Header>
             {this.state.registerUser ? (
@@ -255,6 +257,7 @@ class NavBar extends Component {
               value={this.state.password}
               onChange={this.handleInputChange}
               name="password"
+              type="password"
               placeholder="Enter Password"
               label="Password"
               // pattern="[/.+@.+\..+/"
@@ -277,7 +280,7 @@ class NavBar extends Component {
                 className="btn btn-primary"
                 type="submit"
               >
-              Submit
+              Login
               </FormBtn>
               <FormBtn
                 onClick={this.handleClose}

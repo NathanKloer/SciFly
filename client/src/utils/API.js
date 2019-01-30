@@ -17,5 +17,12 @@ export default {
       /*Make a request to the '/api/products/:category' resource, and run the findByCategory method for all products for a particular category*/
       return axios.get('/api'+baseURL+parameter);
     }//if
-   }//getCategory
+   },//getCategory
+  getUser: function(id) {
+    return axios.get("/api/users" + id);
+  },
+  createUser: function(userData) {
+    return axios.post("/api/users/", userData);
+  }
 };
+

@@ -8,7 +8,7 @@ router.route("/")
 
 // Matches with "/api/users/:id"
 router.route("/:id")
-  .get(loginController.findById)
+  .get(loginController.findOne)
   .put(loginController.update)
   .delete(loginController.remove);
 
