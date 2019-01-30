@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Router as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import HomeContainer from "./pages/HomeContainer";
 import SearchContainer from "./pages/SearchContainer";
 import ConfirmationContainer from "./pages/ConfirmationContainer";
@@ -9,10 +9,9 @@ import NoMatchContainer from "./pages/NoMatchContainer";
 import NavBar from "./components/NavBar";
 import history from "./history";
 import "./style.css";
-// import './App.css';
+import './App.css';
 
-class App extends Component {
-  render() {
+function App() {
     return (
       <Router history={history}>
         {/* Router must have one and only one child tag */}
@@ -34,6 +33,5 @@ class App extends Component {
       </Router>
     );
   }
-}
 
 export default App;
