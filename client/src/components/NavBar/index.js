@@ -11,6 +11,7 @@ class NavBar extends Component {
   state = {
     show: false,
     registerUser: false,
+    _id: "",
     email: "",
     password: "",
     userName:"",
@@ -28,7 +29,9 @@ class NavBar extends Component {
       "Chemistry",
       "Other"
               ],
-    users: []
+    users: [],
+    login: false,
+    loggedInUser: ""
   };
 
   componentDidMount = () => {
@@ -50,9 +53,30 @@ class NavBar extends Component {
     )
     .catch(err => console.log(err));
   }
-  handleSubmit = data => {
+  handleSubmit = () => {
+    const newUserLogin = {   userName: this.state.userName,
+      password: this.state.password
+      }
+    API.userLogin(newUserLogin)
+    .then(res => {
+      if(res.data !== "Incorrect Password"){
 
-    this.handleClose();
+        this.setState({
+          login: true,
+          loggedInUser: res.data.firstName + " " + res.data.lastName,
+          _id: res.data._id
+        })
+        console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.state._id}`)
+        this.handleClose();
+      }else{
+        console.log("password or user invalid");
+      }
+    })
+    .catch(err => {
+      console.log("password or user invalid");
+      console.log(err);
+      });
+
   };
 
   handleRegister = () => {
@@ -74,8 +98,20 @@ class NavBar extends Component {
 
       }else{
         API.createUser(newUser)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then(res => {
+          this.setState({
+            login: true,
+            loggedInUser: this.state.firstName + " " + this.state.lastName,
+            email: "",
+            password: "",
+            userName: "",
+            firstName: "",
+            lastName: "",
+            school: "",
+            district: "",
+            selectedCourse: ""
+            });
+        }).catch(err => console.log(err));
       }
     })
     .catch(err => console.log(err));
@@ -207,6 +243,7 @@ class NavBar extends Component {
               value={this.state.password}
               onChange={this.handleInputChange}
               name="password"
+              type="password"
               placeholder="Enter Password"
               label="Password"
               // pattern="[/.+@.+\..+/"
@@ -243,14 +280,14 @@ class NavBar extends Component {
             ) : (
             <Modal.Body>
             <Input
-              value={this.state.email}
+              value={this.state.userName}
               onChange={this.handleInputChange}
-              name="email"
-              placeholder="Enter Email"
-              label="Email"
-              pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+              name="userName"
+              placeholder="Enter User Name"
+              label="User Name"
+              // pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
               smallname="form-text text-muted"
-              smalltext="We'll never share your email with anyone else."
+              smalltext="We'll never share your information with anyone else."
               required="required"
             />
             <Input
@@ -275,7 +312,7 @@ class NavBar extends Component {
                 </FormBtn>
               </OverlayTrigger>
               <FormBtn
-                disabled={!(this.state.email && this.state.password)}
+                disabled={!(this.state.userName && this.state.password)}
                 onClick={this.handleSubmit}
                 className="btn btn-primary"
                 type="submit"

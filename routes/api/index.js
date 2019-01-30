@@ -2,7 +2,8 @@
 /************************************************/
 const router = require("express").Router();
 const productRoutes = require("./products");//products.js
-const userRoutes = require("./users");//products.js
+const userRoutes = require("./users");
+const loginRoutes = require("./login");
 
 /************************************
  * RouteHandler 2: Product routes
@@ -12,6 +13,7 @@ const userRoutes = require("./users");//products.js
  ************************************/
 router.use("/products", productRoutes);
 router.use("/users", userRoutes);
+router.use("/login", loginRoutes);
 
 module.exports = router;
 /************************************************/

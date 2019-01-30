@@ -3,13 +3,13 @@ const loginController = require("../../controllers/loginController");
 
 // Matches with "/api/login"
 router.route("/")
-  .get(loginController.findAll)
-  .post(loginController.create);
+  .get(loginController.findOne)
+  .post(loginController.findOne);
 
 // Matches with "/api/login/:id"
 router
   .route("/:id")
-  .get(loginController.findById)
+  .get(loginController.findOne)
   .put(loginController.update)
   .delete(loginController.remove);
 
