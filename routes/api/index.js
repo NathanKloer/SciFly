@@ -2,6 +2,7 @@
 /************************************************/
 const router = require("express").Router();
 const productRoutes = require("./products");//products.js
+const orderRoutes = require("./orders");//orders.js
 
 /************************************
  * RouteHandler 2: Product routes
@@ -10,6 +11,7 @@ const productRoutes = require("./products");//products.js
  * be handled by the second argument "productRoutes".
  ************************************/
 router.use("/products", productRoutes);
+router.use("/order", orderRoutes);
 
 module.exports = router;
 /************************************************/
