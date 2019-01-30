@@ -18,7 +18,7 @@ export function InvTblHdr(props) {
         <tbody>
           {props.products.map(product => {
             return (
-              <InvTblItem product= {product} listener = {props.createOrderArr}></InvTblItem>
+              <InvTblItem product= {product} listener = {props.addCartItems}></InvTblItem>
             );
           })}
         </tbody>
@@ -42,7 +42,7 @@ export function InvTblItem(props){
 
 export function AddInvBtn(props){
   return(
-    <button type="button" className="btn custom-view-btn ml-1" onClick={props.listener} data-productid= {props.product._id} tabIndex="0" key= {props.product._id+'btn'}>
+    <button type="button" className="btn custom-view-btn ml-1" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'}>
       Add
     </button>
   );
