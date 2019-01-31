@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {UserConsumer} from "../../providers";
 import { Modal, Navbar, Nav, NavItem, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Input, FormBtn, Dropdown, DropdownList } from "../LogIn";
 import API from "../../utils/API";
@@ -35,7 +36,7 @@ class NavBar extends Component {
   };
 
   componentDidMount = () => {
-    // this.loadBooks();
+    // let userContext = this.context;
   }
 
   handleClose = () => {
@@ -60,20 +61,21 @@ class NavBar extends Component {
     API.userLogin(newUserLogin)
     .then(res => {
       if(res.data !== "Incorrect Password"){
-
+        this.props.idChanged(res.data._id, res.data.userName);
         this.setState({
           login: true,
           loggedInUser: res.data.firstName + " " + res.data.lastName,
           _id: res.data._id
         })
-        console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.state._id}`)
+        console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.props.currentId}`)
+
         this.handleClose();
       }else{
         console.log("password or user invalid");
       }
     })
     .catch(err => {
-      console.log("password or user invalid");
+      console.log("Error");
       console.log(err);
       });
 
@@ -332,5 +334,21 @@ class NavBar extends Component {
       )
     }
     }
-
-export default NavBar;
+// Added to connect AccountConsumer
+// To pass props to AccountUpdate
+// Before component initialization
+// As the AccountUpdate.state requires
+// The new props
+const NavUpdate = props => (
+  <UserConsumer>
+    {({ id, userName, idChanged  }) => (
+      <NavBar
+        // {...props}
+        currentId={id}
+        currentUserName={userName}
+        idChanged={idChanged}
+      />
+    )}
+  </UserConsumer>
+)
+export default NavUpdate;

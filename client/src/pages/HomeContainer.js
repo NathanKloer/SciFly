@@ -47,31 +47,6 @@ class HomeContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  handleCatSearch = event =>{
-    var ddlCatElem = document.getElementById("ddlCatList");
-    var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
-    // console.log("Category to Search = "+category);
-    this.setState({category: category});
-    if (category){
-      event.preventDefault();
-      const baseURL = "/products";
-      const parameter = '/'+category;
-      //Search for all books in Google Books API
-      this.loadByCategory(baseURL, parameter, this.callback);
-    }//if
-  };
-
-  //Initialize the state variables with search results
-  loadByCategory = (baseURL, parameter, cb) => {
-    API.getCategory(baseURL, parameter)
-      .then(res => {
-        // console.log("API CALL HAS STARTED!");
-        //callback to store state variables
-        cb(res);//01122019:SaveAndDisplay the Data:
-      })
-      .catch(err => console.log(err));
-  };
-
   callback = (res) => {
     // console.log();
     // console.log("API CALL HAS ENDED!");
