@@ -17,5 +17,12 @@ export default {
       /*Make a request to the '/api/products/:category' resource, and run the findByCategory method for all products for a particular category*/
       return axios.get('/api'+baseURL+parameter);
     }//if
-   }//getCategory
+   },//getCategory
+
+   postOrder: function(baseURL, data){
+     //console.log('/api'+baseURL+" order = ", data);
+    if(data){
+      return axios.post('/api'+baseURL, data);
+    }
+   }
 };
