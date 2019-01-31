@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {UserConsumer} from "../providers";
 import { Col, Row, Container } from "../components/Grid";
 import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
@@ -117,17 +118,18 @@ class SearchContainer extends Component {
     //console.log(JSON.stringify(this.orders));
 
     //Add the Quantity to the cart
-    let completedOrder = this.orders.map(order =>{
+    let completedOrder = this.orders.map(order => {
       var productId = order.id;
       //console.log("Product ID = ", productId);
-      if(document.getElementById("quantity-"+productId)){
-        var  productQty= document.getElementById("quantity-"+productId).value;
+      if(document.getElementById("quantity-" + productId)){
+        var  productQty= document.getElementById("quantity-" + productId).value;
         //console.log("Quantity for ID-"+productId+" = "+productQty);
-        return ({...order, quantity: productQty});
+        return ({...order, productQuantity: productQty});
       }
     });//map
     //console.log("TEST DATA = "+test);
     let jsonOrder = {
+      id: this.props.currentId,
       data: {...completedOrder}
     };
     //console.log("Completed Order", jsonOrder);
@@ -174,7 +176,7 @@ class SearchContainer extends Component {
 
   viewProps = (cb) => {
     // console.log("Data = " + JSON.stringify(this.props.location.state));
-    this.setState({products: this.props.location.state});
+    this.setState({products: this.state});
     cb();
   }
 
@@ -193,7 +195,7 @@ class SearchContainer extends Component {
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>
           <Row>
             <Col size="md-7">
-              {!this.isCatBtnClicked && this.props.location.state.products.length ? (
+              {!this.isCatBtnClicked && this.state.products.length ? (
                 <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
               ) : (
                 !this.isCatBtnClicked && <h3></h3>
@@ -216,5 +218,15 @@ class SearchContainer extends Component {
     );
   }
 }
-
-export default SearchContainer;
+const SearchUpdate = props => (
+  <UserConsumer>
+    {({ id, userName }) => (
+      <SearchContainer
+        // {...props}
+        currentId={id}
+        currentUserName={userName}
+      />
+    )}
+  </UserConsumer>
+)
+export default SearchUpdate;

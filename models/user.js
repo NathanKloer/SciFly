@@ -6,7 +6,11 @@ const userSchema = new Schema({
   email: { type: String, match:[/.+@.+\..+/, "Please enter a valid e-mail address"],
   required: true },
   password: { type: String, required: true },
-  phone: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  school: { type: String, required: true },
+  district: { type: String, required: true },
+  course: { type: String, required: true },
   //I want to see a user's orders when a query a user _id
   order:[
     {

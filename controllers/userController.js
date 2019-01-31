@@ -18,26 +18,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findOne: function(req, res) {
-    console.log("Find One: " + req.body.userName)
+    console.log(req.params.id)
     db.User
-      .findOne({userName: req.body.userName})
-      .then(dbModel =>
-        bcrypt
-        .compare(req.body.password, dbModel.password)
-        .then(function(valid) {
-          //check if the password provided matches the stored password
-          if (valid) {
-            res.status(200).send(dbModel);
-          } else {
-            res.send("Incorrect Password");
-          }
-        })
-        .catch(function(err) {
-          res.send("Not Found");
-          console.error(err);
-          res.end();
-        })
-      )
+      .findOne({userName: req.params.id})
+      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
