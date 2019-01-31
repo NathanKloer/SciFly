@@ -122,7 +122,11 @@ class NavBar extends Component {
   handleUserLogIn = () => {
     this.setState({ registerUser: false});
   }
-
+  handleSignOut = () => {
+    console.log("sign out");
+    this.setState({loggedInUser: null})
+    this.props.idChanged("", "");
+  }
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -151,9 +155,16 @@ class NavBar extends Component {
             <NavItem eventKey={2} href="/donate">
               Donate
             </NavItem>
-            <NavItem eventKey={3} onClick={this.handleShow}>
-              Login/Regiser
-            </NavItem>
+            {this.state.loggedInUser ? (
+                <NavItem eventKey={3}  onClick={this.handleSignOut}>
+                Sign Out
+                </NavItem>
+                ):(
+                <NavItem eventKey={3}  onClick={this.handleShow}>
+                    Login/Regiser
+                </NavItem>
+                )}
+
           </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -334,16 +345,15 @@ class NavBar extends Component {
       )
     }
     }
-// Added to connect AccountConsumer
+// Added to connect NavConsumer
 // To pass props to AccountUpdate
 // Before component initialization
-// As the AccountUpdate.state requires
+// As the NavUpdate.state requires
 // The new props
 const NavUpdate = props => (
   <UserConsumer>
     {({ id, userName, idChanged  }) => (
       <NavBar
-        // {...props}
         currentId={id}
         currentUserName={userName}
         idChanged={idChanged}
