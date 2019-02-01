@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
@@ -15,14 +14,10 @@ class HomeContainer extends Component {
     // this.loadBooks();
   }
 
-  // callback = (res) => {
-  //   this.setState({ products: res.data.items});
-  // }
 
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
     var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
-    // console.log("Organization to Search = "+organization);
     this.setState({organization: organization});
     if (organization){
       event.preventDefault();
@@ -35,11 +30,9 @@ class HomeContainer extends Component {
   loadByOrganization = (baseURL, cb) => {
     API.getOrganization(baseURL)
       .then(res => {
-        // console.log("API CALL HAS STARTED!");
         //callback to store state variables
         cb(res);//01122019:SaveAndDisplay the Data:
-        // history.push('/search');
-        this.props.history.push({
+        history.push({
           pathname: '/search',
           state: {products: res.data}
         });

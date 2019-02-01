@@ -3,20 +3,7 @@ const bcrypt = require("bcrypt"),
       db = require("../models");
 // Defining methods for the booksController
 module.exports = {
-  findAll: function(req, res) {
-    db.User
-      .find(req.query)
-      .sort({ name: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    console.log(req.params.userName)
-    db.User
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+
   findOne: function(req, res) {
     console.log(req.params.id)
     db.User

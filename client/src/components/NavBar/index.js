@@ -32,7 +32,7 @@ class NavBar extends Component {
               ],
     users: [],
     login: false,
-    loggedInUser: ""
+    loggedInUser: this.props.currentUserName
   };
 
   componentDidMount = () => {
@@ -146,7 +146,7 @@ class NavBar extends Component {
             <NavItem eventKey={2} href="/donate">
               Donate
             </NavItem>
-            {this.state.loggedInUser ? (
+            {this.props.currentUserName ? (
                 <NavItem eventKey={3}  onClick={this.handleSignOut}>
                 Sign Out
                 </NavItem>

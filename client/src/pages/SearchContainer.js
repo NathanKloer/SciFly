@@ -4,7 +4,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
-import {CartHdr, CheckOutBtn} from "../components/Cart";
+import {CartHdr} from "../components/Cart";
 class SearchContainer extends Component {
   constructor(){
     super();
@@ -95,7 +95,7 @@ class SearchContainer extends Component {
     event.preventDefault();
     let cartItemToDel = event.target.getAttribute('data-cart-item-id');
     let curCart = this.state.cartItems;
-    let filteredCart = curCart.filter(eachItem => eachItem.id != cartItemToDel);
+    let filteredCart = curCart.filter(eachItem => eachItem.id !== cartItemToDel);
 
     //Set cart Items array
     this.setState({ cartItems: filteredCart});
@@ -123,11 +123,10 @@ class SearchContainer extends Component {
       //console.log("Product ID = ", productId);
       if(document.getElementById("quantity-" + productId)){
         var  productQty= document.getElementById("quantity-" + productId).value;
-        //console.log("Quantity for ID-"+productId+" = "+productQty);
         return ({...order, productQuantity: productQty});
       }
+      return ({...order, productQuantity: productQty});
     });//map
-    //console.log("TEST DATA = "+test);
     let jsonOrder = {
       id: this.props.currentId,
       data: {...completedOrder}
@@ -198,7 +197,7 @@ class SearchContainer extends Component {
               {!this.isCatBtnClicked && this.state.products.length ? (
                 <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
               ) : (
-                !this.isCatBtnClicked && <h3></h3>
+                !this.isCatBtnClicked && <h3> </h3>
               )}
               {/* {this.products && "Products= " +this.products.length} */}
                 {this.isCatBtnClicked && this.products && this.products.length ? (
