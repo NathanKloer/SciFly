@@ -32,13 +32,27 @@ class NavBar extends Component {
               ],
     users: [],
     login: false,
-    loggedInUser: this.props.currentUserName
+    loggedInUser: ""
   };
 
   componentDidMount = () => {
-    // let userContext = this.context;
-  }
 
+    const cookieUserId = this.readCookie("_uid");
+    this.setState({_id: cookieUserId});
+    this.props.idChanged(cookieUserId);
+  }
+   readCookie = (name) => {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === " ") c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) {
+        return c.substring(nameEQ.length, c.length);
+      }
+    }
+    return null;
+  }
   handleClose = () => {
     this.setState({ show: false,
                     registerUser: false });
@@ -60,10 +74,22 @@ class NavBar extends Component {
           login: true,
           loggedInUser: res.data.firstName + " " + res.data.lastName,
           _id: res.data._id
-        })
+            })
         console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.props.currentId}`)
-
+        document.cookie = `_uid=${this.props.currentId};`;
         this.handleClose();
+        this.setState({
+          login: true,
+          loggedInUser: this.state.firstName + " " + this.state.lastName,
+          email: "",
+          password: "",
+          userName: "",
+          firstName: "",
+          lastName: "",
+          school: "",
+          district: "",
+          selectedCourse: ""
+          });
       }else{
         console.log("password or user invalid");
       }
@@ -95,6 +121,7 @@ class NavBar extends Component {
       }else{
         API.createUser(newUser)
         .then(res => {
+          document.cookie = `userName=${this.props.userName}; userId=${this.props.userId};`;
           this.setState({
             login: true,
             loggedInUser: this.state.firstName + " " + this.state.lastName,
@@ -120,6 +147,7 @@ class NavBar extends Component {
     console.log("sign out");
     this.setState({loggedInUser: null})
     this.props.idChanged("", "");
+    document.cookie = `_uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
   }
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -146,7 +174,7 @@ class NavBar extends Component {
             <NavItem eventKey={2} href="/donate">
               Donate
             </NavItem>
-            {this.props.currentUserName ? (
+            {this.state._id ? (
                 <NavItem eventKey={3}  onClick={this.handleSignOut}>
                 Sign Out
                 </NavItem>
