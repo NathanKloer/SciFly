@@ -12,6 +12,7 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     // this.loadBooks();
+    // console.log("My ID = "+this.props.value.id);
   }
 
 
@@ -44,7 +45,7 @@ class HomeContainer extends Component {
     // console.log();
     // console.log("API CALL HAS ENDED!");
     // console.log();
-    // console.log("Res = "+JSON.stringify(res));
+    //console.log("Res = "+JSON.stringify(res));
     if(res){
       this.setState({ products: res.data.items});
     }

@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt"),
 // Defining methods for the booksController
 module.exports = {
   findOne: function(req, res) {
-    console.log("Find One: " + req.body.userName)
     db.User
       .findOne({userName: req.body.userName})
       .then(dbModel =>

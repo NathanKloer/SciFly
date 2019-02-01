@@ -18,7 +18,6 @@ import './App.css';
 function App() {
     return (
       <Provider>
-        {/* <Consumer> */}
           <Router history={history}>
             {/* Router must have one and only one child tag */}
             <div>
@@ -37,7 +36,6 @@ function App() {
               </Switch>
             </div>
           </Router>
-        {/* </Consumer> */}
       </Provider>
     );
   }

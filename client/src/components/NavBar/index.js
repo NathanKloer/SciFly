@@ -32,7 +32,8 @@ class NavBar extends Component {
               ],
     users: [],
     login: false,
-    loggedInUser: ""
+    loggedInUser: "",
+    loginError: false
   };
 
   componentDidMount = () => {
@@ -88,21 +89,34 @@ class NavBar extends Component {
           lastName: "",
           school: "",
           district: "",
-          selectedCourse: ""
+          selectedCourse: "",
+          loginError: false,
+          registerError: false
           });
       }else{
-        console.log("password or user invalid");
+        this.setState({loginError: true})
       }
     })
-    .catch(err => {
-      console.log("Error");
-      console.log(err);
-      });
+    .catch(err => this.setState({loginError: true}));
 
   };
 
   handleRegister = () => {
-    this.setState({ registerUser: true });
+    this.setState({
+                  registerUser: true,
+                  login: false,
+                  loggedInUser: "",
+                  email: "",
+                  password: "",
+                  userName: "",
+                  firstName: "",
+                  lastName: "",
+                  school: "",
+                  district: "",
+                  selectedCourse: "",
+                  loginError: false,
+                  registerError: false
+                });
   }
   handleRegisterSubmit = () => {
     const newUser = {   email: this.state.email,
@@ -114,13 +128,16 @@ class NavBar extends Component {
       district: this.state.district,
       course: this.state.selectedCourse
       }
-    API.getUser("/" + newUser.userName)
-    .then(res => {
-      if(res.user === this.state.userName){
-
-      }else{
+    // API.getUser("/" + newUser.userName)
+    // .then(res => {
+    //   if(res === this.state.userName){
+    //     this.setState({registerError: true})
+    //   }else{
         API.createUser(newUser)
         .then(res => {
+          if(res.data === "Already Exist"){
+            this.setState({registerError: true})
+          }else{
           document.cookie = `userName=${this.props.userName}; userId=${this.props.userId};`;
           this.setState({
             login: true,
@@ -132,20 +149,38 @@ class NavBar extends Component {
             lastName: "",
             school: "",
             district: "",
-            selectedCourse: ""
+            selectedCourse: "",
+            loginError: false,
+            registerError: false
             });
-        }).catch(err => console.log(err));
-      }
-    })
-    .catch(err => console.log(err));
-    this.handleClose();
+          this.handleClose();
+          }
+        })
+        .catch(err => this.setState({registerError: true}));
+
+    // })
+    // .catch(err => this.setState({registerError: true}));
+
   }
   handleUserLogIn = () => {
-    this.setState({ registerUser: false});
+    this.setState({
+                  registerUser: false,
+                  login: false,
+                  loggedInUser: "",
+                  email: "",
+                  password: "",
+                  userName: "",
+                  firstName: "",
+                  lastName: "",
+                  school: "",
+                  district: "",
+                  selectedCourse: "",
+                  loginError: false,
+                  registerError: false
+                 });
   }
   handleSignOut = () => {
-    console.log("sign out");
-    this.setState({loggedInUser: null})
+    this.setState({_id: null})
     this.props.idChanged("", "");
     document.cookie = `_uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
   }
@@ -196,6 +231,7 @@ class NavBar extends Component {
         handleUserLogIn = {this.handleUserLogIn}
         handleRegister = {this.handleRegister}
         handleRegisterSubmit = {this.handleRegisterSubmit}
+
         />
         </div>
       )

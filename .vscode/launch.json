@@ -8,7 +8,7 @@
         "type": "node",
         "request": "launch",
         "name": "Launch Local Server",
-        "program": "${workspaceFolder}/server/server.js"
+        "program": "${workspaceFolder}/server.js"
       },
       {
         "type": "node",
@@ -21,6 +21,13 @@
             "request": "launch",
             "name": "Seed Database",
             "program": "${workspaceFolder}/scripts/seedDB.js"
-        }
+      },
+        {
+          "name": "Chrome",
+          "type": "chrome",
+          "request": "launch",
+          "url": "http://localhost:3000",
+          "webRoot": "${workspaceRoot}/src"
+      }
     ]
 }
