@@ -37,9 +37,9 @@ export default {
     }
    },
    getOrder: function(baseURL, parameter){
-    console.log('/api'+baseURL+"/"+parameter);
+    // console.log('/api'+baseURL+"/"+parameter);
    if(parameter){
-    console.log('/api'+baseURL+"/"+parameter);
+    // console.log('/api'+baseURL+"/"+parameter);
      return axios.get('/api'+baseURL+'/'+parameter);
    }
   }
