@@ -13,6 +13,7 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     // this.loadBooks();
+    // console.log("My ID = "+this.props.value.id);
   }
 
   // callback = (res) => {
@@ -38,7 +39,6 @@ class HomeContainer extends Component {
         // console.log("API CALL HAS STARTED!");
         //callback to store state variables
         cb(res);//01122019:SaveAndDisplay the Data:
-        // history.push('/search');
         this.props.history.push({
           pathname: '/search',
           state: {products: res.data}
@@ -51,7 +51,7 @@ class HomeContainer extends Component {
     // console.log();
     // console.log("API CALL HAS ENDED!");
     // console.log();
-    // console.log("Res = "+JSON.stringify(res));
+    //console.log("Res = "+JSON.stringify(res));
     if(res){
       this.setState({ products: res.data.items});
     }

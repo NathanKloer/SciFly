@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-// import React from "react";
 import { Col, Row, Container } from "../components/Grid";
 
 class ConfirmationContainer extends Component {
-  // function ConfirmationContainer(props) {
       constructor(){
         super();
         // this.isCatBtnClicked = false;
@@ -25,10 +23,10 @@ class ConfirmationContainer extends Component {
     }
     componentDidMount() {
       // this.loadBooks();
-      console.log("Did Mount Order = ", this.props.location.state.orders);
+      // console.log("Did Mount Order = ", this.props.location.state.orders);
       this.setState({orders:  this.props.location.state.orders});
 
-      console.log("State variables = "+this.state.orders);
+      // console.log("State variables = "+this.state.orders);
     }
     render() {
       return (
@@ -36,17 +34,19 @@ class ConfirmationContainer extends Component {
         <Row>
           <Col size="md-12">
             <h1>I AM THE CONFIRMATION PAGE</h1>
-            <h1>Order NUMBER: {this.props.location.state.orders.length}</h1>
-            <h1>Order ID: {this.props.location.state.orders.map(order => order._id)}</h1>
-            {/* <h1>Products: {this.props.location.state.orders.map(order => {
-              return (
-                <div>
-
-                </div>
-                {(order.products[0].product.productName)}
-            )}</h1> */}
-            {/* <h1>Products: {this.props.location.state.orders.map({order => order.products[0].product.map = (prod) => {prod.productName}})}</h1> */}
-            <h1>User: {this.props.location.state.orders.map(order => order.user.userName)}</h1>
+            <h3>User: {this.props.location.state.orders[0].user.userName}</h3>
+            <h3>Order ID: {this.props.location.state.orders[0]._id}</h3>
+              <div>
+              <h3>Items Ordered:</h3>
+                <ol>
+                  {this.props.location.state.orders[0].products.map(product => {
+                  return (
+                      <h5 key = {product.product._id}><li>{product.product.productName} Quantity: {product.productQuantity}</li></h5>
+                      )
+                    })
+                  }
+                </ol>
+              </div>
             <br/>
           </Col>
         </Row>
