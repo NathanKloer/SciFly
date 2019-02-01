@@ -18,7 +18,7 @@ export function InvTblHdr(props) {
         <tbody>
           {props.products.map(product => {
             return (
-              <InvTblItem product= {product} listener = {props.addCartItems}></InvTblItem>
+              <InvTblItem key={product._id} product= {product} listener = {props.addCartItems}></InvTblItem>
             );
           })}
         </tbody>
