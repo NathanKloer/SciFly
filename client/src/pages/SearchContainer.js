@@ -5,6 +5,8 @@ import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr} from "../components/Cart";
+import history from "../history"
+
 class SearchContainer extends Component {
   constructor(){
     super();
@@ -25,6 +27,9 @@ class SearchContainer extends Component {
 
     //keeps track of all items in the cart
     cartItems: [],
+
+    //the created ordered id;
+    orderId: '',
     product: {},
     category: ""
   };
@@ -118,17 +123,21 @@ class SearchContainer extends Component {
     //console.log(JSON.stringify(this.orders));
 
     //Add the Quantity to the cart
-    let completedOrder = this.orders.map(order => {
+    //Add the User ID here.
+    let completedOrder = this.orders.map(order =>{
       var productId = order.id;
       //console.log("Product ID = ", productId);
-      if(document.getElementById("quantity-" + productId)){
-        var  productQty= document.getElementById("quantity-" + productId).value;
-        return ({...order, productQuantity: productQty});
+      if(document.getElementById("quantity-"+productId)){
+        var  productQty= document.getElementById("quantity-"+productId).value;
+        //console.log("Quantity for ID-"+productId+" = "+productQty);
+        // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
+        console.log("THE USER ID = "+this.props.currentId);
+        return ({...order, quantity: productQty, userId: this.props.currentId});
       }
       return ({...order, productQuantity: productQty});
     });//map
     let jsonOrder = {
-      id: this.props.currentId,
+      // id: this.props.currentId,
       data: {...completedOrder}
     };
     //console.log("Completed Order", jsonOrder);
@@ -157,7 +166,10 @@ class SearchContainer extends Component {
         /******************** */
         //console.log("API CALL HAS STARTED!");
         // callback to store state variables
-        displayOrder(res);//01122019:SaveAndDisplay the Data:
+        let orderId = res.data;//01122019:SaveAndDisplay the Data:
+        console.log("SearchContainer: Order Id = "+orderId);
+        this.setState({ orderId: orderId });
+        this.retrieveOrder(baseURL, this.state.orderId);
         // history.push('/confirmation');
         // this.props.history.push({
         //   pathname: '/confirmation',
@@ -167,8 +179,18 @@ class SearchContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  displayOrder = (data) => {
-    //console.log("Order Id = "+JSON.stringify(data));
+  retrieveOrder = (baseURL, orderId) => {
+    API.getOrder(baseURL, orderId)
+      .then(res => {
+        console.log("SearchContainer: completeOrder = "+JSON.stringify(res));
+        // this.props.history.push({
+          history.push({
+          pathname: '/confirmation',
+          state: {orders: res.data}
+          // state: {test: "Tony"}
+        });
+      });
+
   }
   //END ORDER SUBMISSION
   /**********************************************************/
