@@ -132,6 +132,7 @@ class SearchContainer extends Component {
         var userID = {};
         //console.log("Quantity for ID-"+productId+" = "+productQty);
         // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
+        console.log("THE USER ID = "+this.props.currentId);
         return ({...order, quantity: productQty, userId: this.props.currentId});
       }
     });//map
@@ -183,7 +184,8 @@ class SearchContainer extends Component {
     API.getOrder(baseURL, orderId)
       .then(res => {
         console.log("SearchContainer: completeOrder = "+JSON.stringify(res));
-        this.props.history.push({
+        // this.props.history.push({
+          history.push({
           pathname: '/confirmation',
           state: {orders: res.data}
           // state: {test: "Tony"}
