@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 class HomeContainer extends Component {
   state = {
@@ -59,10 +61,13 @@ class HomeContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>I AM THE HOME PAGE</h1>
-        <br/>
-        <h5>Search by Organization</h5>
-        <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
+        <MDBView src="https://mdbootstrap.com/img/Photos/Others/img%20(40).jpg">
+            <MDBMask overlay="purple-light" className="flex-center flex-column text-white text-center">
+              <h2>I AM THE HOME PAGE</h2>
+              <h5>Search by Organization</h5>
+              <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
+            </MDBMask>
+          </MDBView>
       </React.Fragment>
     );
   }
