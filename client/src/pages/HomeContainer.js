@@ -5,6 +5,8 @@ import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
+import CardExample from "../components/Jumbotron";
+import {Container, Row, Column} from "../components/Grid";
 
 class HomeContainer extends Component {
   state = {
@@ -60,12 +62,14 @@ class HomeContainer extends Component {
   }
   render() {
     return (
+
       <React.Fragment>
-        <MDBView src="https://mdbootstrap.com/img/Photos/Others/img%20(40).jpg">
+        <MDBView src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg">
             <MDBMask overlay="purple-light" className="flex-center flex-column text-white text-center">
-              <h2>I AM THE HOME PAGE</h2>
-              <h5>Search by Organization</h5>
+              <h3>We are proud to partner with various organizations to bring their inventory ("Parts") into a freely searchable online database that will allow you to search and re-"Purpose" the donated items. Please check our stock, and if you find something you can use, you'll be able to create an account and reserve the items</h3>
+              <h5>Select an organization to get started:</h5>
               <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
+              <CardExample />
             </MDBMask>
           </MDBView>
       </React.Fragment>
