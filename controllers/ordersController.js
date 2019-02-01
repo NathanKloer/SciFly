@@ -11,7 +11,10 @@ module.exports = {
     let prodArr = [];
 
     console.log("Body = ", req.body.data);
+    const productData=[];
     for (var key in req.body.data){
+      productData.push({productQuantity: req.body.data[key].productQuantity,
+                        product: req.body.data[key].id})
       var val = req.body.data[key];
 
       prodIds.push(val.id);

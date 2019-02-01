@@ -30,6 +30,7 @@
   "homepage": "https://github.com/NathanKloer/SciFly#readme",
   "devDependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.3",
     "concurrently": "^4.1.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-react-app": "^3.0.6",
