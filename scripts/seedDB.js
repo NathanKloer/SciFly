@@ -175,7 +175,8 @@ function main(){
           },//define user
         },
         populateOrder
-      );//return
+      );//update query
+      return newOrder._id;
       // populateOrder();
     });//thenable
   }//function
