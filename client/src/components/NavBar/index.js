@@ -33,7 +33,8 @@ class NavBar extends Component {
     users: [],
     login: false,
     loggedInUser: "",
-    loginError: false
+    loginError: false,
+    invalidEmail: false
   };
 
   componentDidMount = () => {
@@ -91,7 +92,8 @@ class NavBar extends Component {
           district: "",
           selectedCourse: "",
           loginError: false,
-          registerError: false
+          registerError: false,
+          invalidEmail: false
           });
       }else{
         this.setState({loginError: true})
@@ -115,49 +117,48 @@ class NavBar extends Component {
                   district: "",
                   selectedCourse: "",
                   loginError: false,
-                  registerError: false
+                  registerError: false,
+                  invalidEmail: false
                 });
   }
   handleRegisterSubmit = () => {
     const newUser = {   email: this.state.email,
-      password: this.state.password,
-      userName:this.state.userName,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      school: this.state.school,
-      district: this.state.district,
-      course: this.state.selectedCourse
-      }
-    // API.getUser("/" + newUser.userName)
-    // .then(res => {
-    //   if(res === this.state.userName){
-    //     this.setState({registerError: true})
-    //   }else{
+                        password: this.state.password,
+                        userName:this.state.userName,
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        school: this.state.school,
+                        district: this.state.district,
+                        course: this.state.selectedCourse
+                    }
         API.createUser(newUser)
-        .then(res => {
-          if(res.data === "Already Exist"){
-            this.setState({registerError: true})
-          }else{
-          document.cookie = `userName=${this.props.userName}; userId=${this.props.userId};`;
-          this.setState({
-            login: true,
-            loggedInUser: this.state.firstName + " " + this.state.lastName,
-            email: "",
-            password: "",
-            userName: "",
-            firstName: "",
-            lastName: "",
-            school: "",
-            district: "",
-            selectedCourse: "",
-            loginError: false,
-            registerError: false
-            });
-          this.handleClose();
-          }
-        })
-        .catch(err => this.setState({registerError: true}));
-
+            .then(res => {
+              if(res.data === "Already Exist"){
+                this.setState({registerError: true});
+              }else if(res.data === "this errorValidationError: email: Please enter a valid e-mail address"){
+                this.setState({invalidEmail: true});
+              }else{
+              document.cookie = `_uid=${this.props.userId};`;
+              this.setState({
+                login: true,
+                loggedInUser: this.state.firstName + " " + this.state.lastName,
+                email: "",
+                password: "",
+                userName: "",
+                firstName: "",
+                lastName: "",
+                school: "",
+                district: "",
+                selectedCourse: "",
+                loginError: false,
+                registerError: false,
+                invalidEmail: false
+                });
+              this.handleClose();
+              }
+            })
+            .catch(err =>{
+              this.setState({registerError: true})});
     // })
     // .catch(err => this.setState({registerError: true}));
 

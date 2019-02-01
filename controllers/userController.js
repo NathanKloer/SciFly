@@ -5,46 +5,48 @@ const bcrypt = require("bcrypt"),
 module.exports = {
 
   findOne: function(req, res) {
-    console.log(req.params.id)
     db.User
       .findOne({userName: req.params.id})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
-    console.log(req.body);
+  create: function(req, response) {
     db.User
-    .findOne({userName: req.params.id})
+    .findOne({userName: req.body.userName})
     .then(dbModel => {
-        res.json("Already Exist")
-         })
-    .catch(err => {
-      bcrypt
-      .hash(req.body.password, saltRounds)
-      .then(function(hash) {
-        //create user in database
-        db.User.create({
-          userName: req.body.userName,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          school: req.body.school,
-          district: req.body.district,
-          course: req.body.course,
-          email: req.body.email,
-          password: hash
-        })
-          //return newly created user to the front-end
-          .then(function(data) {
-            res.json(data);
+        if(dbModel === null){
+          bcrypt
+          .hash(req.body.password, saltRounds)
+          .then(function(hash) {
+            //create user in database
+            db.User.create({
+              userName: req.body.userName,
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              school: req.body.school,
+              district: req.body.district,
+              course: req.body.course,
+              email: req.body.email,
+              password: hash
+            })
+              //return newly created user to the front-end
+              .then(function(data) {
+                res.json(data);
+              })
+              //catch error and return to front-end
+              //ex. Username already exists in database
+              .catch(function(err) {
+                response.json("this error"+err);
+              });
+            })
+            .catch(err => {
+              res.send(err);
           })
-          //catch error and return to front-end
-          //ex. Username already exists in database
-          .catch(function(err) {
-            res.send(err);
-          });
-    })
-    });
-
+          }else{
+         res.json("Already Exist")
+        }
+      })
+      .catch(err =>res.send("FindOneerror " + err));
   },
   update: function(req, res) {
     db.User
