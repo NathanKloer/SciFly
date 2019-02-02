@@ -20,6 +20,9 @@ class SearchContainer extends Component {
 
     //Array that is assembled from the inventory table, must be reset when items are deleted from shopping cart
     this.cartItems = [];
+
+    //Reference to UserId
+    this.cookieUserId = '';
   }
   state = {
     //contains a list of items from the api, one render behind
@@ -39,7 +42,7 @@ class SearchContainer extends Component {
     this.setState({organization: updateorg});
     this.orgSearch(updateorg);
     this.viewProps(this.callback);
-
+    this.cookieUserId = readCookie("_uid");
     // this.loadBooks();
     // console.log("My ID = "+this.props.value.id);
   }
@@ -249,6 +252,7 @@ class SearchContainer extends Component {
         <Container fluid>
           <h1>I AM THE SEARCH PAGE</h1>
           <br/>
+          <h3>UserId: {this.cookieUserId}</h3>
           <h3>Organization: {this.state.organization}</h3>
         <h5>Search by Category</h5>
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>

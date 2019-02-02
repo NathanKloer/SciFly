@@ -32,7 +32,7 @@ export function InvTblItem(props){
     <tr >
       <td  id={'name-'+props.product._id}>{props.product.productName}</td>
       <td>{props.product.category}</td>
-      <td>{props.product.Size}</td>
+      <td>{props.product.description}</td>
       <td>{props.product.uom}</td>
       <td id={'prod-stock-quantity-'+props.product._id}>{props.product.stockQuantity}</td>
       <td><AddInvBtn product = {props.product} listener = {props.listener}></AddInvBtn></td>
