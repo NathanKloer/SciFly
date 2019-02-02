@@ -4,6 +4,7 @@ import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import { Col, Row, Container } from "../components/Grid";
+//import "../style.css";
 
 class HomeContainer extends Component {
   state = {
@@ -59,8 +60,11 @@ class HomeContainer extends Component {
   }
   render() {
     return (
+
       <Container>
+        {/* <img src={"https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"} alt="bg" class="bg"></img> */}
         <React.Fragment>
+
           <h1>I AM THE HOME PAGE</h1>
           <br/>
           <h5>Search by Organization</h5>
