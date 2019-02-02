@@ -56,7 +56,6 @@ export function CartItem(props) {
 // }
 
 export function DelInvBtn(props){
-  {/*props.listener*/}
   return(
     <button type="button" className="btn custom-view-btn ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
     ✗

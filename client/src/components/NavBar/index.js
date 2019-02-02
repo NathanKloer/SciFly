@@ -3,6 +3,7 @@ import {UserConsumer} from "../../providers";
 import {ModalComponent} from "../Modal";
 import {Navbar, Nav, NavItem } from "react-bootstrap";
 import API from "../../utils/API";
+import readCookie from "../../utils/RCAPI";
 
 // import { Link } from "react-router-dom";
 import "./style.css";
@@ -32,11 +33,16 @@ class NavBar extends Component {
               ],
     users: [],
     login: false,
-    loggedInUser: ""
+    loggedInUser: "",
+    loginError: false,
+    invalidEmail: false
   };
 
   componentDidMount = () => {
-    // let userContext = this.context;
+
+    const cookieUserId = readCookie("_uid");
+    this.setState({_id: cookieUserId});
+    this.props.idChanged(cookieUserId);
   }
 
   handleClose = () => {
@@ -60,66 +66,118 @@ class NavBar extends Component {
           login: true,
           loggedInUser: res.data.firstName + " " + res.data.lastName,
           _id: res.data._id
-        })
+            })
         console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.props.currentId}`)
-
+        document.cookie = `_uid=${this.props.currentId};`;
         this.handleClose();
+        this.setState({
+          login: true,
+          loggedInUser: this.state.firstName + " " + this.state.lastName,
+          email: "",
+          password: "",
+          userName: "",
+          firstName: "",
+          lastName: "",
+          school: "",
+          district: "",
+          selectedCourse: "",
+          loginError: false,
+          registerError: false,
+          invalidEmail: false
+          });
       }else{
-        console.log("password or user invalid");
+        this.setState({loginError: true})
       }
     })
-    .catch(err => {
-      console.log("Error");
-      console.log(err);
-      });
+    .catch(err => this.setState({loginError: true}));
 
   };
 
   handleRegister = () => {
-    this.setState({ registerUser: true });
+    this.setState({
+                  registerUser: true,
+                  login: false,
+                  loggedInUser: "",
+                  email: "",
+                  password: "",
+                  userName: "",
+                  firstName: "",
+                  lastName: "",
+                  school: "",
+                  district: "",
+                  selectedCourse: "",
+                  loginError: false,
+                  registerError: false,
+                  invalidEmail: false
+                });
   }
   handleRegisterSubmit = () => {
+    this.setState({
+                  registerError: false,
+                  invalidEmail: false
+                  });
     const newUser = {   email: this.state.email,
-      password: this.state.password,
-      userName:this.state.userName,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      school: this.state.school,
-      district: this.state.district,
-      course: this.state.selectedCourse
-      }
-    API.getUser("/" + newUser.userName)
-    .then(res => {
-      if(res.user === this.state.userName){
-
-      }else{
+                        password: this.state.password,
+                        userName:this.state.userName,
+                        firstName: this.state.firstName,
+                        lastName: this.state.lastName,
+                        school: this.state.school,
+                        district: this.state.district,
+                        course: this.state.selectedCourse
+                    }
         API.createUser(newUser)
-        .then(res => {
-          this.setState({
-            login: true,
-            loggedInUser: this.state.firstName + " " + this.state.lastName,
-            email: "",
-            password: "",
-            userName: "",
-            firstName: "",
-            lastName: "",
-            school: "",
-            district: "",
-            selectedCourse: ""
-            });
-        }).catch(err => console.log(err));
-      }
-    })
-    .catch(err => console.log(err));
-    this.handleClose();
+            .then(res => {
+              if(res.data === "Already Exist"){
+                this.setState({registerError: true});
+              }else if(res.data === "this errorValidationError: email: Please enter a valid e-mail address"){
+                this.setState({invalidEmail: true});
+              }else{
+              document.cookie = `_uid=${this.props.userId};`;
+              this.setState({
+                login: true,
+                loggedInUser: this.state.firstName + " " + this.state.lastName,
+                email: "",
+                password: "",
+                userName: "",
+                firstName: "",
+                lastName: "",
+                school: "",
+                district: "",
+                selectedCourse: "",
+                loginError: false,
+                registerError: false,
+                invalidEmail: false
+                });
+              this.handleClose();
+              }
+            })
+            .catch(err =>{
+              this.setState({registerError: true})});
+    // })
+    // .catch(err => this.setState({registerError: true}));
+
   }
   handleUserLogIn = () => {
-    this.setState({ registerUser: false});
+    this.setState({
+                  registerUser: false,
+                  login: false,
+                  loggedInUser: "",
+                  email: "",
+                  password: "",
+                  userName: "",
+                  firstName: "",
+                  lastName: "",
+                  school: "",
+                  district: "",
+                  selectedCourse: "",
+                  loginError: false,
+                  registerError: false
+                 });
   }
   handleSignOut = () => {
-    console.log("sign out");
-    this.setState({loggedInUser: null})
+    this.setState({_id: null})
     this.props.idChanged("", "");
+    document.cookie = `_uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
   }
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -146,7 +204,7 @@ class NavBar extends Component {
             <NavItem eventKey={2} href="/donate">
               Donate
             </NavItem>
-            {this.state.loggedInUser ? (
+            {this.state._id ? (
                 <NavItem eventKey={3}  onClick={this.handleSignOut}>
                 Sign Out
                 </NavItem>
@@ -168,6 +226,7 @@ class NavBar extends Component {
         handleUserLogIn = {this.handleUserLogIn}
         handleRegister = {this.handleRegister}
         handleRegisterSubmit = {this.handleRegisterSubmit}
+
         />
         </div>
       )

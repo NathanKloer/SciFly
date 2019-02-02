@@ -9,8 +9,6 @@ router.route("/")
 // Matches with "/api/login/:id"
 router
   .route("/:id")
-  .get(loginController.findOne)
-  .put(loginController.update)
-  .delete(loginController.remove);
+  .get(loginController.findOne);
 
 module.exports = router;
