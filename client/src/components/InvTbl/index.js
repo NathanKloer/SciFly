@@ -34,7 +34,7 @@ export function InvTblItem(props){
       <td>{props.product.category}</td>
       <td>{props.product.description}</td>
       <td>{props.product.uom}</td>
-      <td>{props.product.stockQuantity}</td>
+      <td id={'prod-stock-quantity-'+props.product._id}>{props.product.stockQuantity}</td>
       <td><AddInvBtn product = {props.product} listener = {props.listener}></AddInvBtn></td>
     </tr>
   );
@@ -42,7 +42,7 @@ export function InvTblItem(props){
 
 export function AddInvBtn(props){
   return(
-    <button type="button" className="btn custom-view-btn ml-1" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'}>
+    <button type="button" id = {props.product._id} className="btn custom-view-btn ml-1" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'}>
       Add
     </button>
   );

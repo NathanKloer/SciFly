@@ -39,7 +39,6 @@ class NavBar extends Component {
   };
 
   componentDidMount = () => {
-
     const cookieUserId = readCookie("_uid");
     this.setState({_id: cookieUserId});
     this.props.idChanged(cookieUserId);
