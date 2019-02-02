@@ -175,8 +175,8 @@ class SearchContainer extends Component {
         //console.log("Quantity for ID-"+productId+" = "+productQty);
         // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
         // console.log("*****THE USER ID = "+this.props.currentId);
-        // return ({...order, quantity: productQty, userId: this.props.currentId});
-        return ({...order, quantity: productQty, userId: "5c547a48b136c68cecd954da"});
+        return ({...order, quantity: productQty, userId: this.props.currentId});
+        // return ({...order, quantity: productQty, userId: "5c547a48b136c68cecd954da"});
       }
       return ({...order, productQuantity: productQty});
     });//map
