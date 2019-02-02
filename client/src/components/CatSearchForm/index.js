@@ -7,7 +7,7 @@ function CatSearchForm(props) {
     <div className="container">
       <div className="row">
         <form>
-          <select id="ddlCatList">
+          <select id="ddlCatList" onChange={props.catSearchEvent}>
             <option value="1">Culturing</option>
             <option value="2">Dryer</option>
             <option value="3">Electrophoresis</option>

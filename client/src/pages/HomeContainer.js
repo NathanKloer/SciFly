@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
-import CardExample from "../components/Jumbotron";
-import {Container, Row, Column} from "../components/Grid";
+import readCookie from "../utils/RCAPI";
+import { Col, Row, Container } from "../components/Grid";
 
 class HomeContainer extends Component {
   state = {
@@ -32,18 +29,17 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     // this.loadBooks();
+    const updateorg = readCookie("org");
+    this.setState({organization: updateorg});
     // console.log("My ID = "+this.props.value.id);
   }
 
-  // callback = (res) => {
-  //   this.setState({ products: res.data.items});
-  // }
 
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
     var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
-    // console.log("Organization to Search = "+organization);
     this.setState({organization: organization});
+    document.cookie = `org=${organization};`;
     if (organization){
       event.preventDefault();
       const baseURL = "/products";
@@ -55,10 +51,9 @@ class HomeContainer extends Component {
   loadByOrganization = (baseURL, cb) => {
     API.getOrganization(baseURL)
       .then(res => {
-        // console.log("API CALL HAS STARTED!");
         //callback to store state variables
         cb(res);//01122019:SaveAndDisplay the Data:
-        this.props.history.push({
+        history.push({
           pathname: '/search',
           state: {products: res.data}
         });
