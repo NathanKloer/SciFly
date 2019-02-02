@@ -20,6 +20,9 @@ class SearchContainer extends Component {
 
     //Array that is assembled from the inventory table, must be reset when items are deleted from shopping cart
     this.cartItems = [];
+
+    //Reference to UserId
+    this.cookieUserId = '';
   }
   state = {
     //contains a list of items from the api, one render behind
@@ -39,7 +42,7 @@ class SearchContainer extends Component {
     this.setState({organization: updateorg});
     this.orgSearch(updateorg);
     this.viewProps(this.callback);
-
+    this.cookieUserId = readCookie("_uid");
     // this.loadBooks();
     // console.log("My ID = "+this.props.value.id);
   }
@@ -107,11 +110,19 @@ class SearchContainer extends Component {
     event.preventDefault();
     let productIdClicked = event.target.getAttribute('data-product-id');
     let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
+    let stockQuantityAvailable = document.getElementById('prod-stock-quantity-'+productIdClicked).innerText;
+
+    //Error Handling: If Item clicked don't enter it again
+     let addButton = document.getElementById(productIdClicked);
+      addButton.disabled = true;
+      //console.log(quantityInputValue);
+
     //quantity
     let cartItem =
     {
       id: productIdClicked,
-      name: productNameClicked
+      name: productNameClicked,
+      stockQuantity: stockQuantityAvailable
     };
     this.cartItems.push(cartItem);
     // {this.orders.push(cartItem)};
@@ -128,6 +139,11 @@ class SearchContainer extends Component {
     let cartItemToDel = event.target.getAttribute('data-cart-item-id');
     let curCart = this.state.cartItems;
     let filteredCart = curCart.filter(eachItem => eachItem.id !== cartItemToDel);
+
+    //Errorhandling if item deleted then enable the add to cart button:
+    // let productIdClicked = event.target.getAttribute('data-product-id');
+    let addButton = document.getElementById(cartItemToDel );
+    addButton.disabled = false;
 
     //Set cart Items array
     this.setState({ cartItems: filteredCart});
@@ -160,6 +176,7 @@ class SearchContainer extends Component {
         // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
         // console.log("*****THE USER ID = "+this.props.currentId);
         return ({...order, quantity: productQty, userId: this.props.currentId});
+        // return ({...order, quantity: productQty, userId: "5c547a48b136c68cecd954da"});
       }
       return ({...order, productQuantity: productQty});
     });//map
@@ -167,7 +184,7 @@ class SearchContainer extends Component {
       // id: this.props.currentId,
       data: {...completedOrder}
     };
-    //console.log("Completed Order", jsonOrder);
+
     this.sendOrder(jsonOrder);
 
     //reset the cart
@@ -235,6 +252,7 @@ class SearchContainer extends Component {
         <Container fluid>
           <h1>I AM THE SEARCH PAGE</h1>
           <br/>
+          <h3>UserId: {this.cookieUserId}</h3>
           <h3>Organization: {this.state.organization}</h3>
         <h5>Search by Category</h5>
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>

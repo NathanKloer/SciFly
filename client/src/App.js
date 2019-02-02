@@ -7,7 +7,7 @@ import HomeContainer from "./pages/HomeContainer";
 import SearchUpdate from "./pages/SearchContainer";
 import ConfirmationContainer from "./pages/ConfirmationContainer";
 import DonateContainer from "./pages/DonateContainer";
-import NoMatchContainer from "./pages/NoMatchContainer";
+import NoMatch from "./pages/NoMatch";
 import NavUpdate from "./components/NavBar";
 import history from "./history";
 import "./style.css";
@@ -32,7 +32,7 @@ function App() {
                 <Route exact path="/search/:category" component={SearchUpdate} />
                 <Route exact path="/confirmation" component={ConfirmationContainer} />
                 <Route exact path="/donate" component={DonateContainer} />
-                <Route component={NoMatchContainer} />
+                <Route component={NoMatch} />
               </Switch>
             </div>
           </Router>
