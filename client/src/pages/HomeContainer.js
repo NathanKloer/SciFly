@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
+import { Col, Row, Container } from "../components/Grid";
 
 class HomeContainer extends Component {
   state = {
@@ -58,12 +59,14 @@ class HomeContainer extends Component {
   }
   render() {
     return (
-      <React.Fragment>
-        <h1>I AM THE HOME PAGE</h1>
-        <br/>
-        <h5>Search by Organization</h5>
-        <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
-      </React.Fragment>
+      <Container>
+        <React.Fragment>
+          <h1>I AM THE HOME PAGE</h1>
+          <br/>
+          <h5>Search by Organization</h5>
+          <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
+        </React.Fragment>
+      </Container>
     );
   }
 }

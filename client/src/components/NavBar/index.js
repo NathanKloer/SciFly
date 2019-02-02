@@ -3,6 +3,7 @@ import {UserConsumer} from "../../providers";
 import {ModalComponent} from "../Modal";
 import {Navbar, Nav, NavItem } from "react-bootstrap";
 import API from "../../utils/API";
+import { Col, Row, Container } from "../Grid";
 
 // import { Link } from "react-router-dom";
 import "./style.css";
@@ -131,44 +132,46 @@ class NavBar extends Component {
   render() {
       return (
         <div>
-        <Navbar  staticTop collapseOnSelect id="nav-bar">
-        <Navbar.Header >
-          <Navbar.Brand>
-            <a href="/">Parts-To-Purpose</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            <NavItem eventKey={1} href="/search">
-              Search
-            </NavItem>
-            <NavItem eventKey={2} href="/donate">
-              Donate
-            </NavItem>
-            {this.state.loggedInUser ? (
-                <NavItem eventKey={3}  onClick={this.handleSignOut}>
-                Sign Out
+          <Container fluid>
+            <Navbar  staticTop collapseOnSelect id="nav-bar">
+            <Navbar.Header >
+              <Navbar.Brand>
+                <a href="/">Parts-To-Purpose</a>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              <Nav pullRight>
+                <NavItem eventKey={1} href="/search">
+                  Search
                 </NavItem>
-                ):(
-                <NavItem eventKey={3}  onClick={this.handleShow}>
-                    Login/Regiser
+                <NavItem eventKey={2} href="/donate">
+                  Donate
                 </NavItem>
-                )}
+                {this.state.loggedInUser ? (
+                    <NavItem eventKey={3}  onClick={this.handleSignOut}>
+                    Sign Out
+                    </NavItem>
+                    ):(
+                    <NavItem eventKey={3}  onClick={this.handleShow}>
+                        Login/Regiser
+                    </NavItem>
+                    )}
 
-          </Nav>
-        </Navbar.Collapse>
-        </Navbar>
-        <ModalComponent
-        state = {this.state}
-        handleClose = {this.handleClose}
-        handleShow = {this.handleShow}
-        handleSubmit = {this.handleSubmit}
-        handleInputChange = {this.handleInputChange}
-        handleUserLogIn = {this.handleUserLogIn}
-        handleRegister = {this.handleRegister}
-        handleRegisterSubmit = {this.handleRegisterSubmit}
-        />
+              </Nav>
+            </Navbar.Collapse>
+            </Navbar>
+            <ModalComponent
+            state = {this.state}
+            handleClose = {this.handleClose}
+            handleShow = {this.handleShow}
+            handleSubmit = {this.handleSubmit}
+            handleInputChange = {this.handleInputChange}
+            handleUserLogIn = {this.handleUserLogIn}
+            handleRegister = {this.handleRegister}
+            handleRegisterSubmit = {this.handleRegisterSubmit}
+            />
+          </Container>
         </div>
       )
     }

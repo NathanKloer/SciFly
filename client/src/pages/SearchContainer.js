@@ -5,6 +5,8 @@ import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr, CheckOutBtn} from "../components/Cart";
+
+
 class SearchContainer extends Component {
   constructor(){
     super();
@@ -187,34 +189,34 @@ class SearchContainer extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Container fluid>
-          <h1>I AM THE SEARCH PAGE</h1>
-          <br/>
-        <h5>Search by Category</h5>
-        <CatSearchForm catSearchEvent={this.handleCatSearch}/>
-          <Row>
-            <Col size="md-7">
-              {!this.isCatBtnClicked && this.state.products.length ? (
-                <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
-              ) : (
-                !this.isCatBtnClicked && <h3></h3>
-              )}
-              {/* {this.products && "Products= " +this.products.length} */}
-                {this.isCatBtnClicked && this.products && this.products.length ? (
-                <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
-              ) : (
-                this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
-              )}
-            </Col>
-            <Col size="md-4">
-             <CartHdr cartItems = {this.state.cartItems} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
-              {/* <h5>Invalid user id or password</h5> */}
-             </CartHdr>
-            </Col>
-          </Row>
-        </Container>
-      </React.Fragment>
+      <Container>
+        <React.Fragment>
+            <h1>I AM THE SEARCH PAGE</h1>
+            <br/>
+          <h5>Search by Category</h5>
+          <CatSearchForm catSearchEvent={this.handleCatSearch}/>
+            <Row>
+              <Col size="md-7">
+                {!this.isCatBtnClicked && this.state.products.length ? (
+                  <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
+                ) : (
+                  !this.isCatBtnClicked && <h3></h3>
+                )}
+                {/* {this.products && "Products= " +this.products.length} */}
+                  {this.isCatBtnClicked && this.products && this.products.length ? (
+                  <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
+                ) : (
+                  this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
+                )}
+              </Col>
+              <Col size="md-4">
+              <CartHdr cartItems = {this.state.cartItems} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
+                {/* <h5>Invalid user id or password</h5> */}
+              </CartHdr>
+              </Col>
+            </Row>
+        </React.Fragment>
+      </Container>
     );
   }
 }
