@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import PartnerBlock from "../components/PartnerBlock";
+import { Col, Row, Container } from "../components/Grid";
+
 
 class DonateContainer extends Component {
   state = {
@@ -45,10 +47,12 @@ class DonateContainer extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <h1>I AM THE DONATE PAGE</h1>
-        <PartnerBlock onClick={this.handleFormSearch}/>
-      </React.Fragment>
+      <Container>
+        <React.Fragment>
+          <h1>I AM THE DONATE PAGE</h1>
+          <PartnerBlock onClick={this.handleFormSearch}/>
+        </React.Fragment>
+      </Container>
     );
   }
 }

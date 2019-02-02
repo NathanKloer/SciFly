@@ -21,7 +21,7 @@ import "./style.css";
             {props.cartItems.map(cartItem => {
               return (
                 // listener = {props.createOrderArr}
-                <CartItem cartItem= {cartItem} delCartItems= {props.delCartItems}></CartItem>
+                <CartItem key={cartItem.id} cartItem= {cartItem} delCartItems= {props.delCartItems}></CartItem>
               );
             })}
           </tbody>

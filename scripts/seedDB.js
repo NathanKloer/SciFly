@@ -61,17 +61,25 @@ const productSeed = [
 let userIdArr = [];
 const userSeed = [
   {
-    userName: "Tony Lockhart",
+    userName: "tlockhart",
     email: "Tony.Lockhart@ymail.com",
     password: "9834u-q24j0i",
-    phone: "662-5555",
+    firstName: "Tony",
+    lastName: "Lockhart",
+    school: "GT",
+    district: "ATL",
+    course: "Biology",
     date: new Date(Date.now())
   },
   {
     userName: "Juel Lockhart",
     email: "Juel.lockhart@ymail.com",
     password: "908q34u-[poi240",
-    phone: "663-7777",
+    firstName: "Juel",
+    lastName: "Lockhart",
+    school: "GT",
+    district: "ATL",
+    course: "AP Biology",
     date: new Date(Date.now())
   }
 ];
@@ -96,7 +104,7 @@ function main(){
   // db.Product.remove({});
   try{
     db.Product.insertMany(productSeed, function(error, products){
-      console.log("PRODUCTLENGTH= "+products.length);
+      console.log("PRODUCTLENGTH= " + products.length);
       for(var i = 0; i < products.length; i++)
       {
         productIdArr[i] = products[i]._id;
@@ -119,7 +127,7 @@ function main(){
   createUser = () => {
     try{
       db.User.insertMany(userSeed, function(error, users){
-        console.log("USERLENGTH= "+users.length);
+        console.log("USERLENGTH= " + users);
         for(var i = 0; i < users.length; i++)
         {
           userIdArr[i] = users[i]._id;
@@ -175,7 +183,8 @@ function main(){
           },//define user
         },
         populateOrder
-      );//return
+      );//update query
+      return newOrder._id;
       // populateOrder();
     });//thenable
   }//function

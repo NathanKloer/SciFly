@@ -4,7 +4,7 @@ import Jumbotron from "../components/jumbotron";
 
 function NoMatch() {
   return (
-    <Container fluid>
+    <Container>
       <Row>
         <Col size="md-12">
           <Jumbotron>
