@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
-import { Col, Row, Container } from "../components/Grid";
-//import "../style.css";
-
+import readCookie from "../utils/RCAPI";
 class HomeContainer extends Component {
   state = {
     products: [],
@@ -15,18 +12,17 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     // this.loadBooks();
+    const updateorg = readCookie("org");
+    this.setState({organization: updateorg});
     // console.log("My ID = "+this.props.value.id);
   }
 
-  // callback = (res) => {
-  //   this.setState({ products: res.data.items});
-  // }
 
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
     var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
-    // console.log("Organization to Search = "+organization);
     this.setState({organization: organization});
+    document.cookie = `org=${organization};`;
     if (organization){
       event.preventDefault();
       const baseURL = "/products";
@@ -38,10 +34,9 @@ class HomeContainer extends Component {
   loadByOrganization = (baseURL, cb) => {
     API.getOrganization(baseURL)
       .then(res => {
-        // console.log("API CALL HAS STARTED!");
         //callback to store state variables
         cb(res);//01122019:SaveAndDisplay the Data:
-        this.props.history.push({
+        history.push({
           pathname: '/search',
           state: {products: res.data}
         });
