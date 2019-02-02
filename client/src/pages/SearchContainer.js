@@ -5,7 +5,6 @@ import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr} from "../components/Cart";
-import history from "../history"
 import readCookie from "../utils/RCAPI";
 
 class SearchContainer extends Component {
