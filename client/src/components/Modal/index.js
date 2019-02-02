@@ -14,6 +14,9 @@ export function ModalComponent(props) {
 <Modal.Header>
      <Modal.Title className="text-center">
      {props.state.registerUser ? ("Please Register"):("Please Login")}
+     {props.state.loginError && !props.state.registerUser ? (<p className="text-danger">Incorrect Username or Password!</p>):("")}
+     {props.state.registerError && props.state.registerUser ? (<p className="text-danger">Username already in used. Please try again.</p>):("")}
+     {props.state.invalidEmail && props.state.registerUser ? (<p className="text-danger">Invalid Email. Please try again.</p>):("")}
      </Modal.Title>
  </Modal.Header>
    {props.state.registerUser ? (
@@ -87,12 +90,14 @@ export function ModalComponent(props) {
      value={props.state.email}
      onChange={props.handleInputChange}
      name="email"
+     type="email"
      placeholder="Enter Email"
      label="Email"
      pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
      smallname="form-text text-muted"
      smalltext="We'll never share your email with anyone else."
      required="required"
+     className={props.state.invalidEmail ? ("form-control error"):("form-control")}
    />
    <Input
      value={props.state.password}

@@ -5,7 +5,7 @@ import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr} from "../components/Cart";
-// import history from "../history"
+import readCookie from "../utils/RCAPI";
 
 class SearchContainer extends Component {
   constructor(){
@@ -31,12 +31,39 @@ class SearchContainer extends Component {
     //the created ordered id;
     orderId: '',
     // product: {},
-    category: ""
+    category: "",
+    organization: ""
   };
+  componentDidMount() {
+    const updateorg = readCookie("org");
+    this.setState({organization: updateorg});
+    this.orgSearch(updateorg);
+    this.viewProps(this.callback);
 
+    // this.loadBooks();
+    // console.log("My ID = "+this.props.value.id);
+  }
   /*************************************************/
   //API CALLS TO LOAD INVENTORY
-
+  orgSearch = (organization) =>{
+    if (organization){
+      // event.preventDefault();
+      const baseURL = "/products";
+      this.loadByOrganization(baseURL, this.callback);
+    }//if
+  };
+  loadByOrganization = (baseURL, cb) => {
+    API.getOrganization(baseURL)
+      .then(res => {
+        //callback to store state variables
+        cb(res);//01122019:SaveAndDisplay the Data:
+        // history.push({
+        //   pathname: '/search',
+        //   state: {products: res.data}
+        // });
+      })
+      .catch(err => console.log(err));
+  };
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
     var ddlCatElem = document.getElementById("ddlCatList");
@@ -108,7 +135,7 @@ class SearchContainer extends Component {
     event.preventDefault();
     let cartItemToDel = event.target.getAttribute('data-cart-item-id');
     let curCart = this.state.cartItems;
-    let filteredCart = curCart.filter(eachItem => eachItem.id != cartItemToDel);
+    let filteredCart = curCart.filter(eachItem => eachItem.id !== cartItemToDel);
 
     //Errorhandling if item deleted then enable the add to cart button:
     // let productIdClicked = event.target.getAttribute('data-product-id');
@@ -142,15 +169,14 @@ class SearchContainer extends Component {
       //console.log("Product ID = ", productId);
       if(document.getElementById("quantity-"+productId)){
         var  productQty= document.getElementById("quantity-"+productId).value;
-        var userID = {};
         //console.log("Quantity for ID-"+productId+" = "+productQty);
         // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
         // console.log("*****THE USER ID = "+this.props.currentId);
         // return ({...order, quantity: productQty, userId: this.props.currentId});
         return ({...order, quantity: productQty, userId: "5c547a48b136c68cecd954da"});
       }
+      return ({...order, productQuantity: productQty});
     });//map
-    //console.log("TEST DATA = "+test);
     let jsonOrder = {
       // id: this.props.currentId,
       data: {...completedOrder}
@@ -216,10 +242,6 @@ class SearchContainer extends Component {
     cb();
   }
 
-  componentDidMount() {
-    // this.loadBooks();
-    this.viewProps(this.callback);
-  }
 
   render() {
     return (
@@ -227,7 +249,7 @@ class SearchContainer extends Component {
         <Container fluid>
           <h1>I AM THE SEARCH PAGE</h1>
           <br/>
-          <h3>Organization: {this.props.location.state.products[0].organization}</h3>
+          <h3>Organization: {this.state.organization}</h3>
         <h5>Search by Category</h5>
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>
         {/* <h1>Length: {this.props.location.state.products[0]._id}</h1> */}
@@ -235,10 +257,10 @@ class SearchContainer extends Component {
         <Row>
             <Col size="md-7">
             {/* <h1>{this.props.location.state.products.length}</h1> */}
-              {!this.isCatBtnClicked && this.props.location.state.products.length ? (
-                <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
+              {!this.isCatBtnClicked && this.products.length ? (
+                <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
               ) : (
-                !this.isCatBtnClicked && <h3></h3>
+                !this.isCatBtnClicked && <h3> </h3>
               )}
                 {this.isCatBtnClicked && this.products && this.products.length ? (
                 <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
