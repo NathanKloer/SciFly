@@ -4,9 +4,8 @@
   color: black!important;
   box-shadow: none!important;
 }
-<<<<<<< HEAD
 
-/*-------MARY FOR FULLBACKGROUND-------- */
+/* -------MARY FOR FULLBACKGROUND-------- */
 img.bg {
   /* Set rules to fill background */
   min-height: 100%;
@@ -28,14 +27,12 @@ img.bg {
     margin-left: -512px;   /* 50% */
   }
 }
-/*--------------------------------------*/
+/*-------------------------------------- */
 
 
-=======
 .top-margin{
   margin-top: 1rem;
 }
->>>>>>> master
 /* @font-face {
     font-family: blkchcry;
     src: url(/fonts/BLKCHCRY.TTF);

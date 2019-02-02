@@ -15,6 +15,21 @@ class HomeContainer extends Component {
     organization: ""
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapse: false,
+      isWideEnough: false,
+    };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    this.setState({
+      collapse: !this.state.collapse,
+    });
+  }
+
   componentDidMount() {
     // this.loadBooks();
     // console.log("My ID = "+this.props.value.id);
@@ -62,7 +77,7 @@ class HomeContainer extends Component {
   }
   render() {
     return (
-
+<div>
       <React.Fragment>
         <MDBView src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg">
             <MDBMask overlay="purple-light" className="flex-center flex-column text-white text-center">
@@ -73,6 +88,7 @@ class HomeContainer extends Component {
             </MDBMask>
           </MDBView>
       </React.Fragment>
+  </div>
     );
   }
 }
