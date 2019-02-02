@@ -207,18 +207,11 @@ class NavBar extends Component {
                 <NavItem eventKey={3}  onClick={this.handleSignOut}>
                 Sign Out
                 </NavItem>
-                <NavItem eventKey={2} href="/donate">
-                  Donate
+                ):(
+                <NavItem eventKey={3}  onClick={this.handleShow}>
+                    Login/Regiser
                 </NavItem>
-                {this.state.loggedInUser ? (
-                    <NavItem eventKey={3}  onClick={this.handleSignOut}>
-                    Sign Out
-                    </NavItem>
-                    ):(
-                    <NavItem eventKey={3}  onClick={this.handleShow}>
-                        Login/Regiser
-                    </NavItem>
-                    )}
+                )}
 
           </Nav>
         </Navbar.Collapse>

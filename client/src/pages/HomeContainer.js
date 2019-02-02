@@ -3,6 +3,8 @@ import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import readCookie from "../utils/RCAPI";
+import { Col, Row, Container } from "../components/Grid";
+
 class HomeContainer extends Component {
   state = {
     products: [],
