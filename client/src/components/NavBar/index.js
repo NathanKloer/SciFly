@@ -3,6 +3,7 @@ import {UserConsumer} from "../../providers";
 import {ModalComponent} from "../Modal";
 import {Navbar, Nav, NavItem } from "react-bootstrap";
 import API from "../../utils/API";
+import readCookie from "../../utils/RCAPI";
 
 // import { Link } from "react-router-dom";
 import "./style.css";
@@ -39,22 +40,11 @@ class NavBar extends Component {
 
   componentDidMount = () => {
 
-    const cookieUserId = this.readCookie("_uid");
+    const cookieUserId = readCookie("_uid");
     this.setState({_id: cookieUserId});
     this.props.idChanged(cookieUserId);
   }
-   readCookie = (name) => {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === " ") c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) === 0) {
-        return c.substring(nameEQ.length, c.length);
-      }
-    }
-    return null;
-  }
+
   handleClose = () => {
     this.setState({ show: false,
                     registerUser: false });
@@ -122,6 +112,10 @@ class NavBar extends Component {
                 });
   }
   handleRegisterSubmit = () => {
+    this.setState({
+                  registerError: false,
+                  invalidEmail: false
+                  });
     const newUser = {   email: this.state.email,
                         password: this.state.password,
                         userName:this.state.userName,

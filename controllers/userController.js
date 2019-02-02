@@ -39,14 +39,14 @@ module.exports = {
                 response.json("this error"+err);
               });
             })
-            .catch(err => {
-              res.send(err);
+          .catch(err => {
+            res.send(err);
           })
           }else{
-         res.json("Already Exist")
+         response.json("Already Exist")
         }
       })
-      .catch(err =>res.send("FindOneerror " + err));
+    .catch(err =>res.send("FindOneerror " + err));
   },
   update: function(req, res) {
     db.User

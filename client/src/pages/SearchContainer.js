@@ -6,6 +6,7 @@ import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr} from "../components/Cart";
 import history from "../history"
+import readCookie from "../utils/RCAPI";
 
 class SearchContainer extends Component {
   constructor(){
@@ -31,12 +32,39 @@ class SearchContainer extends Component {
     //the created ordered id;
     orderId: '',
     // product: {},
-    category: ""
+    category: "",
+    organization: ""
   };
+  componentDidMount() {
+    const updateorg = readCookie("org");
+    this.setState({organization: updateorg});
+    this.orgSearch(updateorg);
+    this.viewProps(this.callback);
 
+    // this.loadBooks();
+    // console.log("My ID = "+this.props.value.id);
+  }
   /*************************************************/
   //API CALLS TO LOAD INVENTORY
-
+  orgSearch = (organization) =>{
+    if (organization){
+      // event.preventDefault();
+      const baseURL = "/products";
+      this.loadByOrganization(baseURL, this.callback);
+    }//if
+  };
+  loadByOrganization = (baseURL, cb) => {
+    API.getOrganization(baseURL)
+      .then(res => {
+        //callback to store state variables
+        cb(res);//01122019:SaveAndDisplay the Data:
+        // history.push({
+        //   pathname: '/search',
+        //   state: {products: res.data}
+        // });
+      })
+      .catch(err => console.log(err));
+  };
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
     var ddlCatElem = document.getElementById("ddlCatList");
@@ -201,10 +229,6 @@ class SearchContainer extends Component {
     cb();
   }
 
-  componentDidMount() {
-    // this.loadBooks();
-    this.viewProps(this.callback);
-  }
 
   render() {
     return (
@@ -212,7 +236,7 @@ class SearchContainer extends Component {
         <Container fluid>
           <h1>I AM THE SEARCH PAGE</h1>
           <br/>
-          <h3>Organization: Georgia Bio</h3>
+          <h3>Organization: {this.state.organization}</h3>
         <h5>Search by Category</h5>
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>
         {/* <h1>Length: {this.props.location.state.products[0]._id}</h1> */}

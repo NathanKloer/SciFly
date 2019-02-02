@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
-
+import readCookie from "../utils/RCAPI";
 class HomeContainer extends Component {
   state = {
     products: [],
@@ -12,6 +12,8 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     // this.loadBooks();
+    const updateorg = readCookie("org");
+    this.setState({organization: updateorg});
     // console.log("My ID = "+this.props.value.id);
   }
 
@@ -20,6 +22,7 @@ class HomeContainer extends Component {
     var ddlOrgElem = document.getElementById("ddlOrgList");
     var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
     this.setState({organization: organization});
+    document.cookie = `org=${organization};`;
     if (organization){
       event.preventDefault();
       const baseURL = "/products";
