@@ -4,8 +4,8 @@ import { Col, Row, Container } from "../components/Grid";
 import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
-import {CartHdr, CheckOutBtn} from "../components/Cart";
-import history from "../history"
+import {CartHdr} from "../components/Cart";
+// import history from "../history"
 
 class SearchContainer extends Component {
   constructor(){
@@ -80,11 +80,19 @@ class SearchContainer extends Component {
     event.preventDefault();
     let productIdClicked = event.target.getAttribute('data-product-id');
     let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
+    let stockQuantityAvailable = document.getElementById('prod-stock-quantity-'+productIdClicked).innerText;
+
+    //Error Handling: If Item clicked don't enter it again
+     let addButton = document.getElementById(productIdClicked);
+      addButton.disabled = true;
+      //console.log(quantityInputValue);
+
     //quantity
     let cartItem =
     {
       id: productIdClicked,
-      name: productNameClicked
+      name: productNameClicked,
+      stockQuantity: stockQuantityAvailable
     };
     this.cartItems.push(cartItem);
     // {this.orders.push(cartItem)};
@@ -101,6 +109,11 @@ class SearchContainer extends Component {
     let cartItemToDel = event.target.getAttribute('data-cart-item-id');
     let curCart = this.state.cartItems;
     let filteredCart = curCart.filter(eachItem => eachItem.id != cartItemToDel);
+
+    //Errorhandling if item deleted then enable the add to cart button:
+    // let productIdClicked = event.target.getAttribute('data-product-id');
+    let addButton = document.getElementById(cartItemToDel );
+    addButton.disabled = false;
 
     //Set cart Items array
     this.setState({ cartItems: filteredCart});
@@ -133,7 +146,8 @@ class SearchContainer extends Component {
         //console.log("Quantity for ID-"+productId+" = "+productQty);
         // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
         // console.log("*****THE USER ID = "+this.props.currentId);
-        return ({...order, quantity: productQty, userId: this.props.currentId});
+        // return ({...order, quantity: productQty, userId: this.props.currentId});
+        return ({...order, quantity: productQty, userId: "5c547a48b136c68cecd954da"});
       }
     });//map
     //console.log("TEST DATA = "+test);
@@ -141,7 +155,7 @@ class SearchContainer extends Component {
       // id: this.props.currentId,
       data: {...completedOrder}
     };
-    //console.log("Completed Order", jsonOrder);
+
     this.sendOrder(jsonOrder);
 
     //reset the cart

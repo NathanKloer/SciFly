@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Router, Route, withRouter, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import Provider from './providers';
 import Consumer from './consumer';
 import HomeContainer from "./pages/HomeContainer";

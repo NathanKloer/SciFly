@@ -39,7 +39,7 @@ class HomeContainer extends Component {
         // console.log("API CALL HAS STARTED!");
         //callback to store state variables
         cb(res);//01122019:SaveAndDisplay the Data:
-        this.props.history.push({
+        history.push({
           pathname: '/search',
           state: {products: res.data}
         });
