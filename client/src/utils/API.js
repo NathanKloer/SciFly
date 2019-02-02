@@ -35,6 +35,13 @@ export default {
     if (data) {
       return axios.post('/api' + baseURL, data);
     }
+   },
+   getOrder: function(baseURL, parameter){
+    // console.log('/api'+baseURL+"/"+parameter);
+   if(parameter){
+    // console.log('/api'+baseURL+"/"+parameter);
+     return axios.get('/api'+baseURL+'/'+parameter);
+   }
   }
 };
 

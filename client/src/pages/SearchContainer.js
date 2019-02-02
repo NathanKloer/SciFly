@@ -5,7 +5,7 @@ import { InvTblHdr} from "../components/InvTbl";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr, CheckOutBtn} from "../components/Cart";
-
+import history from "../history"
 
 class SearchContainer extends Component {
   constructor(){
@@ -23,11 +23,14 @@ class SearchContainer extends Component {
   }
   state = {
     //contains a list of items from the api, one render behind
-    products: [],
+    // products: [],
 
     //keeps track of all items in the cart
     cartItems: [],
-    product: {},
+
+    //the created ordered id;
+    orderId: '',
+    // product: {},
     category: ""
   };
 
@@ -64,7 +67,7 @@ class SearchContainer extends Component {
     // console.log();
     // console.log("API CALL HAS ENDED!");
     // console.log();
-    // console.log("Res = "+JSON.stringify(res));
+    //console.log("Res = "+JSON.stringify(res));
     if(res){
       //this.clearTableDiv('table-contents');
       this.products = res.data;
@@ -120,18 +123,22 @@ class SearchContainer extends Component {
     //console.log(JSON.stringify(this.orders));
 
     //Add the Quantity to the cart
-    let completedOrder = this.orders.map(order => {
+    //Add the User ID here.
+    let completedOrder = this.orders.map(order =>{
       var productId = order.id;
       //console.log("Product ID = ", productId);
-      if(document.getElementById("quantity-" + productId)){
-        var  productQty= document.getElementById("quantity-" + productId).value;
+      if(document.getElementById("quantity-"+productId)){
+        var  productQty= document.getElementById("quantity-"+productId).value;
+        var userID = {};
         //console.log("Quantity for ID-"+productId+" = "+productQty);
-        return ({...order, productQuantity: productQty});
+        // return ({...order, quantity: productQty, userId:"5c5320138dc02066d00e5c3f"});
+        // console.log("*****THE USER ID = "+this.props.currentId);
+        return ({...order, quantity: productQty, userId: this.props.currentId});
       }
     });//map
     //console.log("TEST DATA = "+test);
     let jsonOrder = {
-      id: this.props.currentId,
+      // id: this.props.currentId,
       data: {...completedOrder}
     };
     //console.log("Completed Order", jsonOrder);
@@ -160,7 +167,10 @@ class SearchContainer extends Component {
         /******************** */
         //console.log("API CALL HAS STARTED!");
         // callback to store state variables
-        displayOrder(res);//01122019:SaveAndDisplay the Data:
+        let orderId = res.data;//01122019:SaveAndDisplay the Data:
+        // console.log("SearchContainer: Order Id = "+orderId);
+        this.setState({ orderId: orderId });
+        this.retrieveOrder(baseURL, this.state.orderId);
         // history.push('/confirmation');
         // this.props.history.push({
         //   pathname: '/confirmation',
@@ -170,15 +180,25 @@ class SearchContainer extends Component {
       .catch(err => console.log(err));
   };
 
-  displayOrder = (data) => {
-    //console.log("Order Id = "+JSON.stringify(data));
+  retrieveOrder = (baseURL, orderId) => {
+    API.getOrder(baseURL, orderId)
+      .then(res => {
+        // console.log("SearchContainer: completeOrder = "+JSON.stringify(res));
+        // this.props.history.push({
+          this.props.history.push({
+          pathname: '/confirmation',
+          state: {orders: res.data}
+          // state: {test: "Tony"}
+        });
+      });
+
   }
   //END ORDER SUBMISSION
   /**********************************************************/
 
   viewProps = (cb) => {
     // console.log("Data = " + JSON.stringify(this.props.location.state));
-    this.setState({products: this.state});
+    // this.setState({products: this.props.location.state.products});
     cb();
   }
 
@@ -189,46 +209,52 @@ class SearchContainer extends Component {
 
   render() {
     return (
-      <Container>
-        <React.Fragment>
-            <h1>I AM THE SEARCH PAGE</h1>
-            <br/>
-          <h5>Search by Category</h5>
-          <CatSearchForm catSearchEvent={this.handleCatSearch}/>
-            <Row>
-              <Col size="md-7">
-                {!this.isCatBtnClicked && this.state.products.length ? (
-                  <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
-                ) : (
-                  !this.isCatBtnClicked && <h3></h3>
-                )}
-                {/* {this.products && "Products= " +this.products.length} */}
-                  {this.isCatBtnClicked && this.products && this.products.length ? (
-                  <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
-                ) : (
-                  this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
-                )}
-              </Col>
-              <Col size="md-4">
-              <CartHdr cartItems = {this.state.cartItems} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
-                {/* <h5>Invalid user id or password</h5> */}
-              </CartHdr>
-              </Col>
-            </Row>
-        </React.Fragment>
-      </Container>
+      <React.Fragment>
+        <Container fluid>
+          <h1>I AM THE SEARCH PAGE</h1>
+          <br/>
+          <h3>Organization: {this.props.location.state.products[0].organization}</h3>
+        <h5>Search by Category</h5>
+        <CatSearchForm catSearchEvent={this.handleCatSearch}/>
+        {/* <h1>Length: {this.props.location.state.products[0]._id}</h1> */}
+        <div className="top-margin">
+        <Row>
+            <Col size="md-7">
+            {/* <h1>{this.props.location.state.products.length}</h1> */}
+              {!this.isCatBtnClicked && this.props.location.state.products.length ? (
+                <InvTblHdr products = {this.props.location.state.products} addCartItems = {this.addCartItems}></InvTblHdr>
+              ) : (
+                !this.isCatBtnClicked && <h3></h3>
+              )}
+                {this.isCatBtnClicked && this.products && this.products.length ? (
+                <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
+              ) : (
+                this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
+              )}
+            </Col>
+            <Col size="md-4">
+             <CartHdr cartItems = {this.state.cartItems} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
+             </CartHdr>
+            </Col>
+          </Row>
+        </div>
+        </Container>
+      </React.Fragment>
     );
   }
 }
 const SearchUpdate = props => (
   <UserConsumer>
-    {({ id, userName }) => (
+    {({ id, userName}) => (
       <SearchContainer
-        // {...props}
+        {...props}
         currentId={id}
         currentUserName={userName}
+        // currentOrder = {location}
       />
     )}
   </UserConsumer>
 )
+// export default SearchUpdate;
+// export default withRouter(SearchContainer);
 export default SearchUpdate;

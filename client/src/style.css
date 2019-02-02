@@ -4,6 +4,7 @@
   color: black!important;
   box-shadow: none!important;
 }
+<<<<<<< HEAD
 
 /*-------MARY FOR FULLBACKGROUND-------- */
 img.bg {
@@ -30,6 +31,11 @@ img.bg {
 /*--------------------------------------*/
 
 
+=======
+.top-margin{
+  margin-top: 1rem;
+}
+>>>>>>> master
 /* @font-face {
     font-family: blkchcry;
     src: url(/fonts/BLKCHCRY.TTF);
