@@ -6,15 +6,12 @@ import readCookie from "../utils/RCAPI";
 class HomeContainer extends Component {
   state = {
     products: [],
-    product: {},
     organization: ""
   };
 
   componentDidMount() {
-    // this.loadBooks();
     const updateorg = readCookie("org");
     this.setState({organization: updateorg});
-    // console.log("My ID = "+this.props.value.id);
   }
 
 
@@ -35,7 +32,7 @@ class HomeContainer extends Component {
     API.getOrganization(baseURL)
       .then(res => {
         //callback to store state variables
-        cb(res);//01122019:SaveAndDisplay the Data:
+        cb(res);
         history.push({
           pathname: '/search',
           state: {products: res.data}
@@ -45,9 +42,6 @@ class HomeContainer extends Component {
   };
 
   callback = (res) => {
-    // console.log();
-    // console.log("API CALL HAS ENDED!");
-    // console.log();
     //console.log("Res = "+JSON.stringify(res));
     if(res){
       this.setState({ products: res.data.items});

@@ -6,7 +6,8 @@ import "./style.css";
   export function CartHdr(props) {
   return (
     // <div className="list-overflow-container">
-    <div className="list-overflow-container table-responsive" id="table-div">
+    <React.Fragment>
+    {props.currentId?<div className="list-overflow-container table-responsive cart-border" id="table-div">
       <form>
         <table className="w-20 table table-bordered table-contents">
           <thead>
@@ -27,8 +28,9 @@ import "./style.css";
         </table>
         <CheckOutBtn submitOrder= {props.submitOrder}></CheckOutBtn>
       </form>
-    </div>
-  );
+    </div>:<div className = "hide-component"></div>}
+    </React.Fragment>
+  );//return
 }
 
 // This is one item in the cart
@@ -77,7 +79,7 @@ export function CartItem(props) {
   return (
     <tr id = {'row-'+props.cartItem.id} key= {props.cartItem.id}>
       <td  id={'name-'+props.cartItem.id}>{props.cartItem.name}Test</td>
-      <td><input id={'quantity-'+props.cartItem.id} type="number" data-quantity-id = {props.cartItem.id} defaultValue="1" min = "1" max = {props.cartItem.stockQuantity} onChange = {validateQuantity}/></td>
+      <td><input className = "show-component" id={'quantity-'+props.cartItem.id} type="number" data-quantity-id = {props.cartItem.id} defaultValue="1" min = "1" max = {props.cartItem.stockQuantity} onChange = {validateQuantity}/></td>
       <td><DelInvBtn cartItem = {props.cartItem} delCartItems = {props.delCartItems}></DelInvBtn></td>
     </tr>
   );
@@ -94,7 +96,7 @@ export function DelInvBtn(props){
 // This is the checkout button
 export function CheckOutBtn(props) {
   return (
-    <button type="submit" id = "checkout-btn" className="btn custom-view-btn ml-1" onClick= {props.submitOrder}>
+    <button type="submit" id = "checkout-btn" className="btn custom-view-btn submit-margins center-block" onClick= {props.submitOrder}>
       Submit
     </button>
   );

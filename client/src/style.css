@@ -7,6 +7,14 @@
 .top-margin{
   margin-top: 1rem;
 }
+
+.hide-component{
+  display: none;
+}
+
+.show-component{
+  width: 100%;
+}
 /* @font-face {
     font-family: blkchcry;
     src: url(/fonts/BLKCHCRY.TTF);
