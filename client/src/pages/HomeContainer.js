@@ -4,6 +4,7 @@ import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import readCookie from "../utils/RCAPI";
 import { Col, Row, Container } from "../components/Grid";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
 
 class HomeContainer extends Component {
   state = {
@@ -75,11 +76,11 @@ class HomeContainer extends Component {
 <div>
       <React.Fragment>
         <MDBView src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg">
-            <MDBMask overlay="purple-light" className="flex-center flex-column text-white text-center">
+            <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
               <h3>We are proud to partner with various organizations to bring their inventory ("Parts") into a freely searchable online database that will allow you to search and re-"Purpose" the donated items. Please check our stock, and if you find something you can use, you'll be able to create an account and reserve the items</h3>
               <h5>Select an organization to get started:</h5>
               <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
-              <CardExample />
+
             </MDBMask>
           </MDBView>
       </React.Fragment>
