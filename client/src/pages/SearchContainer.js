@@ -22,7 +22,9 @@ class SearchContainer extends Component {
     this.cartItems = [];
 
     //Reference to UserId
-    this.cookieUserId = '';
+    //this.cookieUserId = '';
+    // this.cookieUserId = readCookie("_uid");
+    // this.setState({userId: this.cookieUserId});
   }
   state = {
     //contains a list of items from the api, one render behind
@@ -34,15 +36,15 @@ class SearchContainer extends Component {
     //the created ordered id;
     orderId: '',
     // product: {},
-    category: "",
-    organization: ""
+    category: '',
+    organization: '',
   };
   componentDidMount() {
     const updateorg = readCookie("org");
     this.setState({organization: updateorg});
     this.orgSearch(updateorg);
     this.viewProps(this.callback);
-    this.cookieUserId = readCookie("_uid");
+
     // this.loadBooks();
     // console.log("My ID = "+this.props.value.id);
   }
@@ -252,28 +254,28 @@ class SearchContainer extends Component {
         <Container fluid>
           <h1>I AM THE SEARCH PAGE</h1>
           <br/>
-          <h3>UserId: {this.cookieUserId}</h3>
+          <h3>UserId: {this.props.currentId}</h3>
+          {/* {this.props.currentId?<h3>Show Me</h3>:<h3>Don't Show me</h3>} */}
           <h3>Organization: {this.state.organization}</h3>
         <h5>Search by Category</h5>
         <CatSearchForm catSearchEvent={this.handleCatSearch}/>
-        {/* <h1>Length: {this.props.location.state.products[0]._id}</h1> */}
         <div className="top-margin">
         <Row>
             <Col size="md-7">
             {/* <h1>{this.props.location.state.products.length}</h1> */}
               {!this.isCatBtnClicked && this.products.length ? (
-                <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
+                <InvTblHdr currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
               ) : (
                 !this.isCatBtnClicked && <h3> </h3>
               )}
                 {this.isCatBtnClicked && this.products && this.products.length ? (
-                <InvTblHdr products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
+                <InvTblHdr currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems}></InvTblHdr>
               ) : (
                 this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
               )}
             </Col>
             <Col size="md-4">
-             <CartHdr cartItems = {this.state.cartItems} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
+             <CartHdr cartItems = {this.state.cartItems} currentId = {this.props.currentId} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
              </CartHdr>
             </Col>
           </Row>

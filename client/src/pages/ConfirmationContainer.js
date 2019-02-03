@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
+import API from "../utils/API";
 
 class ConfirmationContainer extends Component {
       constructor(){
@@ -11,6 +12,9 @@ class ConfirmationContainer extends Component {
 
         //Array of orders to submit
         this.orders = [];
+
+        //Products Quantities to update:
+        this.quantityData = [];
 
         //Array that is assembled from the inventory table, must be reset when items are deleted from shopping cart
         // this.cartItems = [];
@@ -25,9 +29,50 @@ class ConfirmationContainer extends Component {
       // this.loadBooks();
       // console.log("Did Mount Order = ", this.props.location.state.orders);
       this.setState({orders:  this.props.location.state.orders});
+      this.quantityData = this.props.location.state.orders[0].products.map(product => {
+        return(
+          {
+            _id: product.product._id,
+            stockQuantity: product.productQuantity
+          }
+        );
+        // return (
+        //     console.log("ProductID = ", product.product._id, "Quantity = "+product.productQuantity)
+        // );
+      })//map
+
+      this.updateStock(this.quantityData);
 
       // console.log("State variables = "+this.state.orders);
+    }//componentDidMount
+
+    callback = (res) => {
+      // console.log();
+      // console.log("API CALL HAS ENDED!");
+      // console.log();
+      //console.log("Res = "+JSON.stringify(res));
+      if(res){
+        //this.clearTableDiv('table-contents');
+        this.products = res.data;
+        this.setState({ products: res.data.items});
+      }
     }
+
+    //Assemble parameters and Pass the data to the API for updates
+    updateStock = (data) => {
+      let baseURL = "/stock"
+      this.updateStockQuantity(baseURL, data, this.callback);
+    }
+    //Initialize the state variables with search results
+  updateStockQuantity = (baseURL, data, cb) => {
+    API.putQuantity(baseURL, data)
+      .then(res => {
+        // console.log("API CALL HAS STARTED!");
+        //callback to store state variables
+        cb(res);//01122019:SaveAndDisplay the Data:
+      })
+      .catch(err => console.log(err));
+  };
     render() {
       return (
       <Container fluid>

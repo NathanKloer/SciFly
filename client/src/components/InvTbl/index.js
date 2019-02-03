@@ -12,13 +12,13 @@ export function InvTblHdr(props) {
             <th>Description</th>
             <th>UOM</th>
             <th>Quantity</th>
-            <th>Add to Cart</th>
+            {props.currentId?<th>Add to Cart</th>:<th className = "hide-component"></th>}
           </tr>
         </thead>
         <tbody>
           {props.products.map(product => {
             return (
-              <InvTblItem key= {product._id} product= {product} listener = {props.addCartItems}></InvTblItem>
+              <InvTblItem key= {product._id} currentId = {props.currentId} product= {product} listener = {props.addCartItems}></InvTblItem>
             );
           })}
         </tbody>
@@ -35,7 +35,7 @@ export function InvTblItem(props){
       <td>{props.product.description}</td>
       <td>{props.product.uom}</td>
       <td id={'prod-stock-quantity-'+props.product._id}>{props.product.stockQuantity}</td>
-      <td><AddInvBtn product = {props.product} listener = {props.listener}></AddInvBtn></td>
+      {props.currentId?<td><AddInvBtn product = {props.product} listener = {props.listener}></AddInvBtn></td>:<td className = "hide-component"></td>}
     </tr>
   );
 }
