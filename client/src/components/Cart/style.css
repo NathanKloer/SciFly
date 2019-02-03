@@ -1,1 +1,9 @@
 /* Pending */
+.cart-border {
+  border: 1px solid #dddddd;
+}
+
+.submit-margins {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

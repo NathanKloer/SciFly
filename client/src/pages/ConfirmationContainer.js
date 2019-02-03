@@ -1,47 +1,59 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
+import API from "../utils/API";
 
 class ConfirmationContainer extends Component {
-      constructor(){
-        super();
-        // this.isCatBtnClicked = false;
+    constructor(){
+      super();
 
-        //Array of products returned from the API
-        // this.products = [];
-
-        //Array of orders to submit
-        this.orders = [];
-
-        //Array that is assembled from the inventory table, must be reset when items are deleted from shopping cart
-        // this.cartItems = [];
-        // console.log("Constructor Order = ", this.props.location.state.orders);
-      }
-
+      //Products Quantities to update:
+      this.quantityData = [];
+    }
     state = {
-      //contains a list of items from the api, one render behind
-      orders: []
+      order: []
     }
-    componentDidMount() {
-      // this.loadBooks();
-      // console.log("Did Mount Order = ", this.props.location.state.orders);
-      this.setState({orders:  this.props.location.state.orders});
 
-      // console.log("State variables = "+this.state.orders);
+    componentDidMount() {
+      this.setState({order:  this.props.location.state.order});
+      this.quantityData = this.props.location.state.order.map(product => {
+        return(
+          {
+            _id: product._id,
+            newStockQuantity: product.newStockQuantity
+          }
+        );
+      })//map
+      this.updateStock(this.quantityData);
+    }//componentDidMount
+
+    //Assemble parameters and Pass the data to the API for updates
+    updateStock = (data) => {
+      let baseURL = "/stock"
+      this.updateStockQuantity(baseURL, data);
     }
+    //Initialize the state variables with search results
+  updateStockQuantity = (baseURL, data) => {
+    API.putQuantity(baseURL, data)
+      .then(res => {
+        // console.log("API CALL HAS STARTED!");
+      })
+      .catch(err => console.log(err));
+  };
     render() {
       return (
       <Container fluid>
         <Row>
           <Col size="md-12">
             <h1>I AM THE CONFIRMATION PAGE</h1>
-            <h3>User: {this.props.location.state.orders[0].user.userName}</h3>
-            <h3>Order ID: {this.props.location.state.orders[0]._id}</h3>
+            <h3>User: {this.props.location.state.order[0].userName}</h3>
+            <h3>Order ID: {this.props.location.state.order[0].orderId}</h3>
               <div>
               <h3>Items Ordered:</h3>
                 <ol>
-                  {this.props.location.state.orders[0].products.map(product => {
+                    {this.props.location.state.order.map(product => {
+
                   return (
-                      <h5 key = {product.product._id}><li>{product.product.productName} Quantity: {product.productQuantity}</li></h5>
+                      <h5 key = {product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></h5>
                       )
                     })
                   }

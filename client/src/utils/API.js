@@ -42,6 +42,12 @@ export default {
     // console.log('/api'+baseURL+"/"+parameter);
      return axios.get('/api'+baseURL+'/'+parameter);
    }
+  },
+  putQuantity(baseURL, data){
+    if (data) {
+      //console.log("In API, going to update quantitites");
+      return axios.put('/api' + baseURL, data);
+    }
   }
 };
 
