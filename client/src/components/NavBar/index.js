@@ -4,8 +4,6 @@ import {ModalComponent} from "../Modal";
 import {Navbar, Nav, NavItem } from "react-bootstrap";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
-
-// import { Link } from "react-router-dom";
 import "./style.css";
 
 class NavBar extends Component {
@@ -66,7 +64,6 @@ class NavBar extends Component {
           loggedInUser: res.data.firstName + " " + res.data.lastName,
           _id: res.data._id
             })
-        console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.props.currentId}`)
         document.cookie = `_uid=${this.props.currentId};`;
         this.handleClose();
         this.setState({
@@ -152,8 +149,6 @@ class NavBar extends Component {
             })
             .catch(err =>{
               this.setState({registerError: true})});
-    // })
-    // .catch(err => this.setState({registerError: true}));
 
   }
   handleUserLogIn = () => {
