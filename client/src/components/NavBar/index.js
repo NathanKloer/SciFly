@@ -209,7 +209,7 @@ class NavBar extends Component {
                 </NavItem>
                 ):(
                 <NavItem eventKey={3}  onClick={this.handleShow}>
-                    Login/Regiser
+                    Login/Register
                 </NavItem>
                 )}
 
