@@ -3,7 +3,9 @@ import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import readCookie from "../utils/RCAPI";
-import { Col, Row, Container } from "../components/Grid";
+//import { Col, Row, Container } from "../components/Grid";
+import {Navbar, Nav, NavItem } from "react-bootstrap";
+import Container from 'react-bootstrap/Container'
 
 class HomeContainer extends Component {
   state = {
@@ -58,8 +60,8 @@ class HomeContainer extends Component {
   render() {
     return (
 
-      <Container>
-        {/* <img src={"https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"} alt="bg" class="bg"></img> */}
+      <Container fluid>
+        <img src={"https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"} alt="bg" class="bg"></img>
         <React.Fragment>
 
           <h1>I AM THE HOME PAGE</h1>
