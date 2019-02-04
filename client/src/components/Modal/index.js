@@ -65,10 +65,10 @@ export function ModalComponent(props) {
      value={props.state.district}
      onChange={props.handleInputChange}
      name="district"
-     placeholder="Enter Your Disctrict"
-     label="Disctrict"
+     placeholder="Enter Your District"
+     label="District"
      smallname="form-text text-muted"
-     smalltext="Disctrict"
+     smalltext="District"
      required="required"
    />
    <Dropdown
