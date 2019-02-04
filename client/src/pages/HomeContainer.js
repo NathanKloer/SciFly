@@ -3,13 +3,17 @@ import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import readCookie from "../utils/RCAPI";
+<<<<<<< HEAD
 import { Col, Row, Container } from "../components/Grid";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
+=======
+import {Carousel, Grid } from "react-bootstrap";
+import "../style.css";
+>>>>>>> mary-branch
 
 class HomeContainer extends Component {
   state = {
     products: [],
-    product: {},
     organization: ""
   };
 
@@ -29,10 +33,8 @@ class HomeContainer extends Component {
   }
 
   componentDidMount() {
-    // this.loadBooks();
     const updateorg = readCookie("org");
     this.setState({organization: updateorg});
-    // console.log("My ID = "+this.props.value.id);
   }
 
 
@@ -53,7 +55,7 @@ class HomeContainer extends Component {
     API.getOrganization(baseURL)
       .then(res => {
         //callback to store state variables
-        cb(res);//01122019:SaveAndDisplay the Data:
+        cb(res);
         history.push({
           pathname: '/search',
           state: {products: res.data}
@@ -63,9 +65,6 @@ class HomeContainer extends Component {
   };
 
   callback = (res) => {
-    // console.log();
-    // console.log("API CALL HAS ENDED!");
-    // console.log();
     //console.log("Res = "+JSON.stringify(res));
     if(res){
       this.setState({ products: res.data.items});
@@ -73,6 +72,7 @@ class HomeContainer extends Component {
   }
   render() {
     return (
+<<<<<<< HEAD
 <div>
       <React.Fragment>
         <MDBView src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg">
@@ -85,6 +85,38 @@ class HomeContainer extends Component {
           </MDBView>
       </React.Fragment>
   </div>
+=======
+      <React.Fragment>
+       <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              <h3>Parts-to-Purpose</h3>
+              <p>Our Mission is to...</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+
+        <Grid container center text>
+          <Grid row>
+            <Grid col> Test 1</Grid>
+
+            <Grid col> <h5>Search by Organization</h5>
+        <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/></Grid>
+
+          </Grid>
+
+        </Grid>
+
+
+
+
+      </React.Fragment>
+>>>>>>> mary-branch
     );
   }
 }

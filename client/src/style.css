@@ -27,11 +27,33 @@ img.bg {
     margin-left: -512px;   /* 50% */
   }
 }
+<<<<<<< HEAD
 /*-------------------------------------- */
+=======
+
+.carousel {
+  height: 70vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/*--------------------------------------*/
+>>>>>>> mary-branch
 
 
 .top-margin{
   margin-top: 1rem;
+}
+
+.hide-component{
+  display: none;
+}
+
+.show-component{
+  width: 100%;
 }
 /* @font-face {
     font-family: blkchcry;

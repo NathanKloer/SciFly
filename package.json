@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.2.1",
     "express": "^4.16.4",
     "mdbreact": "^4.9.0",
     "mongoose": "^5.4.6",
