@@ -27,6 +27,16 @@ img.bg {
     margin-left: -512px;   /* 50% */
   }
 }
+
+.carousel {
+  height: 70vh;
+  min-height: 350px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 /*--------------------------------------*/
 
 

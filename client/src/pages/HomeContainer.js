@@ -3,9 +3,8 @@ import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import readCookie from "../utils/RCAPI";
-//import { Col, Row, Container } from "../components/Grid";
-import {Navbar, Nav, NavItem } from "react-bootstrap";
-import Container from 'react-bootstrap/Container'
+import {Carousel, Grid } from "react-bootstrap";
+import "../style.css";
 
 class HomeContainer extends Component {
   state = {
@@ -53,17 +52,36 @@ class HomeContainer extends Component {
   }
   render() {
     return (
+      <React.Fragment>
+       <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              <h3>Parts-to-Purpose</h3>
+              <p>Our Mission is to...</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
 
-      <Container fluid>
-        <img src={"https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"} alt="bg" class="bg"></img>
-        <React.Fragment>
+        <Grid container center text>
+          <Grid row>
+            <Grid col> Test 1</Grid>
 
-          <h1>I AM THE HOME PAGE</h1>
-          <br/>
-          <h5>Search by Organization</h5>
-          <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
-        </React.Fragment>
-      </Container>
+            <Grid col> <h5>Search by Organization</h5>
+        <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/></Grid>
+
+          </Grid>
+
+        </Grid>
+
+
+
+
+      </React.Fragment>
     );
   }
 }
