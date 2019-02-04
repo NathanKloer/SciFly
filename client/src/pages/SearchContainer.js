@@ -121,7 +121,7 @@ class SearchContainer extends Component {
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
   disableAddBtn = (stockQuantity) => {
-    if(parseInt(stockQuantity) === 0){
+    if(parseInt(stockQuantity) < 1){
       return 'disabled';
     }
     else
