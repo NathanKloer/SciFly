@@ -3,13 +3,9 @@ import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
 import history from "../history"
 import readCookie from "../utils/RCAPI";
-<<<<<<< HEAD
-import { Col, Row, Container } from "../components/Grid";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
-=======
-import {Carousel, Grid } from "react-bootstrap";
 import "../style.css";
->>>>>>> mary-branch
+import CarouselPage from "../components/Carousel";
+import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 
 class HomeContainer extends Component {
   state = {
@@ -72,51 +68,40 @@ class HomeContainer extends Component {
   }
   render() {
     return (
-<<<<<<< HEAD
-<div>
       <React.Fragment>
-        <MDBView src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg">
-            <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
-              <h3>We are proud to partner with various organizations to bring their inventory ("Parts") into a freely searchable online database that will allow you to search and re-"Purpose" the donated items. Please check our stock, and if you find something you can use, you'll be able to create an account and reserve the items</h3>
-              <h5>Select an organization to get started:</h5>
-              <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
-
-            </MDBMask>
-          </MDBView>
+        <CarouselPage />
+        <MDBContainer>
+          <MDBCard className="my-5 px-5 pb-5">
+            <MDBCardBody>
+              <hr className="my-5" />
+              <MDBRow>
+                <MDBCol lg="7">
+                  <h3 className="font-weight-bold mb-3 p-0">
+                    <strong>Search by Organization</strong>
+                  </h3>
+                  <p>
+                    Are you looking for a part to purpose? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
+                  </p>
+                  <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
+                </MDBCol>
+                <MDBCol lg="5">
+                  <MDBView className="rounded z-depth-2 mb-lg-0 mb-4" hover waves>
+                    <img
+                      className="img-fluid"
+                      src="https://mdbootstrap.com/img/Photos/Others/img%20(34).jpg"
+                      alt=""
+                    />
+                    <a href="#!">
+                      <MDBMask overlay="white-slight" />
+                    </a>
+                  </MDBView>
+                </MDBCol>
+              </MDBRow>
+              <hr className="my-5" />
+            </MDBCardBody>
+          </MDBCard>
+        </MDBContainer>
       </React.Fragment>
-  </div>
-=======
-      <React.Fragment>
-       <Carousel>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://recap.princeton.edu/sites/default/files/inline-images/559_0.jpg"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>Parts-to-Purpose</h3>
-              <p>Our Mission is to...</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-
-        <Grid container center text>
-          <Grid row>
-            <Grid col> Test 1</Grid>
-
-            <Grid col> <h5>Search by Organization</h5>
-        <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/></Grid>
-
-          </Grid>
-
-        </Grid>
-
-
-
-
-      </React.Fragment>
->>>>>>> mary-branch
     );
   }
 }
