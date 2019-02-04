@@ -6,7 +6,10 @@ import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
 
 // import { Link } from "react-router-dom";
-import "./style.css";
+//import "./style.css";
+//import FullPageIntroWithFixedTransparentNavbar from "../NavBar2";
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 class NavBar extends Component {
 

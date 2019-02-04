@@ -6,6 +6,7 @@ import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr} from "../components/Cart";
 import readCookie from "../utils/RCAPI";
+import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 
 class SearchContainer extends Component {
   constructor(){
@@ -245,8 +246,7 @@ class SearchContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container fluid>
-          <h1>I AM THE SEARCH PAGE</h1>
+        <MDBContainer>
           <br/>
           {/* <h3>UserId: {this.props.currentId}</h3> */}
           <h3>Organization: {this.state.organization}</h3>
@@ -272,7 +272,7 @@ class SearchContainer extends Component {
             </Col>
           </Row>
         </div>
-        </Container>
+        </MDBContainer>
       </React.Fragment>
     );
   }
