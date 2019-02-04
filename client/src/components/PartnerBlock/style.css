@@ -2,3 +2,27 @@
   background-image: url("../../assets/images/gabioinst.png");
   image-rendering: auto;
 }
+
+h5 {
+  font-size: 300%;
+  margin-left: 90px;
+  
+}
+
+p {
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 60px;
+}
+
+.icon {
+  float: left;
+  margin: 45px 25px 25px;
+  width: 200px;
+  
+}
+
+.summary {
+  margin: 20px 40px 10px;
+
+}
