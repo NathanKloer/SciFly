@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {UserConsumer} from "../providers";
 import { Col, Row, Container } from "../components/Grid";
-import { InvTblHdr} from "../components/InvTbl";
+import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartHdr} from "../components/Cart";
@@ -256,12 +256,12 @@ class SearchContainer extends Component {
         <Row>
             <Col size="md-7">
               {!this.isCatBtnClicked && this.products.length ? (
-                <InvTblHdr currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InvTblHdr>
+                <InventoryTableBody currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InventoryTableBody>
               ) : (
                 !this.isCatBtnClicked && <h3> </h3>
               )}
                 {this.isCatBtnClicked && this.products && this.products.length ? (
-                <InvTblHdr currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InvTblHdr>
+                <InventoryTableBody currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InventoryTableBody>
               ) : (
                 this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
               )}
