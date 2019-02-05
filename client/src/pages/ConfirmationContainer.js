@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/Grid";
+//import { Col, Row, Container } from "../components/Grid";
 import API from "../utils/API";
+import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import "../style.css";
 
 class ConfirmationContainer extends Component {
     constructor(){
@@ -41,10 +43,10 @@ class ConfirmationContainer extends Component {
   };
     render() {
       return (
-      <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <h1>I AM THE CONFIRMATION PAGE</h1>
+        <MDBContainer>
+        <MDBCard className="main-confirmation my-5 px-5 pb-5">
+
+            <h1>Request Confirmation Page</h1>
             <h3>User: {this.props.location.state.order[0].userName}</h3>
             <h3>Order ID: {this.props.location.state.order[0].orderId}</h3>
               <div>
@@ -53,16 +55,17 @@ class ConfirmationContainer extends Component {
                     {this.props.location.state.order.map(product => {
 
                   return (
-                      <h5 key = {product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></h5>
+                      <p key = {product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
                       )
                     })
                   }
                 </ol>
               </div>
             <br/>
-          </Col>
-        </Row>
-      </Container>
+
+        </MDBCard>
+        </MDBContainer>
+
     );//return
   }//render
 }
