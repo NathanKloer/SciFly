@@ -8,7 +8,7 @@ const CarouselPage = () => {
         <MDBCarouselInner>
           <MDBCarouselItem itemId="1">
             <MDBView>
-              <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg" alt="First slide" />
+              <img className="d-block w-100" src={window.location.origin + "/img/Developer_1321x583.png"} alt="First slide" />
               <MDBMask overlay="black-light" />
             </MDBView>
             <MDBCarouselCaption>
@@ -18,30 +18,24 @@ const CarouselPage = () => {
           </MDBCarouselItem>
           <MDBCarouselItem itemId="2">
             <MDBView>
-              <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(99).jpg" alt="Second slide" />
-              <MDBMask overlay="black-strong" />
+              <img className="d-block w-100" src={window.location.origin + "/img/Product_1140x583.png"} alt="Second slide" />
+              <MDBMask overlay="black-light" />
             </MDBView>
             <MDBCarouselCaption>
               <h3 className="h3-responsive">Our Product</h3>
-              <p>Parts-to-Purpos is an open-source, inexpensive inventory and people management platform that nonprofits can use to manage their inventory of donations, donors, and donees</p>
+              <p>Parts-to-Purpose is an open-source, inexpensive inventory and people management platform that nonprofits can use to manage their inventory of donations, donors, and donees</p>
             </MDBCarouselCaption>
           </MDBCarouselItem>
           <MDBCarouselItem itemId="3">
             <MDBView>
-              <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(17).jpg" alt="Third slide" />
-              <MDBMask overlay="black-slight" />
+              <img className="d-block w-100" src={window.location.origin + "/img/Goal_1140x583.png"} alt="Third slide" />
+              <MDBMask overlay="black-light" />
             </MDBView>
             <MDBCarouselCaption>
               <h3 className="h3-responsive">Our Goal</h3>
               <p>To help nonprofits meet their mission by immediately connecting the “purpose” in need to the “part” that’s needed
 </p>
             </MDBCarouselCaption>
-          </MDBCarouselItem>
-          <MDBCarouselItem itemId="4">
-            <MDBView>
-              <img className="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20%28143%29.jpg" alt="Mattonit's item" />
-              <MDBMask overlay="black-light" />
-            </MDBView>
           </MDBCarouselItem>
         </MDBCarouselInner>
       </MDBCarousel>

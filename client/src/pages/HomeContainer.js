@@ -88,7 +88,7 @@ class HomeContainer extends Component {
                   <MDBView className="rounded z-depth-2 mb-lg-0 mb-4" hover waves>
                     <img
                       className="img-fluid"
-                      src="https://mdbootstrap.com/img/Photos/Others/img%20(34).jpg"
+                      src={window.location.origin + "/img/Organization_781x521.png"}
                       alt=""
                     />
                     <a href="#!">
