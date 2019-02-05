@@ -249,6 +249,7 @@ class SearchContainer extends Component {
     return (
       <React.Fragment>
         <MDBContainer>
+          <MDBCard className="main my-5 px-5 pb-5">
           <br/>
           {/* <h3>UserId: {this.props.currentId}</h3> */}
           <h3>Organization: {this.state.organization}</h3>
@@ -274,6 +275,7 @@ class SearchContainer extends Component {
             </Col>
           </Row>
         </div>
+        </MDBCard>
         </MDBContainer>
       </React.Fragment>
     );
