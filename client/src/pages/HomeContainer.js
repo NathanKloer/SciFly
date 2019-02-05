@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import OrgSearchForm from "../components/OrgSearchForm";
-import history from "../history"
+import history from "../history";
 import readCookie from "../utils/RCAPI";
 import "../style.css";
 import CarouselPage from "../components/Carousel";
