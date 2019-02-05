@@ -8,11 +8,18 @@
   margin-bottom: 1rem;
 }
 
+
 #checkout-btn{
   float: right;
+  font-size: 15px;
 }
 
 #delete-btn {
   float: right;
 }
 
+th{
+color:black;
+font-weight: bolder;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
