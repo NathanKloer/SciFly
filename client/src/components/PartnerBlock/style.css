@@ -1,8 +1,3 @@
-#bio-img{
-  background-image: url("../../assets/images/gabioinst.png");
-  image-rendering: auto;
-}
-
 h5 {
   font-size: 400%;
   
@@ -18,9 +13,9 @@ p {
 }
 
 .icon {
+  padding-top: 30px;
   float: left;
-  margin: 45px 15px 0px;
-  width: 200px;
+  width: auto;
   
 }
 
@@ -31,25 +26,28 @@ p {
 
 }
 
-.pageheader {
-  margin-top: 5rem;
-  margin-left: 10rem;
-  
-}
-
 .main{
   margin-top: 60px;
+  margin-left: 25%;
+  margin-right: 25%;
   margin-bottom: 60px;
-  padding-bottom: 60px;
+  padding: 60px;
   max-width: 1200px; 
-  border: 10px solid black;
-  border-radius: 25px;
+  border: 5px solid lightgray;
+  border-radius: 15px;
 }
 
 .partnerbin {
-  border: 10px solid #E8B5CE;
-  border-radius: 25px;
+  
   max-width: 85%;
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+#hr {
+  background-color: lightgrey !important;
+  color: lightgrey !important;
+  border: solid 1px lightgrey !important;
+  height: 1px !important;
+  width: 80% !important;
 }
