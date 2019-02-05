@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Input, FormBtn, Dropdown, DropdownList } from "../LogIn";
-// import "./style.css";
 
 export function ModalComponent(props) {
 
