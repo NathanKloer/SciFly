@@ -69,7 +69,6 @@ class NavBar extends Component {
           loggedInUser: res.data.firstName + " " + res.data.lastName,
           _id: res.data._id
             })
-        console.log(`Logged in ${this.state.login} as ${this.state.loggedInUser}, id: ${this.props.currentId}`)
         document.cookie = `_uid=${this.props.currentId};`;
         this.handleClose();
         this.setState({
@@ -155,9 +154,6 @@ class NavBar extends Component {
             })
             .catch(err =>{
               this.setState({registerError: true})});
-    // })
-    // .catch(err => this.setState({registerError: true}));
-
   }
   handleUserLogIn = () => {
     this.setState({
