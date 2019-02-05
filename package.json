@@ -4,7 +4,7 @@
   "description": "A platform that connects Givers and Receivers.",
   "main": "server.js",
   "scripts": {
-    "start": "npm run start:prod",
+    "start": "npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "start:server": "node ./server.js",
@@ -50,7 +50,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.2.1",
     "express": "^4.16.4",
-    "mdbreact": "^4.9.0",
+    "mdbreact": "^4.10.0",
     "mongoose": "^5.4.6",
     "node": "^11.7.0"
   }
