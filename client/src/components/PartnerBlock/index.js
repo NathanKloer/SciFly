@@ -6,20 +6,21 @@ import "./style.css";
 import API from "../../utils/API";
 function PartnerBlock() {
     return (
-        <Grid clas>
-            <Grid className="row header">
-                <Grid col>
+        <Grid className="main">
+            <Grid row className="row pageheader">
+                <Col size="lg-3">
                     <h5>Our Charity Partners</h5>
-                </Grid>
-                <Col xs-6>
-                    <p>This digital inventory is made possible by the following charities.<br /> If you wish to make a donation,
+                </Col>
+                <Col size="lg-1"></Col>
+                <Col size="md-5">
+                    <h2>This digital inventory is made possible by the following charities.<br /> If you wish to make a donation,
                         we ask you do so through their donation services.
-                    </p>
+                    </h2>
                 </Col>
             </Grid>
-            <hr />
+            
             <Grid>
-                <Grid row>
+                <Grid className="partnerbin">
                 <Col size="md-3">
                     <img class="icon" src={window.location.origin + "/img/gabioinst.png"} alt="" />
                     </Col>
@@ -32,8 +33,8 @@ function PartnerBlock() {
                         <a href="http://www.georgiabioed.org/">visit their site</a>
                     </Col>
                 </Grid>
-                <hr />
-                <Grid row>
+                
+                <Grid className="partnerbin">
                 <Col size="md-3">
                     <img className="icon" src={window.location.origin + "/img/p2p.png"} alt="" />
                     </Col>
@@ -46,13 +47,6 @@ function PartnerBlock() {
                         <a href="/">visit their site</a>
                     </Col>
                 </Grid>
-                <hr />
-                <div className="row">
-                    <p>If you would like to become a partner, please contact us at somewhere@something.com
-                        </p>
-
-                    <a href="/"><br />visit their site</a>
-                </div>
             </Grid>
         </Grid>
         // <Container>
