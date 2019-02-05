@@ -7,6 +7,8 @@ import CatSearchForm from "../components/CatSearchForm";
 import {CartBody} from "../components/CartBody";
 import readCookie from "../utils/RCAPI";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import "../style.css";
+
 
 class SearchContainer extends Component {
   constructor(){

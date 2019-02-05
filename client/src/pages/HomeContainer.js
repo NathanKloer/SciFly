@@ -71,7 +71,7 @@ class HomeContainer extends Component {
       <React.Fragment>
         <CarouselPage />
         <MDBContainer>
-          <MDBCard className="my-5 px-5 pb-5">
+          <MDBCard className="my-5 px-5 pb-5" id="home-page-org-search">
             <MDBCardBody>
               <hr className="my-5" />
               <MDBRow>
@@ -80,7 +80,7 @@ class HomeContainer extends Component {
                     <strong>Search by Organization</strong>
                   </h3>
                   <p>
-                    Are you looking for a part to purpose? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
+                    Are you looking for a "part to purpose"? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
                   </p>
                   <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
                 </MDBCol>

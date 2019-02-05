@@ -19,7 +19,7 @@ const CarouselPage = () => {
           <MDBCarouselItem itemId="2">
             <MDBView>
               <img className="d-block w-100" src={window.location.origin + "/img/Product_1140x583.png"} alt="Second slide" />
-              <MDBMask overlay="black-light" />
+              <MDBMask overlay="black-strong" />
             </MDBView>
             <MDBCarouselCaption>
               <h3 className="h3-responsive">Our Product</h3>
