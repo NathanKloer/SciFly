@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import {UserConsumer} from "../providers";
 import { Col, Row, Container } from "../components/Grid";
-import { InvTblHdr} from "../components/InvTbl";
+import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
-import {CartHdr} from "../components/Cart";
+import {CartBody} from "../components/CartBody";
 import readCookie from "../utils/RCAPI";
+import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 
 class SearchContainer extends Component {
   constructor(){
@@ -120,7 +121,7 @@ class SearchContainer extends Component {
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
   disableAddBtn = (stockQuantity) => {
-    if(parseInt(stockQuantity) === 0){
+    if(parseInt(stockQuantity) < 1){
       return 'disabled';
     }
     else
@@ -245,8 +246,7 @@ class SearchContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container fluid>
-          <h1>I AM THE SEARCH PAGE</h1>
+        <MDBContainer>
           <br/>
           {/* <h3>UserId: {this.props.currentId}</h3> */}
           <h3>Organization: {this.state.organization}</h3>
@@ -256,23 +256,23 @@ class SearchContainer extends Component {
         <Row>
             <Col size="md-7">
               {!this.isCatBtnClicked && this.products.length ? (
-                <InvTblHdr currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InvTblHdr>
+                <InventoryTableBody currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InventoryTableBody>
               ) : (
                 !this.isCatBtnClicked && <h3> </h3>
               )}
                 {this.isCatBtnClicked && this.products && this.products.length ? (
-                <InvTblHdr currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InvTblHdr>
+                <InventoryTableBody currentId = {this.props.currentId} products = {this.products} addCartItems = {this.addCartItems} disableAddBtn = {this.disableAddBtn}></InventoryTableBody>
               ) : (
                 this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
               )}
             </Col>
             <Col size="md-4">
-             <CartHdr cartItems = {this.state.cartItems} currentId = {this.props.currentId} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
-             </CartHdr>
+             <CartBody cartItems = {this.state.cartItems} currentId = {this.props.currentId} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
+             </CartBody>
             </Col>
           </Row>
         </div>
-        </Container>
+        </MDBContainer>
       </React.Fragment>
     );
   }

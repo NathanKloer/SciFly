@@ -3,7 +3,7 @@ import "./style.css";
 
 // This is the container that carries the entire cart box
 // export function CartList({ children }) {
-  export function CartHdr(props) {
+  export function CartBody(props) {
   return (
     // <div className="list-overflow-container">
     <React.Fragment>
@@ -80,12 +80,12 @@ export function CartItem(props) {
     <tr id = {'row-'+props.cartItem.id} key= {props.cartItem.id}>
       <td  id={'name-'+props.cartItem.id}>{props.cartItem.name}Test</td>
       <td><input className = "show-component" id={'quantity-'+props.cartItem.id} type="number" data-quantity-id = {props.cartItem.id} defaultValue="1" min = "1" max = {props.cartItem.stockQuantity} onChange = {validateQuantity}/></td>
-      <td><DelInvBtn cartItem = {props.cartItem} delCartItems = {props.delCartItems}></DelInvBtn></td>
+      <td><DeleteCartItemBtn cartItem = {props.cartItem} delCartItems = {props.delCartItems}></DeleteCartItemBtn></td>
     </tr>
   );
 }
 
-export function DelInvBtn(props){
+export function DeleteCartItemBtn(props){
   return(
     <button type="button" id = {"delete-btn-"+props.cartItem.id} className="btn btn-danger ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
     ✗

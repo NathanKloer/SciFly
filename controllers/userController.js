@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt"),
+const bcrypt = require("bcryptjs"),
       saltRounds = 10,
       db = require("../models");
 // Defining methods for the booksController
