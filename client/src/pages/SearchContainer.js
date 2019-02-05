@@ -4,7 +4,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
-import {CartHdr} from "../components/Cart";
+import {CartBody} from "../components/CartBody";
 import readCookie from "../utils/RCAPI";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 
@@ -267,8 +267,8 @@ class SearchContainer extends Component {
               )}
             </Col>
             <Col size="md-4">
-             <CartHdr cartItems = {this.state.cartItems} currentId = {this.props.currentId} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
-             </CartHdr>
+             <CartBody cartItems = {this.state.cartItems} currentId = {this.props.currentId} delCartItems = {this.delCartItems} submitOrder= {this.submitOrder}>
+             </CartBody>
             </Col>
           </Row>
         </div>
