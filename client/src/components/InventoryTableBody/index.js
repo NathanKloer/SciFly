@@ -4,7 +4,7 @@ import React from "react";
 export function InventoryTableBody(props) {
   return (
     <div className="table-responsive" id="table-div">
-      <table className="w-25 table table-bordered table-contents">
+      <table className="w-25 table table-striped">
         <thead>
           <tr>
             <th>Item</th>
@@ -42,7 +42,7 @@ export function InventoryTableItem(props){
 
 export function AddInventoryBtn(props){
   return(
-    <button type="button" id = {props.product._id} className="btn custom-view-btn ml-1" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'} disabled = {props.disabled}>
+    <button type="button" id = {props.product._id} className="btn btn-info ml-1" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'} disabled = {props.disabled}>
       Add
     </button>
   );
