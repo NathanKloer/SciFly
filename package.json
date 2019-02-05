@@ -4,9 +4,11 @@
   "description": "A platform that connects Givers and Receivers.",
   "main": "server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "npm run start:prod",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "start:server": "node ./server.js",
+    "start:client": "cd client && npm start",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
@@ -28,7 +30,9 @@
   "homepage": "https://github.com/NathanKloer/SciFly#readme",
   "devDependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.3",
     "concurrently": "^4.1.0",
+    "dotenv": "^6.2.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-react-app": "^3.0.6",
     "eslint-plugin-flowtype": "^3.2.1",
@@ -43,7 +47,10 @@
     "react-router-dom": "^4.3.1"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.2.1",
     "express": "^4.16.4",
+    "mdbreact": "^4.9.0",
     "mongoose": "^5.4.6",
     "node": "^11.7.0"
   }

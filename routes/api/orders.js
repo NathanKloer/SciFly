@@ -16,22 +16,7 @@ router.route('/')
 /************************************************/
 // router
 //   .get("/products",productsController.findByOrganization);
+router.route('/:id')
+.get(ordersController.populateOrder);
 
-//CHANGE-8: Simple TEST:Uncomment
-/************************************************/
-  // router.get("/products", function(req, res){
-  //   res.send('route works')
-  // });
-  /************************************************/
-
-//CHANGE-9: Category ROUTE:
-/************************************************/
-/*ROUTE2: /api/products/:Category
-Description: Return all data from the products table as a JSON where productName = url paramenter.*/
-
-/************************************************/
-// router.get("/products/:Category", productsController.findByCategory)
-  /************************************************/
-router.route('/:category')
-.get(productsController.findByCategory);
 module.exports = router;

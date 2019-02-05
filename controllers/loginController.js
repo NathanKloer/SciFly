@@ -1,38 +1,28 @@
-const db = require("../models");
-
+const bcrypt = require("bcryptjs"),
+      saltRounds = 10,
+      db = require("../models");
 // Defining methods for the booksController
 module.exports = {
-  findAll: function(req, res) {
+  findOne: function(req, res) {
     db.User
-      .find(req.query)
-      .sort({ name: -1 })
-      .then(dbModel => res.json(dbModel))
+      .findOne({userName: req.body.userName})
+      .then(dbModel =>
+        bcrypt
+        .compare(req.body.password, dbModel.password)
+        .then(function(valid) {
+          //check if the password provided matches the stored password
+          if (valid) {
+            res.status(200).send(dbModel);
+          } else {
+            res.send("Incorrect Password");
+          }
+        })
+        .catch(function(err) {
+          res.send("Not Found");
+          console.error(err);
+          res.end();
+        })
+      )
       .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    console.log(req.params.id)
-    db.User
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  create: function(req, res) {
-    db.User
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  update: function(req, res) {
-    db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  remove: function(req, res) {
-    db.User
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  }
-};
+      }
+    }
