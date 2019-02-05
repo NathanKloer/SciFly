@@ -9,7 +9,7 @@ import "./style.css";
     <React.Fragment>
     {props.currentId?<div className="list-overflow-container table-responsive cart-border" id="table-div">
       <form>
-        <table className="w-20 table table-bordered table-contents">
+        <table className="w-20 table table-striped table-contents">
           <thead>
             <tr>
               <th>Item</th>
@@ -87,7 +87,7 @@ export function CartItem(props) {
 
 export function DeleteCartItemBtn(props){
   return(
-    <button type="button" id = {"delete-btn-"+props.cartItem.id} className="btn custom-view-btn ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
+    <button type="button" id = {"delete-btn-"+props.cartItem.id} className="btn btn-danger ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
     ✗
     </button>
   );
@@ -96,7 +96,7 @@ export function DeleteCartItemBtn(props){
 // This is the checkout button
 export function CheckOutBtn(props) {
   return (
-    <button type="submit" id = "checkout-btn" className="btn custom-view-btn submit-margins center-block" onClick= {props.submitOrder}>
+    <button type="submit" id = "checkout-btn" className="btn btn-primary fas fa-shopping-cart" onClick= {props.submitOrder}>
       Submit
     </button>
   );
