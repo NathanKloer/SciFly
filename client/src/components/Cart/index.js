@@ -87,7 +87,7 @@ export function CartItem(props) {
 
 export function DelInvBtn(props){
   return(
-    <button type="button" id = {"delete-btn-"+props.cartItem.id} className="btn custom-view-btn ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
+    <button type="button" id = {"delete-btn-"+props.cartItem.id} className="btn btn-danger ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
     ✗
     </button>
   );
@@ -96,7 +96,7 @@ export function DelInvBtn(props){
 // This is the checkout button
 export function CheckOutBtn(props) {
   return (
-    <button type="submit" id = "checkout-btn" className="btn custom-view-btn submit-margins center-block" onClick= {props.submitOrder}>
+    <button type="submit" id = "checkout-btn" className="btn btn-primary submit-margins center-block" onClick= {props.submitOrder}>
       Submit
     </button>
   );
