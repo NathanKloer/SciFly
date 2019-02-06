@@ -33,11 +33,11 @@ Our goal is to provide an IT solution that would make the process easier for sma
 - HTML
 - CSS
 - Bootstrap
+- MDBootstrap (Material Design for Bootstrap)
 - Express
 - Mongoose /MongoDB
 - Node
-- ChartJS
-- Bycrypt (login encryption)
+- Bycrypt (Login encryption)
 - Javascript/JQuery
 - ESLint
 - Heroku
