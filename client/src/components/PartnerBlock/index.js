@@ -1,10 +1,7 @@
 import React from "react";
-import { Grid } from "react-bootstrap";
-import { Container, Row, Col } from "../Grid/index";
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBBtn } from "mdbreact";
 // import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API";
 function PartnerBlock() {
     return (
     <MDBCard className="my-5 px-5 pb-5 main">
@@ -27,15 +24,14 @@ function PartnerBlock() {
         <MDBCol lg="9" xl="10">
           <h3 className="font-weight-bold mb-3 p-0">
             <strong>Georgia BioEd Institute</strong>
-          </h3>
+            </h3>
           <p className="dark-grey-text">
           Our first charity parter, and for whom Parts-to-Purpose was originally designed, Georgia BioEd Institute brings educational science supplies from the shelf to the classNameroom. We are proud to work with GA BioEd Institute to bring educators across Georgia a way to easily and quickly find specific tools or supplies that are needed for their classroom. Here is something about them in their own words:
           <br /><br />
           The Georgia BioEd Institute is a division of Georgia Bio, a 501(c)(3) nonprofit organization serving the state’s life science industry. The Institute’s mission is to strengthen Georgia’s life sciences workforce pipeline through classNameroom-to-career initiatives that align with industry needs. We are building the capacity of Georgia classrooms to support the future life science workforce with teacher professional development in biotechnology, an equipment depot, a visiting scientist program, and the BioGENEius award for student biotechnology projects. The Institute provides training for current workforce needs (e.g., biotech courses for nonscientists and executive leadership training for future managers), and supports networking and mentoring for early career professionals through the Emerging Leaders Network.
           </p>
-          <MDBBtn color="primary" size="md">
-            Visit their Site!
-          </MDBBtn>
+          <h3 className="font-weight-bold">
+            <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn> </h3>
         </MDBCol>
       </MDBRow>
       <hr id="hr"/>
@@ -55,9 +51,8 @@ function PartnerBlock() {
           <br /><br />
           Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.
           </p>
-          <MDBBtn color="primary" size="md">
-            Visit their Site!
-          </MDBBtn>
+          <h3 className="font-weight-bold mb-3 p-0">
+          <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
         </MDBCol>
       </MDBRow>
       <hr id="hr" />
@@ -65,7 +60,5 @@ function PartnerBlock() {
   </MDBCard>
     );
 }
-
-
 
 export default PartnerBlock

@@ -1,22 +1,16 @@
 import axios from "axios";
-//const BASEURL = '/';
 
 export default {
-  getOrganization: function (baseURL) {
-    // console.log("**Get Organization has been called**");
-    if (baseURL) {
-      // console.log("BASEURL = "+baseURL);
-      /*Make a request to the ./api/products. resource, and run the findByOrganization method for all products for the GeorgiaBio organization*/
-      return axios.get('/api' + baseURL);
+  getInventoryByOrganization: function (baseURL, organization) {
+    if (baseURL && organization) {
+      /*Make a request to the ./api/products/Georgia_BioEd. resource, and run the findByOrganization method*/
+      return axios.get('/api' + baseURL + '/' + organization);
     }//if
   },//getOrganization
-
-  getCategory: function (baseURL, parameter) {
-    // console.log("**Get Category has been called**");
-    if (parameter) {
-      // console.log("Parameter = "+parameter);
-      /*Make a request to the '/api/products/:category' resource, and run the findByCategory method for all products for a particular category*/
-      return axios.get('/api' + baseURL + parameter);
+  getInventoryByCategory: function (baseURL, parameter1, parameter2) {
+    if (parameter1 && parameter2) {
+      /*Make a request to the '/api/products/:category/:organization' resource, and run the findByCategoryAndOrganization method*/
+      return axios.get('/api' + baseURL + parameter1 + '/' + parameter2);
     }//if
   },//getCategory
   getUser: function (id) {
@@ -31,23 +25,33 @@ export default {
   },
 
   postOrder: function (baseURL, data) {
-    //console.log('/api'+baseURL+" order = ", data);
     if (data) {
       return axios.post('/api' + baseURL, data);
     }
-   },
-   getOrder: function(baseURL, parameter){
-    // console.log('/api'+baseURL+"/"+parameter);
-   if(parameter){
-    // console.log('/api'+baseURL+"/"+parameter);
-     return axios.get('/api'+baseURL+'/'+parameter);
-   }
   },
-  putQuantity(baseURL, data){
+  getOrder: function (baseURL, parameter) {
+    if (parameter) {
+      return axios.get('/api' + baseURL + '/' + parameter);
+    }
+  },
+  putQuantity(baseURL, data) {
     if (data) {
-      //console.log("In API, going to update quantitites");
       return axios.put('/api' + baseURL, data);
     }
+  },
+  getOrganizationValues(baseURL) {
+    if (baseURL) {
+      return axios.get('/api' + baseURL);
+    }
+    else
+      console.log("NO DATA TO SEND");
+  },
+  getCategoryValues(baseURL, organization) {
+    if (baseURL && organization) {
+      return axios.get('/api' + baseURL + '/' + organization);
+    }
+    else
+      console.log("API: NO DATA TO SEND");
   }
 };
 
