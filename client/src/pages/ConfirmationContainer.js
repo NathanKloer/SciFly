@@ -55,7 +55,6 @@ class ConfirmationContainer extends Component {
                 {this.props.location.state.order.map(product => {
 
                   return (
-<<<<<<< HEAD
                       <p key = {product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
                       )
                     })
@@ -78,17 +77,6 @@ class ConfirmationContainer extends Component {
         </MDBContainer>
 
 
-=======
-                    <p key={product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
-                  )
-                })
-                }
-              </ol>
-            </div>
-            <br />
-          </MDBCard>
-        </MDBContainer>
->>>>>>> master
     );//return
   }//render
 }
