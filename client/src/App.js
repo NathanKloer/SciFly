@@ -27,8 +27,6 @@ function App() {
                 <Route exact path="/" component={HomeContainer} />
                 <Route exact path="/home/:organization" component={HomeContainer} />
                 <Route exact path="/search" component={SearchUpdate} />
-                {/* <Route exact path="/search" render = {(props) => <SearchContainer {...props}/>}
-                /> */}
                 <Route exact path="/search/:category" component={SearchUpdate} />
                 <Route exact path="/confirmation" component={ConfirmationContainer} />
                 <Route exact path="/donate" component={DonateContainer} />
