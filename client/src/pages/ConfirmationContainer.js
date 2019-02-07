@@ -16,16 +16,19 @@ class ConfirmationContainer extends Component {
     }
 
     componentDidMount() {
-      this.setState({order:  this.props.location.state.order});
-      this.quantityData = this.props.location.state.order.map(product => {
-        return(
-          {
-            _id: product._id,
-            newStockQuantity: product.newStockQuantity
-          }
-        );
-      })//map
-      this.updateStock(this.quantityData);
+      if(this.props.location.state){
+        let order = this.props.location.state.order;
+        this.setState({order:  order});
+        this.quantityData = this.props.location.state.order.map(product => {
+          return(
+            {
+              _id: product._id,
+              newStockQuantity: product.newStockQuantity
+            }
+          );
+        })//map
+        this.updateStock(this.quantityData);
+      }
     }//componentDidMount
 
     //Assemble parameters and Pass the data to the API for updates
@@ -44,6 +47,7 @@ class ConfirmationContainer extends Component {
     render() {
       return (
         <MDBContainer>
+          {this.props.location.state?(
           <MDBCard className="main-confirmation my-5 px-5 pb-5">
             <h1>Request Confirmation Page</h1>
             <h3>User: {this.props.location.state.order[0].userName}</h3>
@@ -61,7 +65,7 @@ class ConfirmationContainer extends Component {
               </ol>
             </div>
             <br />
-          </MDBCard>
+          </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>No requests have been made</h1></MDBCard>}
         </MDBContainer>
     );//return
   }//render

@@ -45,9 +45,22 @@ class SearchContainer extends Component {
 
   componentDidMount() {
     const updateorg = readCookie("org");
-    this.setState({organization: updateorg});
-    this.orgSearch(updateorg);
-    this.getDDLCategoryValues(updateorg, this.loadDDLCategoryValues);
+    //ErrorHandling: If users enter an organization directly (/search/Georgia_BioEd) or click navbar search
+      // if(!updateorg){
+        let url = window.location.pathname;
+        let urlArr = url.split('/');
+        let urlOrganization = urlArr[urlArr.length-1].split('_').join(' ');
+        // console.log("Organization = "+urlOrganization);
+        this.setState({organization: urlOrganization});
+        this.orgSearch(urlOrganization);
+        this.getDDLCategoryValues(urlOrganization, this.loadDDLCategoryValues);
+      // }
+      // Caching is interfering with dynamic input
+      // else{
+      //   this.setState({organization: updateorg});
+      //   this.orgSearch(updateorg);
+      //   this.getDDLCategoryValues(updateorg, this.loadDDLCategoryValues);
+      // }
   }
 
   //Populates the ddlOrgList values
@@ -252,7 +265,7 @@ class SearchContainer extends Component {
         })//map
         // Push the order to the confirmation page
           this.props.history.push({
-          pathname: '/confirmation',
+          pathname: '/confirmation/'+order[0].orderId,
           state: {order: order}
         });
       });
@@ -268,7 +281,7 @@ class SearchContainer extends Component {
     return (
       <React.Fragment>
         <MDBContainer>
-          <MDBCard className="main-search my-5 px-5 pb-5">
+          {this.state.organization?(<MDBCard className="main-search my-5 px-5 pb-5">
             <br />
             <h3>Organization: {this.state.organization.split('_').join(' ')}</h3>
             <h5>Search by Category</h5>
@@ -293,7 +306,7 @@ class SearchContainer extends Component {
                 </Col>
               </Row>
             </div>
-          </MDBCard>
+          </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>Please select an <a href='/'>organization</a></h1></MDBCard>}
         </MDBContainer>
       </React.Fragment>
     );

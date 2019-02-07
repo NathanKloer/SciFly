@@ -196,8 +196,8 @@ class NavBar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {/* <NavItem eventKey={1} href="/search"> */}
-            <NavItem eventKey={1} href="/">
+            <NavItem eventKey={1} href="/search/Georgia_BioEd">
+            {/* <NavItem eventKey={1} href="/"> */}
               Search
             </NavItem>
             <NavItem eventKey={2} href="/donate">
