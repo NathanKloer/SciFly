@@ -9,8 +9,8 @@ import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, 
 
 class HomeContainer extends Component {
   state = {
-    products: [],
-    organization: ""
+    organization: "",
+    ddlOrganizations: []
   };
 
   constructor(props) {
@@ -29,42 +29,42 @@ class HomeContainer extends Component {
   }
 
   componentDidMount() {
+    this.getDDLOrganizationValues(this.loadDDLOrganizationValues);
     const updateorg = readCookie("org");
     this.setState({organization: updateorg});
   }
 
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
-    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
+    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text.split(' ').join('_');
     this.setState({organization: organization});
     document.cookie = `org=${organization};`;
-    if (organization){
-      event.preventDefault();
-      const baseURL = "/products";
-      this.loadByOrganization(baseURL, this.callback);
-    }//if
+    history.push(
+      {
+        pathname: '/search'
+      }
+    );
   };
-
-  //Initialize the state variables with search results
-  loadByOrganization = (baseURL, cb) => {
-    API.getOrganization(baseURL)
+//Populates the ddlOrgList values
+  getDDLOrganizationValues = (cb) => {
+    let baseURL = "/organizations";
+    API.getOrganizationValues(baseURL)
       .then(res => {
         //callback to store state variables
         cb(res);
-        history.push({
-          pathname: '/search',
-          state: {products: res.data}
-        });
       })
       .catch(err => console.log(err));
   };
 
-  callback = (res) => {
-    //console.log("Res = "+JSON.stringify(res));
-    if(res){
-      this.setState({ products: res.data.items});
-    }
-  }
+  loadDDLOrganizationValues = (res) => {
+    this.setState({ ddlOrganizations: res.data});
+    const ddlOrgListElem = document.getElementById( 'ddlOrgList' );
+
+    for( let organization in this.state.ddlOrganizations ) {
+      ddlOrgListElem.add( new Option( this.state.ddlOrganizations[organization] ) );
+    };
+  };
+
   render() {
     return (
       <React.Fragment>
