@@ -33,7 +33,6 @@ class HomeContainer extends Component {
     this.setState({organization: updateorg});
   }
 
-
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
     var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
