@@ -1,8 +1,14 @@
 .custom-view-btn, .custom-save-btn{
   background-color: #cde0dc!important;
-  border-color: #cecfd5!important;
-  color: black!important;
+  color: black!important;  border-color: #cecfd5!important;
+
   box-shadow: none!important;
+}
+.navicon {
+    margin-top: 10px;
+    border-radius: 50%;
+    border: solid 1px darkgray;
+    background-color: #87ceeb;
 }
 
 #home-page-org-search {
@@ -11,7 +17,7 @@
   align-self: auto;
 }
 .main-search{
-  margin-top: 60px;
+  margin-top: 10px;
   /* margin-left: 25%;
   margin-right: 25%; */
   margin-bottom: 60px;
@@ -23,7 +29,7 @@
 }
 
 .main-confirmation{
-  margin-top: 60px;
+  margin-top: 10px;
   /* margin-left: 25%;
   margin-right: 25%; */
   margin-bottom: 60px;
@@ -34,6 +40,21 @@
   border-radius: 25px;
 }
 
+.main-donate{
+    margin-top: 10px;
+    /* margin-left: 25%;
+    margin-right: 25%; */
+    margin-bottom: 60px;
+    align-self: auto;
+    padding: 60px;
+    max-width: 1200px;
+    border: 5px solid lightgray;
+    border-radius: 25px;
+  }
+
+.landingtext{
+   font-size: 150%;
+}
 
 /* img.bg {
 

@@ -26,11 +26,9 @@ function App() {
                 {/* Route just registers which component should displayed depending on the url path*/}
                 <Route exact path="/" component={HomeContainer} />
                 <Route exact path="/home/:organization" component={HomeContainer} />
-                <Route exact path="/search" component={SearchUpdate} />
-                {/* <Route exact path="/search" render = {(props) => <SearchContainer {...props}/>}
-                /> */}
-                <Route exact path="/search/:category" component={SearchUpdate} />
-                <Route exact path="/confirmation" component={ConfirmationContainer} />
+                {/* <Route exact path="/search" component={SearchUpdate} /> */}
+                <Route exact path="/search/:organization" component={SearchUpdate} />
+                <Route exact path="/confirmation/:orderId" component={ConfirmationContainer} />
                 <Route exact path="/donate" component={DonateContainer} />
                 <Route component={NoMatch} />
               </Switch>

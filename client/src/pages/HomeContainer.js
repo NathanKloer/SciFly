@@ -9,8 +9,8 @@ import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, 
 
 class HomeContainer extends Component {
   state = {
-    products: [],
-    organization: ""
+    organization: "",
+    ddlOrganizations: []
   };
 
   constructor(props) {
@@ -29,42 +29,42 @@ class HomeContainer extends Component {
   }
 
   componentDidMount() {
+    this.getDDLOrganizationValues(this.loadDDLOrganizationValues);
     const updateorg = readCookie("org");
     this.setState({organization: updateorg});
   }
 
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
-    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text;
+    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text.split(' ').join('_');
     this.setState({organization: organization});
     document.cookie = `org=${organization};`;
-    if (organization){
-      event.preventDefault();
-      const baseURL = "/products";
-      this.loadByOrganization(baseURL, this.callback);
-    }//if
+    history.push(
+      {
+        pathname: '/search/'+organization
+      }
+    );
   };
-
-  //Initialize the state variables with search results
-  loadByOrganization = (baseURL, cb) => {
-    API.getOrganization(baseURL)
+//Populates the ddlOrgList values
+  getDDLOrganizationValues = (cb) => {
+    let baseURL = "/organizations";
+    API.getOrganizationValues(baseURL)
       .then(res => {
         //callback to store state variables
         cb(res);
-        history.push({
-          pathname: '/search',
-          state: {products: res.data}
-        });
       })
       .catch(err => console.log(err));
   };
 
-  callback = (res) => {
-    //console.log("Res = "+JSON.stringify(res));
-    if(res){
-      this.setState({ products: res.data.items});
-    }
-  }
+  loadDDLOrganizationValues = (res) => {
+    this.setState({ ddlOrganizations: res.data});
+    const ddlOrgListElem = document.getElementById( 'ddlOrgList' );
+
+    for( let organization in this.state.ddlOrganizations ) {
+      ddlOrgListElem.add( new Option( this.state.ddlOrganizations[organization] ) );
+    };
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -75,10 +75,10 @@ class HomeContainer extends Component {
               <hr className="my-5" />
               <MDBRow>
                 <MDBCol lg="7">
-                  <h3 className="font-weight-bold mb-3 p-0">
+                  <h3 className="font-weight-bold">
                     <strong>Search by Organization</strong>
                   </h3>
-                  <p>
+                  <p className="landingtext">
                     Are you looking for a "part to purpose"? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
                   </p>
                   <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
