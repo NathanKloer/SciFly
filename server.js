@@ -46,7 +46,7 @@ app.use(routes);
 
 // Connect to the Mongo DB
 // mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/scifly");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/scifly", { useNewUrlParser: true });
 
 // Define API routes here
 
