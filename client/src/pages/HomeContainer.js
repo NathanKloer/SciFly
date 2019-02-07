@@ -76,10 +76,10 @@ class HomeContainer extends Component {
               <hr className="my-5" />
               <MDBRow>
                 <MDBCol lg="7">
-                  <h3 className="font-weight-bold mb-3 p-0">
+                  <h3 className="font-weight-bold">
                     <strong>Search by Organization</strong>
                   </h3>
-                  <p>
+                  <p class="landingtext">
                     Are you looking for a "part to purpose"? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
                   </p>
                   <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
