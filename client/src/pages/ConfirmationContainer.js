@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 import "../style.css";
+import { MDBListGroup, MDBListGroupItem, MDBBadge } from "mdbreact";
 
 class ConfirmationContainer extends Component {
     constructor(){
@@ -63,8 +64,19 @@ class ConfirmationContainer extends Component {
               </div>
             <br/>
 
+
+            <MDBListGroup style={{ width: "35rem" }}>
+            {this.props.location.state.order.map(product => {
+            return (
+                <MDBListGroupItem key = {product._id} className="d-flex justify-content-between align-items-center">Item: {product.productName} <MDBBadge color="primary"
+                pill>Quantity: {product.orderQuantity}</MDBBadge></MDBListGroupItem>
+                )
+              })
+          }
+        </MDBListGroup>
         </MDBCard>
         </MDBContainer>
+
 
     );//return
   }//render
