@@ -45,17 +45,17 @@ class ConfirmationContainer extends Component {
     render() {
       return (
         <MDBContainer>
-        <MDBCard className="main-confirmation my-5 px-5 pb-5">
-
+          <MDBCard className="main-confirmation my-5 px-5 pb-5">
             <h1>Request Confirmation Page</h1>
             <h3>User: {this.props.location.state.order[0].userName}</h3>
             <h3>Order ID: {this.props.location.state.order[0].orderId}</h3>
-              <div>
+            <div>
               <h3>Items Ordered:</h3>
-                <ol>
-                    {this.props.location.state.order.map(product => {
+              <ol>
+                {this.props.location.state.order.map(product => {
 
                   return (
+<<<<<<< HEAD
                       <p key = {product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
                       )
                     })
@@ -78,6 +78,17 @@ class ConfirmationContainer extends Component {
         </MDBContainer>
 
 
+=======
+                    <p key={product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
+                  )
+                })
+                }
+              </ol>
+            </div>
+            <br />
+          </MDBCard>
+        </MDBContainer>
+>>>>>>> master
     );//return
   }//render
 }
