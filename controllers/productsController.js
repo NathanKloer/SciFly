@@ -2,15 +2,16 @@ const db = require("../models");
 
 // Defining methods for the productsController
 module.exports = {
-  findByOrganization: function (req, res) {
+  findInventoryByOrganization: function (req, res) {
+    organization = req.params.organization.split('_').join(' ');
     db.Product
-      .find({})
+      .find({organization: organization})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findByCategory: function (req, res) {
+  findByCategoryAndOrganization: function (req, res) {
     db.Product
-      .find({ category: req.params.category })
+      .find({ category: req.params.category, organization: req.params.organization.split('_').join(' ') })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

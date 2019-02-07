@@ -6,6 +6,8 @@ const userRoutes = require("./users");
 const loginRoutes = require("./login");
 const orderRoutes = require("./orders");//orders.js
 const stockRoutes = require("./stock");
+const organizationRoutes = require("./organizations");
+const categoryRoutes = require("./categories");
 
 /************************************
  * RouteHandler 2: Product routes
@@ -18,6 +20,8 @@ router.use("/users", userRoutes);
 router.use("/login", loginRoutes);
 router.use("/order", orderRoutes);
 router.use("/stock", stockRoutes);
+router.use("/organizations", organizationRoutes);
+router.use("/categories", categoryRoutes);
 
 module.exports = router;
 /************************************************/

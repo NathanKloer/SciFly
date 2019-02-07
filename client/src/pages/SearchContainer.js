@@ -32,6 +32,9 @@ class SearchContainer extends Component {
     //keeps track of all items in the cart
     cartItems: [],
 
+    //load categories into category dropdownlist
+    ddlCategories: [],
+
     //the created ordered id;
     orderId: '',
 
@@ -44,53 +47,91 @@ class SearchContainer extends Component {
     const updateorg = readCookie("org");
     this.setState({organization: updateorg});
     this.orgSearch(updateorg);
-    this.viewProps(this.callback);
+    this.getDDLCategoryValues(updateorg, this.loadDDLCategoryValues);
   }
-  /*************************************************/
-  //API CALLS TO LOAD INVENTORY
-  orgSearch = (organization) =>{
-    if (organization){
-      const baseURL = "/products";
-      this.loadByOrganization(baseURL, this.callback);
-    }//if
-  };
-  loadByOrganization = (baseURL, cb) => {
-    API.getOrganization(baseURL)
+
+  //Populates the ddlOrgList values
+  getDDLCategoryValues = (organization, cb) => {
+    let baseURL = "/categories";
+    API.getCategoryValues(baseURL, organization)
       .then(res => {
         //callback to store state variables
         cb(res);
       })
       .catch(err => console.log(err));
   };
+
+  loadDDLCategoryValues = (res) => {
+    // console.log("Res = "+JSON.stringify(res.data));
+    this.setState({ ddlCategories: res.data});
+    // console.log("Res = "+JSON.stringify(this.state.ddlCategories));
+    const ddlCatListElem = document.getElementById( 'ddlCatList' );
+
+    for( let category in this.state.ddlCategories ) {
+      ddlCatListElem.add( new Option( this.state.ddlCategories[category]));
+    };
+  };
+  /*************************************************/
+  //API CALLS TO LOAD INVENTORY
+  orgSearch = (organization) =>{
+    if (organization){
+      // event.preventDefault();
+      const baseURL = "/products";
+      this.loadInventoryByOrganization(baseURL, organization, this.setOrgProductsState);
+    }//if
+  };
+
+  //Initialize the state variables with search results
+  loadInventoryByOrganization = (baseURL, organization, cb) => {
+    API.getInventoryByOrganization(baseURL, organization)
+      .then(res => {
+        //callback to store state variables
+        cb(res);
+      })
+      .catch(err => console.log(err));
+  };
+
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
+    // console.log("IN HANDLECATSEARCH");
     var ddlCatElem = document.getElementById("ddlCatList");
     var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
     if (category){
       event.preventDefault();
       const baseURL = "/products";
-      const parameter = '/'+category;
+      const formattedCategory = '/'+category;
       //Get Product Info by Category
-      this.loadByCategory(baseURL, parameter, this.callback);
+      this.loadInventoryByCategory(baseURL, formattedCategory, this.setCatProductsState);
     }//if
   };
 
   //Initialize the state variables with search results
-  loadByCategory = (baseURL, parameter, cb) => {
-    API.getCategory(baseURL, parameter)
+  loadInventoryByCategory = (baseURL, category, cb) => {
+    API.getInventoryByCategory(baseURL, category, this.state.organization)
       .then(res => {
         //callback to store state variables
         cb(res);
       })
       .catch(err => console.log(err));
   };
-  callback = (res) => {
+
+  setOrgProductsState = (res) => {
+    // console.log("Products for Organization = "+JSON.stringify(res));
     if(res){
       this.products = res.data;
       this.setState({ products: res.data.items});
     }
-  }
+  };
+
+  setCatProductsState = (res) => {
+    // console.log("Products for Category = "+JSON.stringify(res));
+    if(res){
+      this.products = res.data;
+      this.setState({ products: res.data.items});
+    }//if
+    // console.log("THIS.PRODUCTS = "+JSON.stringify(this.products));
+  };
 /*************************************************/
 //Load Cart Items:
   addCartItems = (event) => {
@@ -223,17 +264,13 @@ class SearchContainer extends Component {
   }
   //END ORDER SUBMISSION
   /**********************************************************/
-
-  viewProps = (cb) => {
-    cb();
-  }
   render() {
     return (
       <React.Fragment>
         <MDBContainer>
           <MDBCard className="main-search my-5 px-5 pb-5">
             <br />
-            <h3>Organization: {this.state.organization}</h3>
+            <h3>Organization: {this.state.organization.split('_').join(' ')}</h3>
             <h5>Search by Category</h5>
             <CatSearchForm catSearchEvent={this.handleCatSearch} />
             <div className="top-margin">
