@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "./utils/API";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch} from "react-router-dom";
 import Provider from './providers';
 import HomeContainer from "./pages/HomeContainer";
 import SearchUpdate from "./pages/SearchContainer";
@@ -9,11 +9,16 @@ import DonateContainer from "./pages/DonateContainer";
 import NoMatch from "./pages/NoMatch";
 import NavUpdate from "./components/NavBar";
 import history from "./history";
+
 import "./style.css";
 import './App.css';
 
 class App extends Component {
 
+  constructor(){
+    super();
+    this.organization= '';
+  }
   componentDidMount() {
     this.getDDLOrganizationValues(this.loadDDLOrganizationValues);
   }
@@ -23,14 +28,27 @@ class App extends Component {
     ddlOrganizations: []
   };
 
+  /***************************************************************************
+   * Method:handleOrgSearch
+   * Children: NavBar Component
+   * Descriptions: Whenever an option is selected in the Organizational Search
+   * DropDown (in NavBar) redirect the app to the page of the organization
+   * selected and set the organization state.
+   * *************************************************************************/
   handleOrgSearch = event =>{
     var ddlOrgElem = document.getElementById("ddlOrgList");
-    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text.split(' ').join('_');
-    this.setState({organization: organization});
+    this.organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text.split(' ').join('_');
+    this.setState({organization: this.organization});
 
-    //IMPORTANT: Whenever an organization is picked from the
-    //nav bar drop down menu, redirect to that page.
-    window.open('/search/'+organization);
+    //IMPORTANT: Redirect to the selected organization's page.
+    console.log("handleOrgSearch organization = "+this.organization);
+    history.push({
+      pathname: '/search/'+this.organization
+    });
+
+    //IMPORTANT: Automatically reset the selection, so the page
+    //will be refreshed if the same organization is selected.
+    document.getElementById('ddlOrgList').selectedIndex = 0;
   };
 //Populates the ddlOrgList values
   getDDLOrganizationValues = (cb) => {
@@ -51,6 +69,7 @@ class App extends Component {
       ddlOrgListElem.add( new Option( this.state.ddlOrganizations[organization] ) );
     };
   };
+
   render() {
     return (
       <Provider>
@@ -62,7 +81,9 @@ class App extends Component {
               {/* Route just registers which component should displayed depending on the url path*/}
               <Route exact path="/" component={HomeContainer} />
               <Route exact path="/home/:organization" component={HomeContainer} />
-              <Route exact path="/search/:organization" component={SearchUpdate} />
+              {/* Pass the selected organization to the SearchContainer Page for a re-render*/}
+              <Route exact path="/search/:organization"
+                component={() => <SearchUpdate organization = {this.state.organization}/>} />
               <Route exact path="/confirmation/:orderId" component={ConfirmationContainer} />
               <Route exact path="/donate" component={DonateContainer} />
               <Route component={NoMatch} />
