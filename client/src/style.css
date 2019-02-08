@@ -42,8 +42,8 @@
 
 .main-donate{
     margin-top: 10px;
-    /* margin-left: 25%;
-    margin-right: 25%; */
+    /* margin-left: auto;
+    margin-right: auto;  */
     margin-bottom: 60px;
     align-self: auto;
     padding: 60px;
@@ -55,6 +55,31 @@
 .landingtext{
    font-size: 150%;
 }
+
+#button {
+    font-size: 60%;
+    border-radius: 20px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 80%;
+  }
+
+  td {
+    font-size: 107% !important;
+}
+
+th {
+    font-size: 110% !important;
+}
+
+.addbutton {
+    font-size: 10px !important;
+    border-radius: 20px !important;
+    padding: 5px;
+    padding-left: 20px !important;
+    padding-right: 5px;
+  }
 
 /* img.bg {
 

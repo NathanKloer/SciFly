@@ -1,5 +1,6 @@
 import React from "react";
-// import "./style.css";
+import { MDBBtn } from "mdbreact";
+import "./style.css";
 
 export function InventoryTableBody(props) {
   return (
@@ -12,7 +13,7 @@ export function InventoryTableBody(props) {
             <th>Description</th>
             <th>UOM</th>
             <th>Quantity</th>
-            {props.currentId?<th>Add to Cart</th>:<th className = "hide-component"></th>}
+            {props.currentId?<th> </th>:<th className = "hide-component"></th>}
           </tr>
         </thead>
         <tbody>
@@ -29,7 +30,7 @@ export function InventoryTableBody(props) {
 
 export function InventoryTableItem(props){
   return(
-    <tr >
+    <tr id="invtable" >
       <td  id={'name-'+props.product._id}>{props.product.productName}</td>
       <td>{props.product.category}</td>
       <td>{props.product.description}</td>
@@ -42,8 +43,8 @@ export function InventoryTableItem(props){
 
 export function AddInventoryBtn(props){
   return(
-    <button type="button" id = {props.product._id} className="btn btn-info ml-1" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'} disabled = {props.disabled}>
+    <MDBBtn type="button" id={props.product._id} className="addbutton btn-primary" onClick={props.listener} data-product-id= {props.product._id} tabIndex="0" key= {props.product._id+'btn'} disabled = {props.disabled}>
       Add
-    </button>
+    </MDBBtn>
   );
 }
