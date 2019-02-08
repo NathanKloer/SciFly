@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 import "../style.css";
+import { MDBListGroup, MDBListGroupItem, MDBBadge } from "mdbreact";
 
 class ConfirmationContainer extends Component {
     constructor(){
@@ -70,6 +71,8 @@ class ConfirmationContainer extends Component {
             <p>Visit our Donate page for more information about the charities we work with and donation oppertunities</p>
           
         </MDBContainer>
+
+
     );//return
   }//render
 }
