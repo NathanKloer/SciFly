@@ -41,7 +41,6 @@ class ConfirmationContainer extends Component {
   updateStockQuantity = (baseURL, data) => {
     API.putQuantity(baseURL, data)
       .then(res => {
-        // console.log("API CALL HAS STARTED!");
       })
       .catch(err => console.log(err));
   };
@@ -52,6 +51,7 @@ class ConfirmationContainer extends Component {
           <MDBCard className="main-confirmation my-5 px-5 pb-5">
             <h1>Request Confirmation Page</h1>
             <h3>User: {this.props.location.state.order[0].userName}</h3>
+            <h3>Organization: {this.props.location.state.order[0].organization}</h3>
             <h3>Order ID: {this.props.location.state.order[0].orderId}</h3>
             <div>
               <h3>Items Ordered:</h3>
@@ -67,9 +67,9 @@ class ConfirmationContainer extends Component {
             </div>
             <br />
           </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>No requests have been made</h1></MDBCard>}
-          
+
             <p>Visit our Donate page for more information about the charities we work with and donation oppertunities</p>
-          
+
         </MDBContainer>
 
 

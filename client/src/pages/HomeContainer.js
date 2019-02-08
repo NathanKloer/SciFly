@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-import API from "../utils/API";
-import OrganizationSearchList from "../components/OrganizationSearchList";
-import history from "../history";
-import readCookie from "../utils/RCAPI";
 import "../style.css";
 import CarouselPage from "../components/Carousel";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 
 class HomeContainer extends Component {
-  state = {
-    organization: "",
-    ddlOrganizations: []
-  };
 
   constructor(props) {
     super(props);
@@ -27,43 +19,6 @@ class HomeContainer extends Component {
       collapse: !this.state.collapse,
     });
   }
-
-  componentDidMount() {
-    this.getDDLOrganizationValues(this.loadDDLOrganizationValues);
-    const updateorg = readCookie("org");
-    this.setState({organization: updateorg});
-  }
-
-  handleOrgSearch = event =>{
-    var ddlOrgElem = document.getElementById("ddlOrgList");
-    var organization = ddlOrgElem.options[ddlOrgElem.selectedIndex].text.split(' ').join('_');
-    this.setState({organization: organization});
-    document.cookie = `org=${organization};`;
-    history.push(
-      {
-        pathname: '/search/'+organization
-      }
-    );
-  };
-//Populates the ddlOrgList values
-  getDDLOrganizationValues = (cb) => {
-    let baseURL = "/organizations";
-    API.getOrganizationValues(baseURL)
-      .then(res => {
-        //callback to store state variables
-        cb(res);
-      })
-      .catch(err => console.log(err));
-  };
-
-  loadDDLOrganizationValues = (res) => {
-    this.setState({ ddlOrganizations: res.data});
-    const ddlOrgListElem = document.getElementById( 'ddlOrgList' );
-
-    for( let organization in this.state.ddlOrganizations ) {
-      ddlOrgListElem.add( new Option( this.state.ddlOrganizations[organization] ) );
-    };
-  };
 
   render() {
     return (
@@ -81,7 +36,6 @@ class HomeContainer extends Component {
                   <p className="landingtext">
                     Are you looking for a "part to purpose"? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
                   </p>
-                  <OrganizationSearchList orgSearchEvent={this.handleOrgSearch}/>
                 </MDBCol>
                 <MDBCol lg="5">
                   <MDBView className="rounded z-depth-2 mb-lg-0 mb-4" hover waves>

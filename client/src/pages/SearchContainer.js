@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import {UserConsumer} from "../providers";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
 import CategorySearchList from "../components/CategorySearchList";
 import {CartBody} from "../components/CartBody";
-import readCookie from "../utils/RCAPI";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
 import "../style.css";
 
@@ -23,6 +22,8 @@ class SearchContainer extends Component {
 
     //Array that is assembled from the inventory table, must be reset when items are deleted from shopping cart
     this.cartItems = [];
+
+    this.urlOrganization = '';
   }
 
   state = {
@@ -44,15 +45,19 @@ class SearchContainer extends Component {
   };
 
   componentDidMount() {
-    const updateorg = readCookie("org");
-    //ErrorHandling: If users enter an organization directly (/search/Georgia_BioEd) or click navbar search
+    // const updateorg = readCookie("org");
+
+    //ErrorHandling: If users enters an organization directly (/search/Georgia_BioEd)
+    /********************************************************************************/
     let url = window.location.pathname;
     let urlArr = url.split('/');
-    let urlOrganization = urlArr[urlArr.length - 1].split('_').join(' ');
-    // console.log("Organization = "+urlOrganization);
-    this.setState({ organization: urlOrganization });
-    this.orgSearch(urlOrganization);
-    this.getDDLCategoryValues(urlOrganization, this.loadDDLCategoryValues);
+    this.urlOrganization = urlArr[urlArr.length - 1].split('_').join(' ');
+    this.setState({ organization: this.urlOrganization });
+    this.orgSearch(this.urlOrganization);
+    /********************************************************************************/
+
+    //Load Category Values
+    this.getDDLCategoryValues(this.urlOrganization, this.loadDDLCategoryValues);
   }
 
   //Error Handing: Each time the state is update, If the user is logged
@@ -61,6 +66,7 @@ class SearchContainer extends Component {
   componentDidUpdate() {
     if (this.props.currentId) {
       this.disableSubmitBtn();
+      this.disableCartSubmitBtn();
     }
   }
 
@@ -76,9 +82,7 @@ class SearchContainer extends Component {
   };
 
   loadDDLCategoryValues = (res) => {
-    // console.log("Res = "+JSON.stringify(res.data));
     this.setState({ ddlCategories: res.data});
-    // console.log("Res = "+JSON.stringify(this.state.ddlCategories));
     const ddlCatListElem = document.getElementById( 'ddlCatList' );
 
     for( let category in this.state.ddlCategories ) {
@@ -106,7 +110,6 @@ class SearchContainer extends Component {
 
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
-    // console.log("IN HANDLECATSEARCH");
     var ddlCatElem = document.getElementById("ddlCatList");
     var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
@@ -122,7 +125,6 @@ class SearchContainer extends Component {
   //Disables the add button for items already in the cart
   disableCartItemsAddBtn = () => {
     let cartItems = document.querySelectorAll("button[data-cart-item-id]");
-    // console.log("CART ITEMS ON PAGE = "+cartItems.length+" Cart = "+cartItems);
     for ( let i = 0; i < cartItems.length; i++ ){
       let addBtnId = cartItems[i].getAttribute("data-cart-item-id");
       let addBtnElement = document.getElementById(addBtnId);
@@ -132,12 +134,27 @@ class SearchContainer extends Component {
     }//for
   }
 
+  //Disable the submit button if any delete buttons on the page are false
+  disableCartSubmitBtn = () => {
+    let disableSubmitBtn = false;
+    let deleteBtnElem = document.querySelectorAll("button[data-cart-item-id]");
+    for ( let i = 0; i < deleteBtnElem.length; i++ ){
+      let isDisabled = deleteBtnElem[i].disabled;
+      if (isDisabled){
+        disableSubmitBtn = true;
+      }
+    }//for
+    if(disableSubmitBtn){
+      document.getElementById("checkout-btn").disabled = true;
+    }//if
+  }
+
   disableSubmitBtn = () => {
     if(this.state.cartItems.length === 0){
       document.getElementById("checkout-btn").disabled = true;
     }
     else
-    document.getElementById("checkout-btn").disabled = false;
+      document.getElementById("checkout-btn").disabled = false;
   }
 
   //Initialize the state variables with search results
@@ -151,7 +168,6 @@ class SearchContainer extends Component {
   };
 
   setOrgProductsState = (res) => {
-    // console.log("Products for Organization = "+JSON.stringify(res));
     if(res){
       this.products = res.data;
       this.setState({ products: res.data.items});
@@ -159,15 +175,13 @@ class SearchContainer extends Component {
   };
 
   setCatProductsState = (res) => {
-    // console.log("Products for Category = "+JSON.stringify(res));
     if(res){
       this.products = res.data;
       this.setState({ products: res.data.items});
     }//if
-    //Error Handling: Each time the category changes if an item
-    //is in the cart disable its add button
+    // Error Handling: Each time the category changes if an item
+    // is in the cart disable its add button
     this.disableCartItemsAddBtn();
-    // console.log("THIS.PRODUCTS = "+JSON.stringify(this.products));
   };
 /*************************************************/
 //Load Cart Items:
@@ -262,9 +276,9 @@ class SearchContainer extends Component {
    let data = {...order};
     API.postOrder(baseURL, data)
       .then(res => {
-        /******************** */
+        /*********************/
         //API CALL
-        /******************** */
+        /*********************/
         let orderId = res.data;
         this.setState({ orderId: orderId });
         this.retrieveOrder(baseURL, this.state.orderId);
@@ -282,6 +296,7 @@ class SearchContainer extends Component {
               userName: res.data[0].user.userName,
               orderId: res.data[0]._id,
               _id: product.product._id,
+              organization: product.product.organization,
               productName: product.product.productName,
               currentStockQuantity: product.product.stockQuantity,
               orderQuantity: product.productQuantity,
