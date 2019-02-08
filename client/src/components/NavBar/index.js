@@ -4,6 +4,7 @@ import {ModalComponent} from "../Modal";
 import {Navbar, Nav, NavItem } from "react-bootstrap";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
+//import { MDBRow, MDBCol, } from "mdbreact";
 
 // import { Link } from "react-router-dom";
 //import "./style.css";
@@ -187,10 +188,15 @@ class NavBar extends Component {
   render() {
       return (
         <div>
-        <Navbar  staticTop collapseOnSelect id="nav-bar">
+        <Navbar staticTop collapseOnSelect id="nav-bar">
         <Navbar.Header >
           <Navbar.Brand>
-            <a href="/">Parts-To-Purpose</a>
+          <a href="/">
+          {'Parts-to-Purpose'}
+          <img className="navicon d-inline-block align-top" 
+          src={window.location.origin + "/img/p2pnticon.png"} 
+          href="/" style={{marginTop: -25, marginLeft: 140}}/>
+          </a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

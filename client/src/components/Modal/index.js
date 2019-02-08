@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Input, FormBtn, Dropdown, DropdownList } from "../LogIn";
+import "../../style.css";
 
 export function ModalComponent(props) {
 
@@ -130,7 +131,8 @@ export function ModalComponent(props) {
      Submit
      </FormBtn>
      <FormBtn
-       onClick={props.handleClose}
+       onClick={props.handleClose} 
+       className="xbtn"
      >
      Close
      </FormBtn>

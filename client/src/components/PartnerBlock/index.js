@@ -1,11 +1,10 @@
 import React from "react";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBBtn } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBMask, MDBBtn, MDBIcon} from "mdbreact";
 // import { Link } from "react-router-dom";
 import "./style.css";
 function PartnerBlock() {
     return (
-    <MDBCard className="my-5 px-5 pb-5 main">
-    <MDBCardBody>
+    <MDBContainer className="my-5 px-5 pb-5 main-donate">
     <MDBRow className="row pageheader">
                  <MDBCol lg="5">
                      <h5>Our Charity Partners</h5>
@@ -30,8 +29,8 @@ function PartnerBlock() {
           <br /><br />
           The Georgia BioEd Institute is a division of Georgia Bio, a 501(c)(3) nonprofit organization serving the state’s life science industry. The Institute’s mission is to strengthen Georgia’s life sciences workforce pipeline through classNameroom-to-career initiatives that align with industry needs. We are building the capacity of Georgia classrooms to support the future life science workforce with teacher professional development in biotechnology, an equipment depot, a visiting scientist program, and the BioGENEius award for student biotechnology projects. The Institute provides training for current workforce needs (e.g., biotech courses for nonscientists and executive leadership training for future managers), and supports networking and mentoring for early career professionals through the Emerging Leaders Network.
           </p>
-          <h3 className="font-weight-bold">
-            <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn> </h3>
+          <h3 className="font-weight-bold mb-3 p-0">
+          <MDBBtn id="button" type="button" className="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
         </MDBCol>
       </MDBRow>
       <hr id="hr"/>
@@ -46,18 +45,32 @@ function PartnerBlock() {
           <h3 className="font-weight-bold mb-3 p-0">
           <strong>Parts-to-Purpose</strong>
           </h3>
-          <p className="dark-grey-text">
+          <p id="sample-text" className="dark-grey-text font-weight-bold">
+
           This is our example charity partner space. Here we will present a small about if information about our various partners and links to their site if users are interested in donating or contacting them for their own requests.
+          </p>
+          <p>
           <br /><br />
-          Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.
+          <MDBIcon icon="quote-left" />  Many small nonprofits receive item donations from donors and distribute those items to people in need.  A lot of these nonprofits operate on a shoestring budget and use basic tools such as Microsoft Excel, Word, and Outlook to manage their inventory, interact with donors, and distribute donations to donees. Their inventory, donees, and donor management are at times kept on multiple documents in different locations and managed by various volunteers which makes it difficult to update, maintain, access, and scale.
+          <br /><br />
+          Our goal is to provide an IT solution that would make the process easier for small nonprofits to manage their donations so that they can spend more time working on their cause -- making a difference.  Our app is called Parts-to-Purpose.  It is a simple inventory and people management platform for nonprofits that will allow them to:
+          <br /><br />
+          <ul>
+            <li>Update, manage, and track their inventory of donations</li>
+            <li>Collect donor and donee information</li>
+            <li>Provide donees a portal to login, view and select items needed, add to a cart, and arrange for pickup/shipment of their cart</li>
+            <li>See changes in inventory/stock in near real-time</li>
+            <li>Collect and visualize metrics to identify needs and trends so that they can use those metrics to focus donation efforts or community marketing</li>
+          </ul>
+          <br />
+          The value of our application is that it will be an open-source, inexpensive, and simple inventory solution that nonprofits can use to immediately connect the “purpose” in need to the “part” that’s needed. <MDBIcon icon="quote-right" />
           </p>
           <h3 className="font-weight-bold mb-3 p-0">
-          <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
+          <MDBBtn id="button" type="button" className="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
         </MDBCol>
       </MDBRow>
       <hr id="hr" />
-    </MDBCardBody>
-  </MDBCard>
+    </MDBContainer>
     );
 }
 
