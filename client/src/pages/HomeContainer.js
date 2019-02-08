@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import OrgSearchForm from "../components/OrgSearchForm";
+import OrganizationSearchList from "../components/OrganizationSearchList";
 import history from "../history";
 import readCookie from "../utils/RCAPI";
 import "../style.css";
@@ -81,7 +81,7 @@ class HomeContainer extends Component {
                   <p className="landingtext">
                     Are you looking for a "part to purpose"? Please select an organization to see what donations they have available within their inventory to provide to the cause at need.
                   </p>
-                  <OrgSearchForm orgSearchEvent={this.handleOrgSearch}/>
+                  <OrganizationSearchList orgSearchEvent={this.handleOrgSearch}/>
                 </MDBCol>
                 <MDBCol lg="5">
                   <MDBView className="rounded z-depth-2 mb-lg-0 mb-4" hover waves>

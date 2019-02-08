@@ -3,7 +3,7 @@ import {UserConsumer} from "../providers";
 import { Col, Row, Container } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
-import CatSearchForm from "../components/CatSearchForm";
+import CategorySearchList from "../components/CategorySearchList";
 import {CartBody} from "../components/CartBody";
 import readCookie from "../utils/RCAPI";
 import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
@@ -46,21 +46,22 @@ class SearchContainer extends Component {
   componentDidMount() {
     const updateorg = readCookie("org");
     //ErrorHandling: If users enter an organization directly (/search/Georgia_BioEd) or click navbar search
-      // if(!updateorg){
-        let url = window.location.pathname;
-        let urlArr = url.split('/');
-        let urlOrganization = urlArr[urlArr.length-1].split('_').join(' ');
-        // console.log("Organization = "+urlOrganization);
-        this.setState({organization: urlOrganization});
-        this.orgSearch(urlOrganization);
-        this.getDDLCategoryValues(urlOrganization, this.loadDDLCategoryValues);
-      // }
-      // Caching is interfering with dynamic input
-      // else{
-      //   this.setState({organization: updateorg});
-      //   this.orgSearch(updateorg);
-      //   this.getDDLCategoryValues(updateorg, this.loadDDLCategoryValues);
-      // }
+    let url = window.location.pathname;
+    let urlArr = url.split('/');
+    let urlOrganization = urlArr[urlArr.length - 1].split('_').join(' ');
+    // console.log("Organization = "+urlOrganization);
+    this.setState({ organization: urlOrganization });
+    this.orgSearch(urlOrganization);
+    this.getDDLCategoryValues(urlOrganization, this.loadDDLCategoryValues);
+  }
+
+  //Error Handing: Each time the state is update, If the user is logged
+  //in check if there is anything in his cart.  If not disable the submit
+  //button
+  componentDidUpdate() {
+    if (this.props.currentId) {
+      this.disableSubmitBtn();
+    }
   }
 
   //Populates the ddlOrgList values
@@ -88,7 +89,6 @@ class SearchContainer extends Component {
   //API CALLS TO LOAD INVENTORY
   orgSearch = (organization) =>{
     if (organization){
-      // event.preventDefault();
       const baseURL = "/products";
       this.loadInventoryByOrganization(baseURL, organization, this.setOrgProductsState);
     }//if
@@ -119,6 +119,27 @@ class SearchContainer extends Component {
     }//if
   };
 
+  //Disables the add button for items already in the cart
+  disableCartItemsAddBtn = () => {
+    let cartItems = document.querySelectorAll("button[data-cart-item-id]");
+    // console.log("CART ITEMS ON PAGE = "+cartItems.length+" Cart = "+cartItems);
+    for ( let i = 0; i < cartItems.length; i++ ){
+      let addBtnId = cartItems[i].getAttribute("data-cart-item-id");
+      let addBtnElement = document.getElementById(addBtnId);
+      if(addBtnElement){
+        addBtnElement.disabled = true;
+      }//if
+    }//for
+  }
+
+  disableSubmitBtn = () => {
+    if(this.state.cartItems.length === 0){
+      document.getElementById("checkout-btn").disabled = true;
+    }
+    else
+    document.getElementById("checkout-btn").disabled = false;
+  }
+
   //Initialize the state variables with search results
   loadInventoryByCategory = (baseURL, category, cb) => {
     API.getInventoryByCategory(baseURL, category, this.state.organization)
@@ -143,6 +164,9 @@ class SearchContainer extends Component {
       this.products = res.data;
       this.setState({ products: res.data.items});
     }//if
+    //Error Handling: Each time the category changes if an item
+    //is in the cart disable its add button
+    this.disableCartItemsAddBtn();
     // console.log("THIS.PRODUCTS = "+JSON.stringify(this.products));
   };
 /*************************************************/
@@ -170,8 +194,7 @@ class SearchContainer extends Component {
     /*********************/
     this.setState({ cartItems: this.cartItems} );
   }
-
-  //ERROR HANDLING: If A Product is not avaialbe disable the add button;
+  //ERROR HANDLING: If A Product is not available disable the add button;
   disableAddBtn = (stockQuantity) => {
     if(parseInt(stockQuantity) < 1){
       return 'disabled';
@@ -179,7 +202,6 @@ class SearchContainer extends Component {
     else
       return '';
   }//disabledAddBtn
-
   //Delete Cart Items
   delCartItems = (event) =>{
     event.preventDefault();
@@ -189,7 +211,11 @@ class SearchContainer extends Component {
 
     //Error Handling: If item deleted from cart then enable the add to cart button:
     let addButton = document.getElementById(cartItemToDel );
-    addButton.disabled = false;
+
+    //ErrorHandling: Disable the addButton only when it is on the page.
+    if(addButton){
+      addButton.disabled = false;
+    }
 
     //Set cart Items array
     this.setState({ cartItems: filteredCart});
@@ -285,7 +311,7 @@ class SearchContainer extends Component {
             <br />
             <h3>Organization: {this.state.organization.split('_').join(' ')}</h3>
             <h5>Search by Category</h5>
-            <CatSearchForm catSearchEvent={this.handleCatSearch} />
+            <CategorySearchList catSearchEvent={this.handleCatSearch} />
             <div className="top-margin">
               <Row>
                 <Col size="md-7">

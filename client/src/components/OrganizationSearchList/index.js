@@ -2,7 +2,7 @@ import React from "react";
 // import { Link } from "react-router-dom";
 // import "./style.css";
 
-function OrgSearchForm(props) {
+function OrganizationSearchList(props) {
 
   return (
     <div className="container">
@@ -17,4 +17,4 @@ function OrgSearchForm(props) {
   );
 }
 
-export default OrgSearchForm;
+export default OrganizationSearchList;

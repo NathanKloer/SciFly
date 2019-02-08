@@ -31,7 +31,7 @@ function PartnerBlock() {
           The Georgia BioEd Institute is a division of Georgia Bio, a 501(c)(3) nonprofit organization serving the state’s life science industry. The Institute’s mission is to strengthen Georgia’s life sciences workforce pipeline through classNameroom-to-career initiatives that align with industry needs. We are building the capacity of Georgia classrooms to support the future life science workforce with teacher professional development in biotechnology, an equipment depot, a visiting scientist program, and the BioGENEius award for student biotechnology projects. The Institute provides training for current workforce needs (e.g., biotech courses for nonscientists and executive leadership training for future managers), and supports networking and mentoring for early career professionals through the Emerging Leaders Network.
           </p>
           <h3 className="font-weight-bold">
-            <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn> </h3>
+            <MDBBtn id="button" type="button" className="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn> </h3>
         </MDBCol>
       </MDBRow>
       <hr id="hr"/>
@@ -52,7 +52,7 @@ function PartnerBlock() {
           Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.
           </p>
           <h3 className="font-weight-bold mb-3 p-0">
-          <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
+          <MDBBtn id="button" type="button" className="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
         </MDBCol>
       </MDBRow>
       <hr id="hr" />
