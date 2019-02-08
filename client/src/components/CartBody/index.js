@@ -6,7 +6,6 @@ import { MDBContainer, MDBRow, MDBCol, MDBMask, MDBBtn } from "mdbreact";
 // export function CartList({ children }) {
   export function CartBody(props) {
   return (
-    // <div className="list-overflow-container">
     <React.Fragment>
     {props.currentId?<div className="list-overflow-container table-responsive cart-border" id="table-div">
       <MDBRow>

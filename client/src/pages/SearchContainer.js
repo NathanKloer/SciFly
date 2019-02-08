@@ -197,10 +197,10 @@ class SearchContainer extends Component {
   //ERROR HANDLING: If A Product is not available disable the add button;
   disableAddBtn = (stockQuantity) => {
     if(parseInt(stockQuantity) < 1){
-      return 'disabled';
+      return true;
     }
     else
-      return '';
+      return false;
   }//disabledAddBtn
   //Delete Cart Items
   delCartItems = (event) =>{
