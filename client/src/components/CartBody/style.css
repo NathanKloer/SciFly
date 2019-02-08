@@ -2,6 +2,9 @@
 .cart-border {
   border: 1px solid #dddddd;
 }
+.cart {
+  margin-left: 10px;
+}
 
 .submit-margins {
   margin-top: 1rem;
@@ -10,16 +13,30 @@
 
 
 #checkout-btn{
-  float: right;
-  font-size: 15px;
+  margin-left: 360px;
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-#delete-btn {
+.xbtn {
   float: right;
+  max-width: 50px;
+  font-size: 12px !important;
+  border-radius: 20px !important;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 th{
 color:black;
 font-weight: bolder;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#tablediv {
+  max-width: 100%;
 }

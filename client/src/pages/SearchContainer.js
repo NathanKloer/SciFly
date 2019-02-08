@@ -314,7 +314,7 @@ class SearchContainer extends Component {
             <CategorySearchList catSearchEvent={this.handleCatSearch} />
             <div className="top-margin">
               <Row>
-                <Col size="md-7">
+                <Col size="md-6">
                   {!this.isCatBtnClicked && this.products.length ? (
                     <InventoryTableBody currentId={this.props.currentId} products={this.products} addCartItems={this.addCartItems} disableAddBtn={this.disableAddBtn}></InventoryTableBody>
                   ) : (
@@ -326,7 +326,7 @@ class SearchContainer extends Component {
                       this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
                     )}
                 </Col>
-                <Col size="md-4">
+                <Col size="md-6">
                   <CartBody cartItems={this.state.cartItems} currentId={this.props.currentId} delCartItems={this.delCartItems} submitOrder={this.submitOrder}>
                   </CartBody>
                 </Col>

@@ -1,6 +1,6 @@
 h5 {
   font-size: 400%;
-  
+
 }
 
 h2 {
@@ -10,13 +10,18 @@ h2 {
 
 p {
   margin-top: 0px;
+  /* font-style: italic; */
+}
+
+#sample-text {
+  font-style: italic
 }
 
 .icon {
   padding-top: 30px;
   float: left;
   width: auto;
-  
+
 }
 
 .summary {
@@ -32,13 +37,13 @@ p {
   margin-right: 25%;
   margin-bottom: 60px;
   padding: 60px;
-  max-width: 1200px; 
+  max-width: 1200px;
   border: 5px solid lightgray;
   border-radius: 15px;
 }
 
 .partnerbin {
-  
+
   max-width: 85%;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -50,13 +55,4 @@ p {
   border: solid 1px lightgrey !important;
   height: 1px !important;
   width: 80% !important;
-}
-
-#button {
-  font-size: 60%;
-  border-radius: 20px;
-  padding: 5px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: 80%;
 }
