@@ -3,3 +3,6 @@
   font-weight: bold;
   background-color: blue;
 }
+.make-inline{
+  display: inline!important;
+}

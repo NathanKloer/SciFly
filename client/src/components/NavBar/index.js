@@ -4,13 +4,8 @@ import {ModalComponent} from "../Modal";
 import {Navbar, Nav, NavItem } from "react-bootstrap";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
-//import { MDBRow, MDBCol, } from "mdbreact";
-
-// import { Link } from "react-router-dom";
-//import "./style.css";
-//import FullPageIntroWithFixedTransparentNavbar from "../NavBar2";
+import OrganizationSearchList from "../OrganizationSearchList";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 class NavBar extends Component {
 
@@ -193,8 +188,8 @@ class NavBar extends Component {
           <Navbar.Brand>
           <a href="/">
           {'Parts-to-Purpose'}
-          <img className="navicon d-inline-block align-top" 
-          src={window.location.origin + "/img/p2pnticon.png"} 
+          <img className="navicon d-inline-block align-top"
+          src={window.location.origin + "/img/p2pnticon.png"}
           href="/" style={{marginTop: -25, marginLeft: 140}}/>
           </a>
           </Navbar.Brand>
@@ -202,9 +197,8 @@ class NavBar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem eventKey={1} href="/search/Georgia_BioEd">
-            {/* <NavItem eventKey={1} href="/"> */}
-              Search
+            <NavItem>
+              <OrganizationSearchList eventKey={1} orgSearchEvent={this.props.orgSearchEvent}></OrganizationSearchList>
             </NavItem>
             <NavItem eventKey={2} href="/donate">
               Donate
@@ -218,7 +212,6 @@ class NavBar extends Component {
                     Login/Register
                 </NavItem>
                 )}
-
           </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -231,7 +224,6 @@ class NavBar extends Component {
         handleUserLogIn = {this.handleUserLogIn}
         handleRegister = {this.handleRegister}
         handleRegisterSubmit = {this.handleRegisterSubmit}
-
         />
         </div>
       )
@@ -246,6 +238,7 @@ const NavUpdate = props => (
   <UserConsumer>
     {({ id, userName, idChanged  }) => (
       <NavBar
+      {...props}
         currentId={id}
         currentUserName={userName}
         idChanged={idChanged}
