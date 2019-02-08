@@ -75,7 +75,7 @@ class HomeContainer extends Component {
               <hr className="my-5" />
               <MDBRow>
                 <MDBCol lg="7">
-                  <h3 className="font-weight-bold">
+                  <h3 id="search-org" className="font-weight-bold">
                     <strong>Search by Organization</strong>
                   </h3>
                   <p className="landingtext">
