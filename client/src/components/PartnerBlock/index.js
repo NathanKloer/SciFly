@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBBtn } from "mdbreact";
+import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBBtn, MDBIcon } from "mdbreact";
 // import { Link } from "react-router-dom";
 import "./style.css";
 function PartnerBlock() {
@@ -46,10 +46,25 @@ function PartnerBlock() {
           <h3 className="font-weight-bold mb-3 p-0">
           <strong>Parts-to-Purpose</strong>
           </h3>
-          <p className="dark-grey-text">
+          <p id="sample-text" className="dark-grey-text font-weight-bold">
+
           This is our example charity partner space. Here we will present a small about if information about our various partners and links to their site if users are interested in donating or contacting them for their own requests.
+          </p>
+          <p>
           <br /><br />
-          Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.Lorem ipsum dolor sit amet, fugit sententiae adversarium vim te, mea nusquam tincidunt ei. Vidit salutatus mea ea. Te vis errem suscipit, eum eu nonumy utamur mediocritatem. Erant dicam mollis sea ea, at has meliore dolores, est id alii posidonium. Probo ipsum sanctus cum ex. Sea cu fabulas oportere. Duo at persecuti moderatius efficiendi, modo tempor menandri ius ad. Laudem soleat albucius et usu. Sed ea utroque tibique mediocritatem. Sed modo dico molestie ne. In nam perpetua gubergren comprehensam, ad oportere splendide disputando vix. Id cum ludus detracto, in nulla aeque vix. An cum viderer integre voluptatibus, ludus tibique per et. Sit ne legimus mentitum placerat. Eos te sint commodo interpretaris, quod percipit evertitur eam in, alterum principes eu his. At eam elit noluisse, augue dicit offendit eum cu.
+          <MDBIcon icon="quote-left" />  Many small nonprofits receive item donations from donors and distribute those items to people in need.  A lot of these nonprofits operate on a shoestring budget and use basic tools such as Microsoft Excel, Word, and Outlook to manage their inventory, interact with donors, and distribute donations to donees. Their inventory, donees, and donor management are at times kept on multiple documents in different locations and managed by various volunteers which makes it difficult to update, maintain, access, and scale.
+          <br /><br />
+          Our goal is to provide an IT solution that would make the process easier for small nonprofits to manage their donations so that they can spend more time working on their cause -- making a difference.  Our app is called Parts-to-Purpose.  It is a simple inventory and people management platform for nonprofits that will allow them to:
+          <br /><br />
+          <ul>
+            <li>Update, manage, and track their inventory of donations</li>
+            <li>Collect donor and donee information</li>
+            <li>Provide donees a portal to login, view and select items needed, add to a cart, and arrange for pickup/shipment of their cart</li>
+            <li>See changes in inventory/stock in near real-time</li>
+            <li>Collect and visualize metrics to identify needs and trends so that they can use those metrics to focus donation efforts or community marketing</li>
+          </ul>
+          <br />
+          The value of our application is that it will be an open-source, inexpensive, and simple inventory solution that nonprofits can use to immediately connect the “purpose” in need to the “part” that’s needed. <MDBIcon icon="quote-right" />
           </p>
           <h3 className="font-weight-bold mb-3 p-0">
           <MDBBtn id="button" type="button" class="btn btn-primary btn-rounded btn-sm" href="http://www.georgiabioed.org/education/equipment-depot/">Donate</MDBBtn></h3>
