@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { MDBContainer, MDBRow, MDBCol, MDBMask, MDBBtn } from "mdbreact";
 
 // This is the container that carries the entire cart box
 // export function CartList({ children }) {
@@ -8,15 +9,18 @@ import "./style.css";
     // <div className="list-overflow-container">
     <React.Fragment>
     {props.currentId?<div className="list-overflow-container table-responsive cart-border" id="table-div">
+      <MDBRow>
       <form>
         <table className="w-20 table table-striped table-contents">
           <thead>
             <tr>
-              <th>Item</th>
-              <th>Quantity</th>
+              <MDBCol sm="1" />
+              <MDBCol md="4">Item</MDBCol>
+              <MDBCol xs="3">Quantity</MDBCol>
               <th>  </th>
             </tr>
           </thead>
+          <MDBCol xs="12">
           <tbody>
           {/* <h1>Length = {props.orders.length}</h1> */}
             {props.cartItems.map(cartItem => {
@@ -25,9 +29,11 @@ import "./style.css";
               );
             })}
           </tbody>
+          <CheckOutBtn submitOrder= {props.submitOrder}></CheckOutBtn>
+          </MDBCol>
         </table>
-        <CheckOutBtn submitOrder= {props.submitOrder}></CheckOutBtn>
       </form>
+      </MDBRow>
     </div>:<div className = "hide-component"></div>}
     </React.Fragment>
   );//return
@@ -78,26 +84,31 @@ export function CartItem(props) {
   }
   return (
     <tr id = {'row-'+props.cartItem.id} key= {props.cartItem.id}>
-      <td  id={'name-'+props.cartItem.id}>{props.cartItem.name}Test</td>
-      <td><input className = "show-component" id={'quantity-'+props.cartItem.id} type="number" data-quantity-id = {props.cartItem.id} defaultValue="1" min = "1" max = {props.cartItem.stockQuantity} onChange = {validateQuantity}/></td>
-      <td><DeleteCartItemBtn cartItem = {props.cartItem} delCartItems = {props.delCartItems}></DeleteCartItemBtn></td>
+    <MDBRow>
+    <MDBCol xs="7" sm="6">
+      <td  id={'name-'+props.cartItem.id}>{props.cartItem.name}</td> </MDBCol>
+    <MDBCol xs="4">
+      <td><input className = "show-component" id={'quantity-'+props.cartItem.id} type="number" data-quantity-id = {props.cartItem.id} defaultValue="1" min = "1" max = {props.cartItem.stockQuantity} onChange = {validateQuantity}/></td></MDBCol>
+    <MDBCol xs="1">
+      <td><DeleteCartItemBtn cartItem = {props.cartItem} delCartItems = {props.delCartItems}></DeleteCartItemBtn></td></MDBCol>
+    </MDBRow>
     </tr>
   );
 }
 
 export function DeleteCartItemBtn(props){
   return(
-    <button type="button" id = {"delete-btn-"+props.cartItem.id} className="btn btn-danger ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
+    <MDBBtn type="button" id = {"delete-btn-"+props.cartItem.id} className="btn xbtn btn-danger ml-1" data-cart-item-id= {props.cartItem.id} onClick= {props.delCartItems}>
     ✗
-    </button>
+    </MDBBtn>
   );
 }
 
 // This is the checkout button
 export function CheckOutBtn(props) {
   return (
-    <button type="submit" id = "checkout-btn" className="btn btn-primary fas fa-shopping-cart" onClick= {props.submitOrder}>
-      Submit
-    </button>
+    <MDBBtn type="submit" id = "checkout-btn" className="btn btn-success fas fa-shopping-cart" onClick= {props.submitOrder}>
+     <span>  Submit</span>
+    </MDBBtn>
   );
 }
