@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   getInventoryByOrganization: function (baseURL, organization) {
     if (baseURL && organization) {
-      /*Make a request to the ./api/products/:organization. resource, and run the findByOrganization method*/
+      /*Make a request to the ./api/products/Georgia_BioEd. resource, and run the findByOrganization method*/
       return axios.get('/api' + baseURL + '/' + organization);
     }//if
   },//getOrganization

@@ -17,16 +17,19 @@ class ConfirmationContainer extends Component {
     }
 
     componentDidMount() {
-      this.setState({order:  this.props.location.state.order});
-      this.quantityData = this.props.location.state.order.map(product => {
-        return(
-          {
-            _id: product._id,
-            newStockQuantity: product.newStockQuantity
-          }
-        );
-      })//map
-      this.updateStock(this.quantityData);
+      if(this.props.location.state){
+        let order = this.props.location.state.order;
+        this.setState({order:  order});
+        this.quantityData = this.props.location.state.order.map(product => {
+          return(
+            {
+              _id: product._id,
+              newStockQuantity: product.newStockQuantity
+            }
+          );
+        })//map
+        this.updateStock(this.quantityData);
+      }
     }//componentDidMount
 
     //Assemble parameters and Pass the data to the API for updates
@@ -45,6 +48,7 @@ class ConfirmationContainer extends Component {
     render() {
       return (
         <MDBContainer>
+          {this.props.location.state?(
           <MDBCard className="main-confirmation my-5 px-5 pb-5">
             <h1>Request Confirmation Page</h1>
             <h3>User: {this.props.location.state.order[0].userName}</h3>
@@ -55,25 +59,14 @@ class ConfirmationContainer extends Component {
                 {this.props.location.state.order.map(product => {
 
                   return (
-                      <p key = {product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
-                      )
-                    })
-                  }
-                </ol>
-              </div>
-            <br/>
-
-
-            <MDBListGroup style={{ width: "35rem" }}>
-            {this.props.location.state.order.map(product => {
-            return (
-                <MDBListGroupItem key = {product._id} className="d-flex justify-content-between align-items-center">Item: {product.productName} <MDBBadge color="primary"
-                pill>Quantity: {product.orderQuantity}</MDBBadge></MDBListGroupItem>
-                )
-              })
-          }
-        </MDBListGroup>
-        </MDBCard>
+                    <p key={product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
+                  )
+                })
+                }
+              </ol>
+            </div>
+            <br />
+          </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>No requests have been made</h1></MDBCard>}
         </MDBContainer>
 
 
