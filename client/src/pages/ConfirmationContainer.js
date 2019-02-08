@@ -66,6 +66,9 @@ class ConfirmationContainer extends Component {
             </div>
             <br />
           </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>No requests have been made</h1></MDBCard>}
+          
+            <p>Visit our Donate page for more information about the charities we work with and donation oppertunities</p>
+          
         </MDBContainer>
     );//return
   }//render
