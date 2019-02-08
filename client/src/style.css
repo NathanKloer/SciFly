@@ -48,16 +48,12 @@
     align-self: auto;
     padding: 60px;
     max-width: 1200px;
-    border: 5px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 25px;
   }
 
 .landingtext{
    font-size: 150%;
-}
-
-#search-org{
-  text-align: center;
 }
 
 #button {
