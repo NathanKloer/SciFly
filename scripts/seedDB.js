@@ -22,7 +22,7 @@ mongoose.connect(
 let productIdArr = [];
 const productSeed = [
   {
-    productName: "petri dishes",
+    productName: "Petri Dishes",
     description: "100 x 15 mm Round",
     stockQuantity: 1000,
     uom: "Unit",
@@ -31,7 +31,7 @@ const productSeed = [
     date: new Date(Date.now())
   },
   {
-    productName: "conical tubes",
+    productName: "Conical Tubes",
     description: "50 mL",
     stockQuantity: 50,
     uom: "Bag",
@@ -40,7 +40,7 @@ const productSeed = [
     date: new Date(Date.now())
   },
   {
-    productName: "microcentrifuge tubes (0.2 mL, 1.5 mL)",
+    productName: "Microcentrifuge Tubes",
     description: "1.5mL",
     stockQuantity: 500,
     uom: "Unit",
@@ -49,14 +49,51 @@ const productSeed = [
     date: new Date(Date.now())
   },
   {
-    productName: "sterile serological pipettes",
+    productName: "Sterile Serological Pipettes",
     description: "10 uL",
     stockQuantity: 200,
     uom: "Unit",
     category: "Pipettes",
     organization: "Georgia BioEd",
     date: new Date(Date.now())
-  }
+  },
+  {
+    productName: "Culture Flasks",
+    description: "175 mL",
+    stockQuantity: 50,
+    uom: "Box",
+    category: "Culturing",
+    organization: "Georgia BioEd",
+    date: new Date(Date.now())
+  },
+  {
+    productName: "Aerosol Resistant Tips",
+    description: "50 mL",
+    stockQuantity: 50,
+    uom: "Box",
+    category: "Pipettes",
+    organization: "Georgia BioEd",
+    date: new Date(Date.now())
+  },
+  {
+    productName: "Pasteur Pipettes",
+    description: "50 mL",
+    stockQuantity: 50,
+    uom: "Box",
+    category: "Pipettes",
+    organization: "Georgia BioEd",
+    date: new Date(Date.now())
+  },
+  {
+    productName: "Racked Tip Refills",
+    description: "10 uL",
+    stockQuantity: 50,
+    uom: "Box",
+    category: "Pipettes",
+    organization: "Georgia BioEd",
+    date: new Date(Date.now())
+  },
+
 ];
 
 //User Data
