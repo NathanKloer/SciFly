@@ -153,9 +153,9 @@ class SearchContainer extends Component {
                                     this.setCatProductsState
                                   );
     }
-    // else {
-    //   this.orgSearch(this.state.organization);
-    // }
+    else if (category) {
+      this.orgSearch(this.state.organization);
+    }
   };
 
   //Initialize the product state variables with the

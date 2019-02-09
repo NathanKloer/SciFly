@@ -1,8 +1,7 @@
 import React from "react";
 import "./style.css";
 import { MDBContainer, MDBCard, MDBTable, MDBRow,
-        MDBCol, MDBTableHead, MDBBtn, MDBTableBody,
-        MDBIcon
+        MDBCol, MDBTableHead, MDBBtn, MDBTableBody
        } from "mdbreact";
 
 // This is the container that carries the entire cart box
