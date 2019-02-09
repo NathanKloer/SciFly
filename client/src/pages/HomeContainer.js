@@ -5,7 +5,7 @@ import history from "../history";
 import readCookie from "../utils/RCAPI";
 import "../style.css";
 import CarouselPage from "../components/Carousel";
-import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBView } from "mdbreact";
 
 class HomeContainer extends Component {
   state = {

@@ -1,26 +1,23 @@
 import React from "react";
-import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Input, FormBtn, Dropdown, DropdownList } from "../LogIn";
+import { Input, Dropdown, DropdownList } from "../LogIn";
+import { MDBTooltip, MDBBtn, MDBModal, MDBModalBody,
+         MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import "../../style.css";
 
 export function ModalComponent(props) {
 
+    const tooltip = `${props.state.registerUser ? ("Click to Login"):("Click here to register new user.")}`
 
-    const tooltip = <Tooltip id="modal-tooltip">
-                    {props.state.registerUser ? ("Click to Login"):("Click here to register new user.")}
-                    </Tooltip>;
     return (
-<Modal show={props.state.show} onHide={props.handleClose} className={props.state.registerUser ? ("modal-Container"):("")}>
-<Modal.Header>
-     <Modal.Title className="text-center">
+<MDBModal isOpen={props.state.show} toggle={props.handleClose} className={props.state.registerUser ? ("modal-Container"):("")}>
+<MDBModalHeader className="text-center">
      {props.state.registerUser ? ("Please Register"):("Please Login")}
      {props.state.loginError && !props.state.registerUser ? (<p className="text-danger">Incorrect Username or Password!</p>):("")}
      {props.state.registerError && props.state.registerUser ? (<p className="text-danger">Username already in used. Please try again.</p>):("")}
      {props.state.invalidEmail && props.state.registerUser ? (<p className="text-danger">Invalid Email. Please try again.</p>):("")}
-     </Modal.Title>
- </Modal.Header>
+ </MDBModalHeader>
    {props.state.registerUser ? (
-   <Modal.Body>
+   <MDBModalBody>
    <Input
      value={props.state.userName}
      onChange={props.handleInputChange}
@@ -106,40 +103,41 @@ export function ModalComponent(props) {
      type="password"
      placeholder="Enter Password"
      label="Password"
-     // pattern="[/.+@.+\..+/"
      smallname="form-text text-muted"
      smalltext="Password"
      required="required"
    />
-   <Modal.Footer>
-     <OverlayTrigger placement="top" overlay={tooltip}>
-       <FormBtn
-       bsstyle="link"
-       onClick={props.handleUserLogIn}
+   <MDBModalFooter>
+   <MDBTooltip  placement="top"
+                tag="div"
+                tooltipContent={tooltip}>
+       <span
+          className="mr-3"
+          flat
+          onClick={props.handleUserLogIn}
        >
-         Login?
-       </FormBtn>
-     </OverlayTrigger>
-     <FormBtn
+          Login?
+       </span>
+     </MDBTooltip>
+     <MDBBtn
        disabled={!(props.state.email && props.state.password && props.state.userName
                    && props.state.firstName && props.state.lastName && props.state.school
                    && props.state.district && props.state.selectedCourse)}
        onClick={props.handleRegisterSubmit}
-       className="btn btn-primary"
-       type="submit"
+       color="primary"
      >
-     Submit
-     </FormBtn>
-     <FormBtn
-       onClick={props.handleClose} 
-       className="xbtn"
+     Register
+     </MDBBtn>
+     <MDBBtn
+       onClick={props.handleClose}
+       color="secondary"
      >
      Close
-     </FormBtn>
-   </Modal.Footer>
-   </Modal.Body>
+     </MDBBtn>
+   </MDBModalFooter>
+   </MDBModalBody>
    ) : (
-   <Modal.Body>
+   <MDBModalBody>
    <Input
      value={props.state.userName}
      onChange={props.handleInputChange}
@@ -163,32 +161,35 @@ export function ModalComponent(props) {
      smalltext="Password"
      required="required"
    />
-   <Modal.Footer>
-     <OverlayTrigger placement="top" overlay={tooltip}>
-       <FormBtn
-       bsstyle="link"
+   <MDBModalFooter>
+     <MDBTooltip  placement="top"
+                  tag="div"
+                  tooltipContent={tooltip}>
+       <span
+       className="mr-3"
+       flat
        onClick={props.handleRegister}
        >
          Register?
-       </FormBtn>
-     </OverlayTrigger>
-     <FormBtn
+       </span>
+     </MDBTooltip>
+     <MDBBtn
        disabled={!(props.state.userName && props.state.password)}
        onClick={props.handleSubmit}
-       className="btn btn-primary"
-       type="submit"
+       color="primary"
      >
      Login
-     </FormBtn>
-     <FormBtn
+     </MDBBtn>
+     <MDBBtn
        onClick={props.handleClose}
+       color="secondary"
      >
      Close
-     </FormBtn>
-   </Modal.Footer>
-   </Modal.Body>
+     </MDBBtn>
+   </MDBModalFooter>
+   </MDBModalBody>
    )}
-</Modal>
+</MDBModal>
     )};
 
   export default ModalComponent;

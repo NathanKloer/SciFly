@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-//import { Col, Row, Container } from "../components/Grid";
 import API from "../utils/API";
-import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import {  MDBContainer, MDBCard } from "mdbreact";
 import "../style.css";
-import { MDBListGroup, MDBListGroupItem, MDBBadge } from "mdbreact";
 
 class ConfirmationContainer extends Component {
     constructor(){
@@ -67,9 +65,9 @@ class ConfirmationContainer extends Component {
             </div>
             <br />
           </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>No requests have been made</h1></MDBCard>}
-          
+
             <p>Visit our Donate page for more information about the charities we work with and donation oppertunities</p>
-          
+
         </MDBContainer>
 
 

@@ -1,6 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-// import "./style.css";
 
 function OrgSearchForm(props) {
 
@@ -8,8 +6,8 @@ function OrgSearchForm(props) {
     <div className="container">
       <div className="row">
         <form>
-          <select id="ddlOrgList" onChange={props.orgSearchEvent} required>
-            <option value="" hidden>Select an Organization</option>
+          <select id="ddlOrgList" className="browser-default custom-select" onChange={props.orgSearchEvent} required>
+            <option>Select an Organization</option>
           </select>
         </form>
       </div>

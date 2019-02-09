@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import {UserConsumer} from "../providers";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
 import CatSearchForm from "../components/CatSearchForm";
 import {CartBody} from "../components/CartBody";
-import readCookie from "../utils/RCAPI";
-import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import {  MDBModal, MDBModalHeader, MDBModalBody, MDBCard, MDBModalFooter, MDBIcon, MDBBtn } from "mdbreact";
 import "../style.css";
 
 
@@ -41,10 +40,11 @@ class SearchContainer extends Component {
     category: '',
 
     organization: '',
+
+    sideModal: false
   };
 
   componentDidMount() {
-    const updateorg = readCookie("org");
     //ErrorHandling: If users enter an organization directly (/search/Georgia_BioEd) or click navbar search
       // if(!updateorg){
         let url = window.location.pathname;
@@ -54,15 +54,13 @@ class SearchContainer extends Component {
         this.setState({organization: urlOrganization});
         this.orgSearch(urlOrganization);
         this.getDDLCategoryValues(urlOrganization, this.loadDDLCategoryValues);
-      // }
-      // Caching is interfering with dynamic input
-      // else{
-      //   this.setState({organization: updateorg});
-      //   this.orgSearch(updateorg);
-      //   this.getDDLCategoryValues(updateorg, this.loadDDLCategoryValues);
-      // }
   }
-
+  //Open Cart
+  toggleCart = () =>{
+    this.setState({
+                    sideModal: !this.state.sideModal
+                  });
+  }
   //Populates the ddlOrgList values
   getDDLCategoryValues = (organization, cb) => {
     let baseURL = "/categories";
@@ -110,13 +108,15 @@ class SearchContainer extends Component {
     var ddlCatElem = document.getElementById("ddlCatList");
     var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
-    if (category){
+    if (category !== "None"){
       event.preventDefault();
       const baseURL = "/products";
-      const formattedCategory = '/'+category;
+      const formattedCategory = '/'+ category;
       //Get Product Info by Category
       this.loadInventoryByCategory(baseURL, formattedCategory, this.setCatProductsState);
-    }//if
+    }else {
+      this.orgSearch(this.state.organization);
+    }
   };
 
   //Initialize the state variables with search results
@@ -174,10 +174,10 @@ class SearchContainer extends Component {
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
   disableAddBtn = (stockQuantity) => {
     if(parseInt(stockQuantity) < 1){
-      return 'disabled';
+      return true;
     }
     else
-      return '';
+      return false;
   }//disabledAddBtn
 
   //Delete Cart Items
@@ -280,34 +280,76 @@ class SearchContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <MDBContainer>
-          {this.state.organization?(<MDBCard className="main-search my-5 px-5 pb-5">
+      <div className="container">
+
+          {this.state.organization?(
+          <MDBCard className="main-search my-5">
+                {this.props.currentId ?
+                       <span> <button
+                          className="link-button text-left"
+                          icon="shopping-cart"
+                          color="info"
+                          size="sm"
+                          onClick={this.toggleCart}>
+                         <MDBIcon icon="shopping-cart" /> Shopping Cart
+                        </button>
+                        </span>:("")}
             <br />
             <h3>Organization: {this.state.organization.split('_').join(' ')}</h3>
             <h5>Search by Category</h5>
             <CatSearchForm catSearchEvent={this.handleCatSearch} />
             <div className="top-margin">
               <Row>
-                <Col size="md-6">
+                <Col size="md-12">
                   {!this.isCatBtnClicked && this.products.length ? (
-                    <InventoryTableBody currentId={this.props.currentId} products={this.products} addCartItems={this.addCartItems} disableAddBtn={this.disableAddBtn}></InventoryTableBody>
+                    <InventoryTableBody currentId={this.props.currentId}
+                                        products={this.products}
+                                        addCartItems={this.addCartItems}
+                                        disableAddBtn={this.disableAddBtn}
+                                        toggleCart={this.toggleCart}/>
                   ) : (
                       !this.isCatBtnClicked && <h3> </h3>
                     )}
                   {this.isCatBtnClicked && this.products && this.products.length ? (
-                    <InventoryTableBody currentId={this.props.currentId} products={this.products} addCartItems={this.addCartItems} disableAddBtn={this.disableAddBtn}></InventoryTableBody>
+                    <InventoryTableBody currentId={this.props.currentId}
+                                        products={this.products}
+                                        addCartItems={this.addCartItems}
+                                        disableAddBtn={this.disableAddBtn}
+                                        toggleCart={this.toggleCart}/>
                   ) : (
                       this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
                     )}
                 </Col>
-                <Col size="md-6">
-                  <CartBody cartItems={this.state.cartItems} currentId={this.props.currentId} delCartItems={this.delCartItems} submitOrder={this.submitOrder}>
-                  </CartBody>
-                </Col>
+                  <MDBModal isOpen={this.state.sideModal} toggle={this.toggleCart} fullHeight position="right">
+                    <MDBModalHeader
+                                    toggle={this.toggleCart}
+                                    >Shopping Cart
+                    </MDBModalHeader>
+                    <MDBModalBody>
+                      <CartBody
+                        cartItems={this.state.cartItems}
+                        currentId={this.props.currentId}
+                        delCartItems={this.delCartItems}
+                      />
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                      <MDBBtn
+                        color="secondary"
+                        onClick={this.toggleCart}
+                        >Close
+                      </MDBBtn>
+                      <MDBBtn
+                        color="primary"
+                        id="checkout-btn"
+                        onClick={this.submitOrder}
+                        >Submit
+                        </MDBBtn>
+                    </MDBModalFooter>
+                  </MDBModal>
               </Row>
             </div>
           </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>Please select an <a href='/'>organization</a></h1></MDBCard>}
-        </MDBContainer>
+      </div>
       </React.Fragment>
     );
   }
