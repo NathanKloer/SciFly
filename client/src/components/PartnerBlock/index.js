@@ -43,7 +43,7 @@ function PartnerBlock() {
       <hr id="hr"/>
       <MDBRow>
         <MDBCol lg="3" xl="3">
-          <img className="p2pgiticon" src={window.location.origin + "/img/p2pcrop.png"} alt="" />
+          <img className="p2picon" src={window.location.origin + "/img/p2pcrop.png"} alt="" />
             <a href="#!">
               <MDBMask overlay="white-slight" />
             </a>
