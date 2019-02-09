@@ -281,7 +281,6 @@ class SearchContainer extends Component {
     return (
       <React.Fragment>
       <div className="container">
-
           {this.state.organization?(
           <MDBCard className="main-search my-5">
                 {this.props.currentId ?
