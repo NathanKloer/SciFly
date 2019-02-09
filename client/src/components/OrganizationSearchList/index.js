@@ -1,17 +1,15 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-import "./style.css";
 
 function OrganizationSearchList(props) {
 
   return (
     <div className="container-fluid margin-left">
       <div className="row">
-        {/* <form> */}
-          <select id="ddlOrgList" onChange={props.orgSearchEvent} required>
-            <option value="" hidden>Select an Organization</option>
+        <form>
+          <select id="ddlOrgList" className="browser-default custom-select" onChange={props.orgSearchEvent} required>
+            <option>Select an Organization</option>
           </select>
-        {/* </form> */}
+        </form>
       </div>
     </div>
   );
