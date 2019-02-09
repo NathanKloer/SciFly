@@ -47,7 +47,7 @@ function PartnerBlock() {
           </h3>
           <p id="sample-text" className="dark-grey-text font-weight-bold">
 
-          This is our example charity partner space. Here we will present a small about if information about our various partners and links to their site if users are interested in donating or contacting them for their own requests.
+          This is our example charity partner space. Here we will present information about our partners and links to their site if users are interested in donating or contacting them directly.
           </p>
           <p>
           <br /><br />
