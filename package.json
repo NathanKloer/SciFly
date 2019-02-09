@@ -40,7 +40,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "if-env": "^1.0.4",
-    "nodemailer": "^5.1.1",
     "nodemon": "^1.18.9",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",
