@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 const db = require("../models");
 
 // Defining methods for the OrdersController
@@ -43,27 +43,27 @@ module.exports = {
         )//return
           .then(function (dataUpdate) {
               // Send Email
-                  const transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      user: 'parts2pieces.info@gmail.com',
-                      pass: process.env.gmailPassword
-                    }
-                  });
-                  const mailOptions = {
-                    from: 'parts2pieces.info@gmail.com',
-                    to: 'phillip.grider@gmail.com',
-                    subject: 'Sending Email using Node.js',
-                    text: `That was easy! ${JSON.stringify(newOrder)}`
-                  };
-                  transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                      console.log(error);
-                    } else {
-                      console.log('Email sent: ' + info.response);
-                    }
-                  });
-            res.json(newOrder._id);
+            //       const transporter = nodemailer.createTransport({
+            //         service: 'gmail',
+            //         auth: {
+            //           user: 'parts2pieces.info@gmail.com',
+            //           pass: process.env.gmailPassword
+            //         }
+            //       });
+            //       const mailOptions = {
+            //         from: 'parts2pieces.info@gmail.com',
+            //         to: 'phillip.grider@gmail.com',
+            //         subject: 'Sending Email using Node.js',
+            //         text: `That was easy! ${JSON.stringify(newOrder)}`
+            //       };
+            //       transporter.sendMail(mailOptions, function(error, info){
+            //         if (error) {
+            //           console.log(error);
+            //         } else {
+            //           console.log('Email sent: ' + info.response);
+            //         }
+            //       });
+            // res.json(newOrder._id);
           })
       });//orderCreate thenable
   },//createOrder function
