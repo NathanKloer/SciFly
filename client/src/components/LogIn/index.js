@@ -1,6 +1,5 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBMask, MDBBtn } from "mdbreact";
-import { Button, FormGroup, ControlLabel, FormControl } from "react-bootstrap";
+import { FormGroup, ControlLabel, FormControl } from "react-bootstrap";
 import "./style.css";
 
 export function Input(props) {
@@ -11,11 +10,6 @@ export function Input(props) {
       <small className={props.smallname}>{props.smalltext}</small>
     </div>
   );
-}
-export function FormBtn(props) {
-  return (
-          <Button bsStyle={props.bsstyle} {...props} >{props.children}</Button>
-          );
 }
 export function Dropdown(props) {
   return (

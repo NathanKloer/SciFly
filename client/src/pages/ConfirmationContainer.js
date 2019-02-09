@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-//import { Col, Row, Container } from "../components/Grid";
 import API from "../utils/API";
-import {  MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBtn } from "mdbreact";
+import {  MDBContainer, MDBCard } from "mdbreact";
 import "../style.css";
-import { MDBListGroup, MDBListGroupItem, MDBBadge } from "mdbreact";
 
 class ConfirmationContainer extends Component {
     constructor(){

@@ -7,8 +7,9 @@ function CategorySearchList(props) {
     <div className="container">
       <div className="row">
         <form>
-          <select id="ddlCatList" onChange={props.catSearchEvent}>
-          <option value="" hidden>Select a Category</option>
+          <select id="ddlCatList" className="browser-default custom-select" onChange={props.catSearchEvent}>
+          <option>Select a Category</option>
+          <option>All</option>
           </select>
         </form>
       </div>
