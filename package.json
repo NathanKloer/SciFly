@@ -4,7 +4,7 @@
   "description": "A platform that connects Givers and Receivers.",
   "main": "server.js",
   "scripts": {
-    "start": "npm run start:dev",
+    "start": "npm run start:prod",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "start:server": "node ./server.js",
@@ -40,6 +40,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "if-env": "^1.0.4",
+    "nodemailer": "^5.1.1",
     "nodemon": "^1.18.9",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",

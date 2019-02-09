@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import {UserConsumer} from "../../providers";
 import {ModalComponent} from "../Modal";
-import {Navbar, Nav, NavItem } from "react-bootstrap";
+import OrganizationSearchList from "../OrganizationSearchList";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
-import OrganizationSearchList from "../OrganizationSearchList";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
+import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,
+        MDBCollapse, MDBNavItem, MDBNavLink, MDBDropdown,
+        MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem,
+        MDBIcon} from 'mdbreact';
 
 class NavBar extends Component {
 
   state = {
+    isOpen: false,
     show: false,
     registerUser: false,
     _id: "",
@@ -42,14 +45,21 @@ class NavBar extends Component {
     this.setState({_id: cookieUserId});
     this.props.idChanged(cookieUserId);
   }
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
 
   handleClose = () => {
     this.setState({ show: false,
-                    registerUser: false });
+                    registerUser: false
+                  });
   }
 
   handleShow = () => {
-    this.setState({ show: true });
+    this.setState({
+                    show: true,
+                    registerUser: false
+                  });
   }
 
   handleSubmit = () => {
@@ -92,21 +102,22 @@ class NavBar extends Component {
 
   handleRegister = () => {
     this.setState({
-                  registerUser: true,
-                  login: false,
-                  loggedInUser: "",
-                  email: "",
-                  password: "",
-                  userName: "",
-                  firstName: "",
-                  lastName: "",
-                  school: "",
-                  district: "",
-                  selectedCourse: "",
-                  loginError: false,
-                  registerError: false,
-                  invalidEmail: false
-                });
+                    show: true,
+                    registerUser: true,
+                    login: false,
+                    loggedInUser: "",
+                    email: "",
+                    password: "",
+                    userName: "",
+                    firstName: "",
+                    lastName: "",
+                    school: "",
+                    district: "",
+                    selectedCourse: "",
+                    loginError: false,
+                    registerError: false,
+                    invalidEmail: false
+                  });
   }
   handleRegisterSubmit = () => {
     this.setState({
@@ -183,39 +194,47 @@ class NavBar extends Component {
   render() {
       return (
         <div>
-        <Navbar staticTop collapseOnSelect id="nav-bar">
-        <Navbar.Header >
-          <Navbar.Brand>
-          <a href="/">
-          {'Parts-to-Purpose'}
-          <img className="navicon d-inline-block align-top"
-          src={window.location.origin + "/img/p2pnticon.png"}
-          href="/" style={{marginTop: -25, marginLeft: 140}}/>
-          </a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            <NavItem>
+        <MDBNavbar  color="default-color"
+                    dark
+                    expand="md"
+                    style={{ marginBottom: "20px" }}>
+          <MDBNavbarBrand>
+            <a href="/"><strong className="white-text" >Parts-to-Purpose</strong>
+            <img className="navicon d-inline-block align-top" alt="P2P" src={window.location.origin + "/img/p2pnticon.png"}
+                  href="/" style={{marginTop: 0, marginLeft: 10}}/>
+            </a>
+          </MDBNavbarBrand>
+          <MDBNavbarToggler onClick={this.toggleCollapse} />
+          <MDBCollapse id="navbarCollapse" isOpen={this.state.isOpen} navbar>
+          <MDBNavbarNav right>
+            <MDBNavItem>
               <OrganizationSearchList eventKey={1} orgSearchEvent={this.props.orgSearchEvent}></OrganizationSearchList>
-            </NavItem>
-            <NavItem eventKey={2} href="/donate">
-              Donate
-            </NavItem>
-            {this.state._id ? (
-                <NavItem eventKey={3}  onClick={this.handleSignOut}>
-                Sign Out
-                </NavItem>
-                ):(
-                <NavItem eventKey={3}  onClick={this.handleShow}>
-                    Login/Register
-                </NavItem>
-                )}
-          </Nav>
-        </Navbar.Collapse>
-        </Navbar>
-        <ModalComponent
+            </MDBNavItem>
+            <MDBNavItem >
+              <MDBNavLink to="/donate">Donate</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+                  <MDBDropdown>
+                    <MDBDropdownToggle nav caret>
+                      <MDBIcon icon="user" />
+                    </MDBDropdownToggle>
+                    {this.state._id ? (
+                        <MDBDropdownMenu className="dropdown-default" right>
+                          <MDBDropdownItem onClick={this.handleSignOut}>Sign Out</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                    ) : (
+                        <MDBDropdownMenu className="dropdown-default" right>
+                          <MDBDropdownItem onClick={this.handleShow}>Login</MDBDropdownItem>
+                          <MDBDropdownItem onClick={this.handleRegister}>Register</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                      )}
+                  </MDBDropdown>
+          </MDBNavItem>
+          </MDBNavbarNav>
+        </MDBCollapse>
+        </MDBNavbar>
+
+       <ModalComponent
         state = {this.state}
         handleClose = {this.handleClose}
         handleShow = {this.handleShow}

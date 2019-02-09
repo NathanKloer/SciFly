@@ -12,24 +12,13 @@
   margin-bottom: 1rem;
 }
 
-
-#checkout-btn{
-  margin-left: 360px;
-  border-radius: 20px;
-  font-size: 13px;
-  padding: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 .xbtn {
-  float: right;
-  max-width: 50px;
-  font-size: 12px !important;
+  width: 30px;
+  height: 30px;
+  font-size: 16px !important;
   border-radius: 20px !important;
-  padding: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
+  background-color: red;
+  color: white;
 }
 
 th{
