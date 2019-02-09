@@ -9,3 +9,7 @@
  td {
       font-size: 60px;
   }
+
+  #table-div {
+    overflow: hidden;
+  }

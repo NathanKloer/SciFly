@@ -13,7 +13,7 @@ export function InventoryTableBody(props) {
             <th>Description</th>
             <th>UOM</th>
             <th>Quantity</th>
-            {props.currentId?<th> </th>:<th className = "hide-component"></th>}
+            {props.currentId?<th></th>:<th className = "hide-component"></th>}
           </tr>
         </thead>
         <tbody>

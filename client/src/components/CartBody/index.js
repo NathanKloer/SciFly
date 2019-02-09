@@ -6,7 +6,6 @@ import { MDBContainer, MDBRow, MDBCol, MDBMask, MDBBtn } from "mdbreact";
 // export function CartList({ children }) {
   export function CartBody(props) {
   return (
-    // <div className="list-overflow-container">
     <React.Fragment>
     {props.currentId?<div className="list-overflow-container table-responsive cart-border" id="table-div">
       <MDBRow>
@@ -56,14 +55,14 @@ export function CartItem(props) {
         let quantityInputValue = parseInt(quantityInputElements[i].value);
 
         isQuantityAvailable = minValue <= quantityInputValue && maxValue >= quantityInputValue && maxValue !== 0;
-        // console.log("QUANTITY = ", isQuantityAvailable);
-        // console.log("minValue = ", minValue, "QUANTITY = ", quantityInputValue, "maxValue = ", maxValue, "Available = ", isQuantityAvailable);
 
         //if quantity not available stop loop
         if (!isQuantityAvailable){
           shouldCartBeSubmitted = false;
           delBtnElem.disabled = true;
-          addButton.disabled = true;
+          if(addButton){
+            addButton.disabled = true;
+          }
           quantityInputElements[i].style.color = 'red';
         }
         else{
