@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import {  MDBContainer, MDBCard } from "mdbreact";
+import {  MDBContainer, MDBCard, MDBRow } from "mdbreact";
 import "../style.css";
 
 class ConfirmationContainer extends Component {
@@ -68,7 +68,7 @@ class ConfirmationContainer extends Component {
             
           <MDBRow>
           <div className="col-md-6 col-md-offset-3 splattext">
-            <p id="splattext" font-size="200px">Visit our <a href="../Donate">Donate</a> page for more information about the charities we work with and donation oppertunities</p>
+            <p>Visit our <a href="../Donate">Donate</a> page for more information about the charities we work with and donation oppertunities</p>
           </div>
           </MDBRow>
         </MDBContainer>
