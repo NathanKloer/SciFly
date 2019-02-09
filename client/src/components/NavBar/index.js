@@ -4,7 +4,7 @@ import {ModalComponent} from "../Modal";
 import OrganizationSearchList from "../OrganizationSearchList";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,
+import { MDBContainer, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,
         MDBCollapse, MDBNavItem, MDBNavLink, MDBDropdown,
         MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem,
         MDBIcon} from 'mdbreact';
@@ -198,6 +198,7 @@ class NavBar extends Component {
                     dark
                     expand="md"
                     style={{ marginBottom: "20px" }}>
+          <MDBContainer>
           <MDBNavbarBrand>
             <a href="/"><strong className="white-text" >Parts-to-Purpose</strong>
             <img className="navicon d-inline-block align-top" alt="P2P" src={window.location.origin + "/img/p2pnticon.png"}
@@ -232,7 +233,9 @@ class NavBar extends Component {
           </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
+        </MDBContainer>
         </MDBNavbar>
+        
 
        <ModalComponent
         state = {this.state}
@@ -244,6 +247,7 @@ class NavBar extends Component {
         handleRegister = {this.handleRegister}
         handleRegisterSubmit = {this.handleRegisterSubmit}
         />
+        
         </div>
       )
     }
