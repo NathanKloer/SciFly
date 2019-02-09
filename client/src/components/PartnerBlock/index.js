@@ -10,18 +10,18 @@ function PartnerBlock() {
             <MDBCol lg="5">
               <h5>Our Charity Partners</h5>
             </MDBCol>
-            <MDBCol lg="7">
-              <h3>This digital inventory is made possible by the following charities.<br /> If you wish to make a donation,
+            <MDBCol lg="6">
+              <h4>This digital inventory is made possible by the following charities.<br /> If you wish to make a donation,
                   we ask you do so through their donation services.
-                     </h3>
+              </h4>
             </MDBCol>
           </MDBRow>
           <MDBRow>
             <hr id="hr" />
-            <MDBCol lg="3" xl="2">
+            <MDBCol lg="3" xl="3">
               <img className="img-fluid icon" src={window.location.origin + "/img/gabioinst.png"} alt="" />
             </MDBCol>
-            <MDBCol lg="9" xl="10">
+            <MDBCol lg="8" xl="8">
               <h3 className="font-weight-bold mb-3 p-0">
                 <strong>Georgia BioEd Institute</strong>
               </h3>
@@ -42,13 +42,13 @@ function PartnerBlock() {
       </MDBRow>
       <hr id="hr"/>
       <MDBRow>
-        <MDBCol lg="3" xl="2">
-          <img className="icon" src={window.location.origin + "/img/p2p.png"} alt="" />
+        <MDBCol lg="3" xl="3">
+          <img className="p2pgiticon" src={window.location.origin + "/img/p2pcrop.png"} alt="" />
             <a href="#!">
               <MDBMask overlay="white-slight" />
             </a>
         </MDBCol>
-        <MDBCol lg="9" xl="10">
+        <MDBCol lg="8" xl="8">
           <h3 className="font-weight-bold mb-3 p-0">
           <strong>Parts-to-Purpose</strong>
           </h3>
