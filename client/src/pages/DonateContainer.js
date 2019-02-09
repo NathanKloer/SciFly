@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../style.css";
 import {  MDBContainer } from "mdbreact";
 import PartnerBlock from "../components/PartnerBlock";
 
