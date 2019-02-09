@@ -1,9 +1,9 @@
 import React from "react";
 
-function OrgSearchForm(props) {
+function OrganizationSearchList(props) {
 
   return (
-    <div className="container">
+    <div className="container-fluid margin-left">
       <div className="row">
         <form>
           <select id="ddlOrgList" className="browser-default custom-select" onChange={props.orgSearchEvent} required>
@@ -15,4 +15,4 @@ function OrgSearchForm(props) {
   );
 }
 
-export default OrgSearchForm;
+export default OrganizationSearchList;

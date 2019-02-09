@@ -9,7 +9,6 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
 // export function CartList({ children }) {
   export function CartBody(props) {
   return (
-    // <div className="list-overflow-container">
     <React.Fragment>
     {props.currentId ?
     <MDBContainer className="mt-3">
@@ -62,7 +61,9 @@ export function CartItem(props) {
         if (!isQuantityAvailable){
           shouldCartBeSubmitted = false;
           delBtnElem.disabled = true;
-          addButton.disabled = true;
+          if(addButton){
+            addButton.disabled = true;
+          }
           quantityInputElements[i].style.color = 'red';
         }
         else{

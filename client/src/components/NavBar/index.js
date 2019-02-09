@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {UserConsumer} from "../../providers";
 import {ModalComponent} from "../Modal";
+import OrganizationSearchList from "../OrganizationSearchList";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,
@@ -207,7 +208,7 @@ class NavBar extends Component {
           <MDBCollapse id="navbarCollapse" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav right>
             <MDBNavItem>
-              <MDBNavLink to="/search/Georgia_BioEd">Search</MDBNavLink>
+              <OrganizationSearchList eventKey={1} orgSearchEvent={this.props.orgSearchEvent}></OrganizationSearchList>
             </MDBNavItem>
             <MDBNavItem >
               <MDBNavLink to="/donate">Donate</MDBNavLink>
@@ -242,7 +243,6 @@ class NavBar extends Component {
         handleUserLogIn = {this.handleUserLogIn}
         handleRegister = {this.handleRegister}
         handleRegisterSubmit = {this.handleRegisterSubmit}
-
         />
         </div>
       )
@@ -257,6 +257,7 @@ const NavUpdate = props => (
   <UserConsumer>
     {({ id, userName, idChanged  }) => (
       <NavBar
+      {...props}
         currentId={id}
         currentUserName={userName}
         idChanged={idChanged}

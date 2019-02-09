@@ -1,6 +1,7 @@
 /* Pending */
 .cart-border {
   border: 1px solid #dddddd;
+  overflow: hidden;
 }
 .cart {
   margin-left: 10px;

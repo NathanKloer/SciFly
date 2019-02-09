@@ -25,7 +25,13 @@ export function InventoryTableBody(props) {
               <MDBTableBody>
                 {props.products.map(product => {
                   return (
-                    <InventoryTableItem key={product._id} currentId={props.currentId} product={product} listener={props.addCartItems} disableAddBtn={props.disableAddBtn}></InventoryTableItem>
+                    <InventoryTableItem
+                                        key={product._id}
+                                        currentId={props.currentId}
+                                        product={product}
+                                        listener={props.addCartItems}
+                                        disableAddBtn={props.disableAddBtn}
+                                        />
                   );
                 })}
               </MDBTableBody>

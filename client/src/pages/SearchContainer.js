@@ -3,12 +3,21 @@ import {UserConsumer} from "../providers";
 import { Col, Row } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
-import CatSearchForm from "../components/CatSearchForm";
+import CategorySearchList from "../components/CategorySearchList";
 import {CartBody} from "../components/CartBody";
-import {  MDBModal, MDBModalHeader, MDBModalBody, MDBCard, MDBModalFooter, MDBIcon, MDBBtn } from "mdbreact";
+import { MDBCard, MDBIcon, MDBBtn, MDBModal, MDBModalFooter,
+        MDBModalBody, MDBModalHeader } from "mdbreact";
+import history from "../history";
 import "../style.css";
 
-
+/*************************************************************************
+ * Reads the parameter of the URL each time the search page is mounted
+ * (called) to display inventory.  However, the push to the SearchContainer
+ * is done in App.js.  Each time a push occurs the page is mounted again.
+ * All organization information is grabbed directly from the url and stored
+ * as an organization state variable.  The search page is responsible for
+ * setting the state of the categories.
+ * ************************************************************************/
 class SearchContainer extends Component {
   constructor(){
     super();
@@ -22,6 +31,8 @@ class SearchContainer extends Component {
 
     //Array that is assembled from the inventory table, must be reset when items are deleted from shopping cart
     this.cartItems = [];
+
+    this.urlOrganization = '';
   }
 
   state = {
@@ -45,15 +56,34 @@ class SearchContainer extends Component {
   };
 
   componentDidMount() {
-    //ErrorHandling: If users enter an organization directly (/search/Georgia_BioEd) or click navbar search
-      // if(!updateorg){
-        let url = window.location.pathname;
-        let urlArr = url.split('/');
-        let urlOrganization = urlArr[urlArr.length-1].split('_').join(' ');
-        // console.log("Organization = "+urlOrganization);
-        this.setState({organization: urlOrganization});
-        this.orgSearch(urlOrganization);
-        this.getDDLCategoryValues(urlOrganization, this.loadDDLCategoryValues);
+    /************************************************************
+     * Determine the correct organization: Pull the organization
+     * directly from the URL(/search/Georgia_BioEd)
+    /************************************************************/
+    let url = window.location.pathname;
+    let urlArr = url.split('/');
+    this.urlOrganization = urlArr[urlArr.length - 1].split('_').join(' ');
+    this.setState({ organization: this.urlOrganization });
+    this.orgSearch(this.urlOrganization);
+    // console.log('PROPS.ORG = ' + this.urlOrganization);
+    /**************************************************************/
+
+    //Load Category Values
+    this.getDDLCategoryValues(this.urlOrganization, this.loadDDLCategoryValues);
+    // if(this.props.organization){
+    //   console.log('PROPS.ORG = ' + this.props.organization);
+    //   // this.setState({ organization: this.props.organization });
+    // }
+  }
+
+  //Error Handing: Each time the state is updated, if the user is logged
+  //in check if there is anything in his cart.  If not disable the submit
+  //button
+  componentDidUpdate() {
+    // if (this.props.currentId) {
+    //   // this.disableSubmitBtn();
+    //   // this.disableCartSubmitBtn();
+    // }
   }
   //Open Cart
   toggleCart = () =>{
@@ -73,26 +103,29 @@ class SearchContainer extends Component {
   };
 
   loadDDLCategoryValues = (res) => {
-    // console.log("Res = "+JSON.stringify(res.data));
     this.setState({ ddlCategories: res.data});
-    // console.log("Res = "+JSON.stringify(this.state.ddlCategories));
     const ddlCatListElem = document.getElementById( 'ddlCatList' );
 
     for( let category in this.state.ddlCategories ) {
       ddlCatListElem.add( new Option( this.state.ddlCategories[category]));
     };
   };
-  /*************************************************/
-  //API CALLS TO LOAD INVENTORY
+  /*******************************
+   **API CALLS TO LOAD INVENTORY
+   *******************************/
   orgSearch = (organization) =>{
     if (organization){
-      // event.preventDefault();
       const baseURL = "/products";
-      this.loadInventoryByOrganization(baseURL, organization, this.setOrgProductsState);
+      this.loadInventoryByOrganization(
+        baseURL,
+        organization,
+        this.setOrgProductsState
+      );
     }//if
   };
 
-  //Initialize the state variables with search results
+  //Initialize the product state variables with the
+  //results of the Inventory by Organization search results
   loadInventoryByOrganization = (baseURL, organization, cb) => {
     API.getInventoryByOrganization(baseURL, organization)
       .then(res => {
@@ -104,22 +137,28 @@ class SearchContainer extends Component {
 
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
-    // console.log("IN HANDLECATSEARCH");
     var ddlCatElem = document.getElementById("ddlCatList");
     var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
-    if (category !== "None"){
+    if (category !== "All"){
       event.preventDefault();
       const baseURL = "/products";
       const formattedCategory = '/'+ category;
-      //Get Product Info by Category
-      this.loadInventoryByCategory(baseURL, formattedCategory, this.setCatProductsState);
+      /**************************************
+       * Get Product Inventory by Category
+       * ***********************************/
+      this.loadInventoryByCategory(
+                                    baseURL,
+                                    formattedCategory,
+                                    this.setCatProductsState
+                                  );
     }else {
       this.orgSearch(this.state.organization);
     }
   };
 
-  //Initialize the state variables with search results
+  //Initialize the product state variables with the
+  //results of the Inventory by Category search results
   loadInventoryByCategory = (baseURL, category, cb) => {
     API.getInventoryByCategory(baseURL, category, this.state.organization)
       .then(res => {
@@ -130,7 +169,6 @@ class SearchContainer extends Component {
   };
 
   setOrgProductsState = (res) => {
-    // console.log("Products for Organization = "+JSON.stringify(res));
     if(res){
       this.products = res.data;
       this.setState({ products: res.data.items});
@@ -138,14 +176,18 @@ class SearchContainer extends Component {
   };
 
   setCatProductsState = (res) => {
-    // console.log("Products for Category = "+JSON.stringify(res));
     if(res){
       this.products = res.data;
       this.setState({ products: res.data.items});
     }//if
-    // console.log("THIS.PRODUCTS = "+JSON.stringify(this.products));
+    // Error Handling: Each time the category changes if an item
+    // is in the cart disable its add button
+    this.disableCartItemsAddBtn();
   };
-/*************************************************/
+
+/*************************
+ * BEGINNING CART ASSEMBLY
+ *************************/
 //Load Cart Items:
   addCartItems = (event) => {
     event.preventDefault();
@@ -165,9 +207,9 @@ class SearchContainer extends Component {
       stockQuantity: stockQuantityAvailable
     };
     this.cartItems.push(cartItem);
-    /*********************/
-    // CART ITEMS
-    /*********************/
+    /*****************************
+    * SET CARTITEMS STATE VARIABLE
+    *******************************/
     this.setState({ cartItems: this.cartItems} );
   }
 
@@ -189,7 +231,11 @@ class SearchContainer extends Component {
 
     //Error Handling: If item deleted from cart then enable the add to cart button:
     let addButton = document.getElementById(cartItemToDel );
-    addButton.disabled = false;
+
+    //ErrorHandling: Disable the addButton only when it is on the page.
+    if(addButton){
+      addButton.disabled = false;
+    }
 
     //Set cart Items array
     this.setState({ cartItems: filteredCart});
@@ -198,6 +244,7 @@ class SearchContainer extends Component {
     this.cartItems= []
     this.cartItems = filteredCart;
   };
+
 /******************************************************************
  **Submit Completed Order:
  ******************************************************************/
@@ -236,9 +283,9 @@ class SearchContainer extends Component {
    let data = {...order};
     API.postOrder(baseURL, data)
       .then(res => {
-        /******************** */
+        /*********************/
         //API CALL
-        /******************** */
+        /*********************/
         let orderId = res.data;
         this.setState({ orderId: orderId });
         this.retrieveOrder(baseURL, this.state.orderId);
@@ -256,6 +303,7 @@ class SearchContainer extends Component {
               userName: res.data[0].user.userName,
               orderId: res.data[0]._id,
               _id: product.product._id,
+              organization: product.product.organization,
               productName: product.product.productName,
               currentStockQuantity: product.product.stockQuantity,
               orderQuantity: product.productQuantity,
@@ -264,7 +312,7 @@ class SearchContainer extends Component {
           );
         })//map
         // Push the order to the confirmation page
-          this.props.history.push({
+          history.push({
           pathname: '/confirmation/'+order[0].orderId,
           state: {order: order}
         });
@@ -275,7 +323,30 @@ class SearchContainer extends Component {
     let newStockQuantity = parseInt(currentStockQuantity) - orderQuantity;
     return newStockQuantity;
   }
-  //END ORDER SUBMISSION
+
+  /***************************
+  * Beginning of Error Block
+  ****************************/
+  //Disables the add button for items already in the cart
+  disableCartItemsAddBtn = () => {
+    let cartItems = document.querySelectorAll("button[data-cart-item-id]");
+    for ( let i = 0; i < cartItems.length; i++ ){
+      let addBtnId = cartItems[i].getAttribute("data-cart-item-id");
+      let addBtnElement = document.getElementById(addBtnId);
+      if(addBtnElement){
+        addBtnElement.disabled = true;
+      }//if
+    }//for
+  }
+
+   disableAddBtn = (stockQuantity) => {
+    if(parseInt(stockQuantity) < 1){
+      return true;
+    }
+    else
+      return false;
+  }//disabledAddBtn
+
   /**********************************************************/
   render() {
     return (
@@ -296,7 +367,7 @@ class SearchContainer extends Component {
             <br />
             <h3>Organization: {this.state.organization.split('_').join(' ')}</h3>
             <h5>Search by Category</h5>
-            <CatSearchForm catSearchEvent={this.handleCatSearch} />
+            <CategorySearchList catSearchEvent={this.handleCatSearch} />
             <div className="top-margin">
               <Row>
                 <Col size="md-12">
@@ -340,6 +411,7 @@ class SearchContainer extends Component {
                       <MDBBtn
                         color="primary"
                         id="checkout-btn"
+                        disabled = {this.state.cartItems.length === 0 ? (true):(false)}
                         onClick={this.submitOrder}
                         >Submit
                         </MDBBtn>
