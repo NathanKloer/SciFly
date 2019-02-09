@@ -43,7 +43,7 @@
 .main-donate{
     margin-top: 10px;
     /* margin-left: auto;
-    margin-right: auto;  */
+    margin-right: auto;   */
     margin-bottom: 60px;
     align-self: auto;
     padding: 60px;
@@ -81,6 +81,13 @@ th {
     padding-right: 5px;
   }
 
+.splattext {
+    margin-right: 200px;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    font-size: 19px;
+}
 /* img.bg {
 
   min-height: 100%;

@@ -49,7 +49,7 @@ class ConfirmationContainer extends Component {
         <MDBContainer>
           {this.props.location.state?(
           <MDBCard className="main-confirmation my-5 px-5 pb-5">
-            <h1>Request Confirmation Page</h1>
+            <h1>Request Confirmation</h1>
             <h3>User: {this.props.location.state.order[0].userName}</h3>
             <h3>Organization: {this.props.location.state.order[0].organization}</h3>
             <h3>Order ID: {this.props.location.state.order[0].orderId}</h3>
@@ -67,9 +67,12 @@ class ConfirmationContainer extends Component {
             </div>
             <br />
           </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>No requests have been made</h1></MDBCard>}
-
-            <p>Visit our Donate page for more information about the charities we work with and donation oppertunities</p>
-
+            
+          <MDBRow>
+          <div className="col-md-6 col-md-offset-3 splattext">
+            <p id="splattext" font-size="200px">Visit our <a href="../Donate">Donate</a> page for more information about the charities we work with and donation oppertunities</p>
+          </div>
+          </MDBRow>
         </MDBContainer>
 
 
