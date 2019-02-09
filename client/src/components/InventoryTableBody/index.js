@@ -11,7 +11,8 @@ export function InventoryTableBody(props) {
         <MDBCol md="12">
           <MDBCard>
             <MDBTable striped>
-              <MDBTableHead color="aqua-gradient">
+              {/* <MDBTableHead color="default-color"> */}
+              <MDBTableHead>
                 <tr>
                   <th>Item</th>
                   <th>Category</th>

@@ -41,7 +41,6 @@ class App extends Component {
     this.setState({organization: this.organization});
 
     //IMPORTANT: Redirect to the selected organization's page.
-    console.log("handleOrgSearch organization = "+this.organization);
     history.push({
       pathname: '/search/'+this.organization
     });

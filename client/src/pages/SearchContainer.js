@@ -80,10 +80,10 @@ class SearchContainer extends Component {
   //in check if there is anything in his cart.  If not disable the submit
   //button
   componentDidUpdate() {
-    // if (this.props.currentId) {
-    //   // this.disableSubmitBtn();
-    //   // this.disableCartSubmitBtn();
-    // }
+    if (this.props.currentId) {
+      this.disableSubmitBtn();
+      this.disableCartSubmitBtn();
+    }
   }
   //Open Cart
   toggleCart = () =>{
@@ -140,7 +140,7 @@ class SearchContainer extends Component {
     var ddlCatElem = document.getElementById("ddlCatList");
     var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
-    if (category !== "All"){
+    if (category && category !== "All"){
       event.preventDefault();
       const baseURL = "/products";
       const formattedCategory = '/'+ category;
@@ -152,7 +152,8 @@ class SearchContainer extends Component {
                                     formattedCategory,
                                     this.setCatProductsState
                                   );
-    }else {
+    }
+    else if (category) {
       this.orgSearch(this.state.organization);
     }
   };
@@ -214,13 +215,13 @@ class SearchContainer extends Component {
   }
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
-  disableAddBtn = (stockQuantity) => {
-    if(parseInt(stockQuantity) < 1){
-      return true;
-    }
-    else
-      return false;
-  }//disabledAddBtn
+  // disableAddBtn = (stockQuantity) => {
+  //   if(parseInt(stockQuantity) < 1){
+  //     return true;
+  //   }
+  //   else
+  //     return false;
+  // }//disabledAddBtn
 
   //Delete Cart Items
   delCartItems = (event) =>{
@@ -338,7 +339,32 @@ class SearchContainer extends Component {
       }//if
     }//for
   }
+ //Disable the submit button if any delete buttons on the page are disabled
+ disableCartSubmitBtn = () => {
+  let shouldDisableSubmitBtn = false;
+  let deleteBtnElem = document.querySelectorAll("button[data-cart-item-id]");
+  for ( let i = 0; i < deleteBtnElem.length; i++ ){
+    let isDisabled = deleteBtnElem[i].disabled;
+    if (isDisabled){
+      shouldDisableSubmitBtn = true;
+    }
+  }//for
+  if(shouldDisableSubmitBtn){
+    document.getElementById("checkout-btn").disabled = true;
+  }//if
+}
 
+//Disable the submit button if there is nothing in the cart
+disableSubmitBtn = () => {
+  let checkOutBtn = document.getElementById("checkout-btn");
+  if(checkOutBtn && this.state.cartItems.length === 0){
+    document.getElementById("checkout-btn").disabled = true;
+  }
+  else if (checkOutBtn)
+    document.getElementById("checkout-btn").disabled = false;
+}
+
+ //ERROR HANDLING: If A Product is not available disable the add button;
    disableAddBtn = (stockQuantity) => {
     if(parseInt(stockQuantity) < 1){
       return true;
