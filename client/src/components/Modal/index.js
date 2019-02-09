@@ -113,7 +113,7 @@ export function ModalComponent(props) {
                 tooltipContent={tooltip}>
        <span
           className="mr-3"
-          flat
+          flat = "flat"
           onClick={props.handleUserLogIn}
        >
           Login?
@@ -167,7 +167,7 @@ export function ModalComponent(props) {
                   tooltipContent={tooltip}>
        <span
        className="mr-3"
-       flat
+       flat = "flat"
        onClick={props.handleRegister}
        >
          Register?

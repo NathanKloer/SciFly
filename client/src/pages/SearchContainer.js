@@ -191,26 +191,47 @@ class SearchContainer extends Component {
 //Load Cart Items:
   addCartItems = (event) => {
     event.preventDefault();
-    let productIdClicked = event.target.getAttribute('data-product-id');
-    let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
-    let stockQuantityAvailable = document.getElementById('prod-stock-quantity-'+productIdClicked).innerText;
-
-    //Error Handling: If item has been added to cart, don't add it to the cart again
-    let addButton = document.getElementById(productIdClicked);
+    const addButton = document.getElementById(event.target.id);
     addButton.disabled = true;
 
+    API.getItem(event.target.id)
+    .then(res => {
+      //callback to store state variables
+      const cartItem =
+      {
+        id: res.data._id,
+        name: res.data.productName,
+        stockQuantity: res.data.stockQuantity,
+        quantity: 1
+      };
+      this.cartItems.push(cartItem);
+      this.setState({ cartItems: this.cartItems} );
+      console.log("Cart Items" + JSON.stringify(this.cartItems))
+     console.log(res.data)
+    })
+    .catch(err => console.log(err));
+    // let productIdClicked = event.target.getAttribute('data-product-id');
+    // let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
+    // let stockQuantityAvailable = document.getElementById('prod-stock-quantity-'+productIdClicked).innerText;
+
+    //Error Handling: If item has been added to cart, don't add it to the cart again
+    // let addButton = document.getElementById(productIdClicked);
+    // addButton.disabled = true;
+
     //Assemble cart
-    let cartItem =
-    {
-      id: productIdClicked,
-      name: productNameClicked,
-      stockQuantity: stockQuantityAvailable
-    };
-    this.cartItems.push(cartItem);
+    // let cartItem =
+    // {
+    //   id: productIdClicked,
+    //   name: productNameClicked,
+    //   stockQuantity: stockQuantityAvailable,
+    //   quantity: 1
+    // };
+    // this.cartItems.push(cartItem);
     /*****************************
     * SET CARTITEMS STATE VARIABLE
     *******************************/
-    this.setState({ cartItems: this.cartItems} );
+    // this.setState({ cartItems: this.cartItems} );
+    // console.log("Cart Items" + JSON.stringify(this.state.cartItems))
   }
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
@@ -225,7 +246,10 @@ class SearchContainer extends Component {
   //Delete Cart Items
   delCartItems = (event) =>{
     event.preventDefault();
-    let cartItemToDel = event.target.getAttribute('data-cart-item-id');
+    console.log(event.target);
+    console.log(event.target.id);
+
+    let cartItemToDel = event.target.id;
     let curCart = this.state.cartItems;
     let filteredCart = curCart.filter(eachItem => eachItem.id !== cartItemToDel);
 
@@ -292,7 +316,6 @@ class SearchContainer extends Component {
       })
       .catch(err => console.log(err));
   };
-
   retrieveOrder = (baseURL, orderId) => {
     API.getOrder(baseURL, orderId)
       .then(res => {
@@ -323,7 +346,14 @@ class SearchContainer extends Component {
     let newStockQuantity = parseInt(currentStockQuantity) - orderQuantity;
     return newStockQuantity;
   }
-
+updateItem = (id, quantity) =>{
+  console.log(`id: ${id} qty: ${quantity}`)
+  for(let i = 0; i < this.cartItems.length; i++){
+    if ( this.cartItems[i].id === id){
+      this.cartItems[i].quantity = quantity;
+    }
+  }
+}
   /***************************
   * Beginning of Error Block
   ****************************/
@@ -346,7 +376,6 @@ class SearchContainer extends Component {
     else
       return false;
   }//disabledAddBtn
-
   /**********************************************************/
   render() {
     return (
@@ -372,7 +401,8 @@ class SearchContainer extends Component {
               <Row>
                 <Col size="md-12">
                   {!this.isCatBtnClicked && this.products.length ? (
-                    <InventoryTableBody currentId={this.props.currentId}
+                    <InventoryTableBody
+                                        currentId={this.props.currentId}
                                         products={this.products}
                                         addCartItems={this.addCartItems}
                                         disableAddBtn={this.disableAddBtn}
@@ -397,7 +427,8 @@ class SearchContainer extends Component {
                     </MDBModalHeader>
                     <MDBModalBody>
                       <CartBody
-                        cartItems={this.state.cartItems}
+                        updateItem={this.updateItem}
+                        cartItems={this.cartItems}
                         currentId={this.props.currentId}
                         delCartItems={this.delCartItems}
                       />
