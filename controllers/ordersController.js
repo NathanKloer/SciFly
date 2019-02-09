@@ -47,7 +47,7 @@ module.exports = {
                     service: 'gmail',
                     auth: {
                       user: 'parts2pieces.info@gmail.com',
-                      pass: 'SciFly19'
+                      pass: process.env.gmailPassword
                     }
                   });
                   const mailOptions = {
