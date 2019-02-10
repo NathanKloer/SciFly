@@ -256,9 +256,7 @@ class SearchContainer extends Component {
     this.sendOrder(completedOrder);
 
     //Reset the cart after order submitted
-    this.cartItems = [];
     this.orders =[];
-    this.setState({ cartItems: [] });
   }//function
 
   sendOrder = (order) =>{
@@ -298,6 +296,8 @@ class SearchContainer extends Component {
             }
           );
         })//map
+        this.cartItems = [];
+        this.setState({ cartItems: [] });
         // Push the order to the confirmation page
           history.push({
           pathname: '/confirmation/'+order[0].orderId,
