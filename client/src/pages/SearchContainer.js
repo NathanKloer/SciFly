@@ -198,6 +198,9 @@ class SearchContainer extends Component {
 //Load Cart Items:
   addCartItems = (event) => {
     event.preventDefault();
+    this.setState({
+                    sideModal: false
+                  })
     const addButton = document.getElementById(event.target.id);
     addButton.disabled = true;
 
