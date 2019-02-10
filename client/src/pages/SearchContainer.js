@@ -159,7 +159,8 @@ class SearchContainer extends Component {
                                   );
     }
     else if (category) {
-      this.orgSearch(this.state.organization);
+      this.loadInventoryByOrganization("/products", this.state.organization,
+                                        this.setCatProductsState);
     }
   };
 
