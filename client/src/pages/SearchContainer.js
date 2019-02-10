@@ -307,13 +307,13 @@ class SearchContainer extends Component {
     let newStockQuantity = parseInt(currentStockQuantity) - orderQuantity;
     return newStockQuantity;
   }
-updateItem = (id, quantity) =>{
-  for(let i = 0; i < this.cartItems.length; i++){
-    if ( this.cartItems[i]._id === id){
-      this.cartItems[i].productQuantity = quantity;
+  updateItem = (id, quantity) =>{
+    for(let i = 0; i < this.cartItems.length; i++){
+      if ( this.cartItems[i]._id === id){
+        this.cartItems[i].productQuantity = quantity;
+      }
     }
   }
-}
   /***************************
   * Beginning of Error Block
   ****************************/

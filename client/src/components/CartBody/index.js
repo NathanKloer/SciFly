@@ -95,7 +95,7 @@ export function CartItem(props) {
       <td className="align-middle">
         <input className = "show-component"
               id={props.cartItem._id} type="number"
-              data-quantity-id = {props.id}
+              data-quantity-id = {props.cartItem._id}
               min = "1" max = {props.stockQuantity}
               defaultValue = {props.cartItemQuantity}
               onChange = {validateQuantity}
