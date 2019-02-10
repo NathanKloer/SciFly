@@ -121,8 +121,7 @@ export function ModalComponent(props) {
      </MDBTooltip>
      <MDBBtn
        disabled={!(props.state.email && props.state.password && props.state.userName
-                   && props.state.firstName && props.state.lastName && props.state.school
-                   && props.state.district && props.state.selectedCourse)}
+                   && props.state.firstName && props.state.lastName)}
        onClick={props.handleRegisterSubmit}
        color="primary"
      >
