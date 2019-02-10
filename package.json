@@ -50,10 +50,10 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.2.1",
     "express": "^4.16.4",
+    "if-env": "^1.0.4",
     "mdbreact": "^4.10.0",
     "mongoose": "^5.4.6",
     "node": "^11.7.0",
-    "nodemailer": "^5.1.1",
-    "if-env": "^1.0.4"
+    "nodemailer": "^5.1.1"
   }
 }
