@@ -113,7 +113,7 @@ export function ModalComponent(props) {
                 tooltipContent={tooltip}>
        <span
           className="mr-3"
-          flat
+          flat = "flat"
           onClick={props.handleUserLogIn}
        >
           Login?
@@ -121,8 +121,7 @@ export function ModalComponent(props) {
      </MDBTooltip>
      <MDBBtn
        disabled={!(props.state.email && props.state.password && props.state.userName
-                   && props.state.firstName && props.state.lastName && props.state.school
-                   && props.state.district && props.state.selectedCourse)}
+                   && props.state.firstName && props.state.lastName)}
        onClick={props.handleRegisterSubmit}
        color="primary"
      >
@@ -167,7 +166,7 @@ export function ModalComponent(props) {
                   tooltipContent={tooltip}>
        <span
        className="mr-3"
-       flat
+       flat = "flat"
        onClick={props.handleRegister}
        >
          Register?

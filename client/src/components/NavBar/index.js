@@ -217,7 +217,10 @@ class NavBar extends Component {
             <MDBNavItem>
                   <MDBDropdown>
                     <MDBDropdownToggle nav caret>
-                      <MDBIcon icon="user" />
+                      {this.state._id ? (<MDBIcon icon="user-check"/>
+                                        ):(
+                                        <MDBIcon icon="user" />
+                                        )}
                     </MDBDropdownToggle>
                     {this.state._id ? (
                         <MDBDropdownMenu className="dropdown-default" right>

@@ -3,6 +3,7 @@ import {UserConsumer} from "../providers";
 import { Col, Row } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
+import readCookie from "../utils/RCAPI";
 import CategorySearchList from "../components/CategorySearchList";
 import {CartBody} from "../components/CartBody";
 import { MDBCard, MDBIcon, MDBBtn, MDBModal, MDBModalFooter,
@@ -52,7 +53,9 @@ class SearchContainer extends Component {
 
     organization: '',
 
-    sideModal: false
+    sideModal: false,
+
+    _id:''
   };
 
   componentDidMount() {
@@ -67,7 +70,8 @@ class SearchContainer extends Component {
     this.orgSearch(this.urlOrganization);
     // console.log('PROPS.ORG = ' + this.urlOrganization);
     /**************************************************************/
-
+    const cookieUserId = readCookie("_uid");
+    this.setState({_id: cookieUserId});
     //Load Category Values
     this.getDDLCategoryValues(this.urlOrganization, this.loadDDLCategoryValues);
     // if(this.props.organization){
@@ -80,10 +84,11 @@ class SearchContainer extends Component {
   //in check if there is anything in his cart.  If not disable the submit
   //button
   componentDidUpdate() {
-    if (this.props.currentId) {
-      this.disableSubmitBtn();
-      this.disableCartSubmitBtn();
-    }
+
+    // if (this.props.currentId) {
+    //   // this.disableSubmitBtn();
+    //   // this.disableCartSubmitBtn();
+    // }
   }
   //Open Cart
   toggleCart = () =>{
@@ -137,8 +142,8 @@ class SearchContainer extends Component {
 
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
-    var ddlCatElem = document.getElementById("ddlCatList");
-    var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
+    const ddlCatElem = document.getElementById("ddlCatList");
+    const category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
     if (category && category !== "All"){
       event.preventDefault();
@@ -192,46 +197,35 @@ class SearchContainer extends Component {
 //Load Cart Items:
   addCartItems = (event) => {
     event.preventDefault();
-    let productIdClicked = event.target.getAttribute('data-product-id');
-    let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
-    let stockQuantityAvailable = document.getElementById('prod-stock-quantity-'+productIdClicked).innerText;
-
-    //Error Handling: If item has been added to cart, don't add it to the cart again
-    let addButton = document.getElementById(productIdClicked);
+    const addButton = document.getElementById(event.target.id);
     addButton.disabled = true;
 
-    //Assemble cart
-    let cartItem =
-    {
-      id: productIdClicked,
-      name: productNameClicked,
-      stockQuantity: stockQuantityAvailable
-    };
-    this.cartItems.push(cartItem);
-    /*****************************
-    * SET CARTITEMS STATE VARIABLE
-    *******************************/
-    this.setState({ cartItems: this.cartItems} );
+    API.getItem(event.target.id)
+    .then(res => {
+      //callback to store state variables
+      const cartItem =
+      {
+        _id: res.data._id,
+        product: res.data.productName,
+        stockQuantity: res.data.stockQuantity,
+        productQuantity: 1
+      };
+      this.cartItems.push(cartItem);
+      this.setState({ cartItems: this.cartItems} );
+    })
+    .catch(err => console.log(err));
+    this.toggleCart();
   }
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
-  // disableAddBtn = (stockQuantity) => {
-  //   if(parseInt(stockQuantity) < 1){
-  //     return true;
-  //   }
-  //   else
-  //     return false;
-  // }//disabledAddBtn
-
-  //Delete Cart Items
   delCartItems = (event) =>{
     event.preventDefault();
-    let cartItemToDel = event.target.getAttribute('data-cart-item-id');
+    let cartItemToDel = event.target.id;
     let curCart = this.state.cartItems;
-    let filteredCart = curCart.filter(eachItem => eachItem.id !== cartItemToDel);
+    let filteredCart = curCart.filter(eachItem => eachItem._id !== cartItemToDel);
 
     //Error Handling: If item deleted from cart then enable the add to cart button:
-    let addButton = document.getElementById(cartItemToDel );
+    let addButton = document.getElementById( cartItemToDel );
 
     //ErrorHandling: Disable the addButton only when it is on the page.
     if(addButton){
@@ -249,23 +243,14 @@ class SearchContainer extends Component {
 /******************************************************************
  **Submit Completed Order:
  ******************************************************************/
-  submitOrder = (event, sendOrder) => {
+  submitOrder = (event) => {
     event.preventDefault();
-    this.orders.push(...this.cartItems);
-    //Add the Quantity to the cart
-    let completedOrder = this.orders.map(order =>{
-      var productId = order.id;
-      if(document.getElementById("quantity-"+productId)){
-        var  productQty= document.getElementById("quantity-"+productId).value;
-        return ({...order, quantity: productQty, userId: this.props.currentId});
-      }
-      return ({...order, productQuantity: productQty});
-    });//map
-    let jsonOrder = {
-      data: {...completedOrder}
-    };
+    let completedOrder = {
+                          _id: this.state._id,
+                          data: this.cartItems
+                          };
 
-    this.sendOrder(jsonOrder);
+    this.sendOrder(completedOrder);
 
     //Reset the cart after order submitted
     this.cartItems = [];
@@ -281,8 +266,7 @@ class SearchContainer extends Component {
   };
 
   loadOrder = (baseURL, order, displayOrder) => {
-   let data = {...order};
-    API.postOrder(baseURL, data)
+    API.postOrder(baseURL, order)
       .then(res => {
         /*********************/
         //API CALL
@@ -293,7 +277,6 @@ class SearchContainer extends Component {
       })
       .catch(err => console.log(err));
   };
-
   retrieveOrder = (baseURL, orderId) => {
     API.getOrder(baseURL, orderId)
       .then(res => {
@@ -324,7 +307,13 @@ class SearchContainer extends Component {
     let newStockQuantity = parseInt(currentStockQuantity) - orderQuantity;
     return newStockQuantity;
   }
-
+updateItem = (id, quantity) =>{
+  for(let i = 0; i < this.cartItems.length; i++){
+    if ( this.cartItems[i]._id === id){
+      this.cartItems[i].productQuantity = quantity;
+    }
+  }
+}
   /***************************
   * Beginning of Error Block
   ****************************/
@@ -372,7 +361,6 @@ disableSubmitBtn = () => {
     else
       return false;
   }//disabledAddBtn
-
   /**********************************************************/
   render() {
     return (
@@ -398,7 +386,8 @@ disableSubmitBtn = () => {
               <Row>
                 <Col size="md-12">
                   {!this.isCatBtnClicked && this.products.length ? (
-                    <InventoryTableBody currentId={this.props.currentId}
+                    <InventoryTableBody
+                                        currentId={this.props.currentId}
                                         products={this.products}
                                         addCartItems={this.addCartItems}
                                         disableAddBtn={this.disableAddBtn}
@@ -423,7 +412,8 @@ disableSubmitBtn = () => {
                     </MDBModalHeader>
                     <MDBModalBody>
                       <CartBody
-                        cartItems={this.state.cartItems}
+                        updateItem={this.updateItem}
+                        cartItems={this.cartItems}
                         currentId={this.props.currentId}
                         delCartItems={this.delCartItems}
                       />

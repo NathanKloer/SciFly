@@ -2,6 +2,7 @@
 /************************************************/
 const router = require("express").Router();
 const productRoutes = require("./products");//products.js
+const itemRoutes = require("./items");//products.js
 const userRoutes = require("./users");
 const loginRoutes = require("./login");
 const orderRoutes = require("./orders");//orders.js
@@ -16,6 +17,7 @@ const categoryRoutes = require("./categories");
  * be handled by the second argument "productRoutes".
  ************************************/
 router.use("/products", productRoutes);
+router.use("/items", itemRoutes);
 router.use("/users", userRoutes);
 router.use("/login", loginRoutes);
 router.use("/order", orderRoutes);

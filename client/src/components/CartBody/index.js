@@ -24,7 +24,14 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
                 <MDBTableBody>
                 {props.cartItems.map(cartItem => {
                   return (
-                    <CartItem key={cartItem.id} cartItem= {cartItem} delCartItems= {props.delCartItems}></CartItem>
+
+                    <CartItem
+                              key={cartItem._id}
+                              updateItem = {props.updateItem}
+                              cartItemQuantity= {cartItem.productQuantity}
+                              stockQuantity={cartItem.stockQuantity}
+                              cartItem= {cartItem}
+                              delCartItems= {props.delCartItems}></CartItem>
                   );
                 })}
                 </MDBTableBody>
@@ -41,8 +48,9 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
 
 // This is one item in the cart
 export function CartItem(props) {
-  let validateQuantity = () => {
+  let validateQuantity = (event) => {
     //Validate Whether the Quantity is in stock
+    props.updateItem(event.target.id, event.target.value);
     let quantityInputElements = document.querySelectorAll('[data-quantity-id]');
     let isQuantityAvailable = true;
     let shouldCartBeSubmitted = true;
@@ -50,7 +58,7 @@ export function CartItem(props) {
         let maxValue = parseInt(quantityInputElements[i].getAttribute('max'));
         let minValue = parseInt(quantityInputElements[i].getAttribute('min'));
         let quantityId = quantityInputElements[i].getAttribute('data-quantity-id');
-        let delBtnElem = document.getElementById('delete-btn-'+quantityId);
+        let delBtnElem = document.getElementById(quantityId);
         let addButton = document.getElementById(quantityId);
         let quantityInputValue = parseInt(quantityInputElements[i].value);
 
@@ -82,14 +90,17 @@ export function CartItem(props) {
       }
   }
   return (
-    <tr id = {'row-'+props.cartItem.id} key= {props.cartItem.id}>
-      <td  className="align-middle" id={'name-'+props.cartItem.id}>{props.cartItem.name}</td>
+    <tr id = {'row-'+props.cartItem._id} key= {props.cartItem._id}>
+      <td  className="align-middle" id={'name-'+props.cartItem._id}>{props.cartItem.product}</td>
       <td className="align-middle">
         <input className = "show-component"
-              id={'quantity-'+props.cartItem.id} type="number"
-              data-quantity-id = {props.cartItem.id} defaultValue="1"
-              min = "1" max = {props.cartItem.stockQuantity}
-              onChange = {validateQuantity}/>
+              id={props.cartItem._id} type="number"
+              data-quantity-id = {props.id}
+              min = "1" max = {props.stockQuantity}
+              defaultValue = {props.cartItemQuantity}
+              onChange = {validateQuantity}
+              ></input>
+
       </td>
       <td className="align-middle">
         <DeleteCartItemBtn cartItem = {props.cartItem}
@@ -104,9 +115,9 @@ export function DeleteCartItemBtn(props){
     <button
       color="red"
       size="sm"
-      id = {"delete-btn-"+props.cartItem.id}
+      id = {props.cartItem._id}
       className=" xbtn "
-      data-cart-item-id= {props.cartItem.id}
+      data-cart-item-id= {props.cartItem._id}
       onClick= {props.delCartItems}
       >X</button>
   );
