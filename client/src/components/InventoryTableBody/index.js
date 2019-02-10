@@ -10,7 +10,7 @@ export function InventoryTableBody(props) {
       <MDBRow className="py-3">
         <MDBCol md="12">
           <MDBCard>
-            <MDBTable striped>
+            <MDBTable responsive striped>
               <MDBTableHead className="w-100" color="aqua-gradient">
                 <tr>
                   <th>Item</th>

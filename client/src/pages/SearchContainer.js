@@ -319,9 +319,9 @@ class SearchContainer extends Component {
   ****************************/
   //Disables the add button for items already in the cart
   disableCartItemsAddBtn = () => {
-    let cartItems = document.querySelectorAll("button[data-cart-item-id]");
-    for ( let i = 0; i < cartItems.length; i++ ){
-      let addBtnId = cartItems[i].getAttribute("data-cart-item-id");
+    // let cartItems = document.querySelectorAll("button[data-cart-item-id]");
+    for ( let i = 0; i < this.cartItems.length; i++ ){
+      let addBtnId = this.cartItems[i]._id;
       let addBtnElement = document.getElementById(addBtnId);
       if(addBtnElement){
         addBtnElement.disabled = true;
