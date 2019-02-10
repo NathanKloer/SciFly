@@ -208,6 +208,8 @@ class SearchContainer extends Component {
       {
         _id: res.data._id,
         product: res.data.productName,
+        description: res.data.description,
+        uom: res.data.uom,
         stockQuantity: res.data.stockQuantity,
         productQuantity: 1
       };
@@ -406,10 +408,14 @@ disableSubmitBtn = () => {
                       this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
                     )}
                 </Col>
-                  <MDBModal isOpen={this.state.sideModal} toggle={this.toggleCart} fullHeight position="right">
+                  <MDBModal size="lg" isOpen={this.state.sideModal} toggle={this.toggleCart} fullHeight position="top">
                     <MDBModalHeader
                                     toggle={this.toggleCart}
-                                    >Shopping Cart
+
+                                    >
+                                    <MDBIcon icon="shopping-cart"> Shopping Cart
+                                    </MDBIcon>
+
                     </MDBModalHeader>
                     <MDBModalBody>
                       <CartBody

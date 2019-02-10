@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./style.css";
 import { MDBContainer, MDBCard, MDBTable, MDBRow,
-        MDBCol, MDBTableHead, MDBBtn, MDBTableBody
-       } from "mdbreact";
+        MDBCol, MDBTableHead, MDBBtn, MDBTableBody,
+        MDBTooltip} from "mdbreact";
 
 // This is the container that carries the entire cart box
 // export function CartList({ children }) {
@@ -11,14 +11,22 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
     <React.Fragment>
     {props.currentId ?
     <MDBContainer className="mt-3">
-      <MDBRow className="py-3">
+      <MDBRow>
         <MDBCol md="12">
           <MDBCard>
             <MDBTable className="w-100">
                 <MDBTableHead>
                   <tr>
-                    <th className="align-middle">Item</th>
-                    <th className="align-middle">Quantity</th>
+                    <th className="align-middle w-75">Item</th>
+                    <th className="align-middle w-50">Description</th>
+                    <MDBTooltip
+                      placement="top"
+                      tag="th"
+                      className="align-middle text-center w-50"
+                      tooltipContent="Unit of Measure">
+                      UOM
+                    </MDBTooltip>
+                    <th className="align-middle text-center w-25">Quantity</th>
                   </tr>
                 </MDBTableHead>
                 <MDBTableBody>
@@ -92,19 +100,27 @@ validateQuantity = (event) => {
   return (
     <tr id = {'row-' + this.props.cartItem._id}
         key= {this.props.cartItem._id}>
-      <td  className="align-middle"
+      <td  className="align-middle w-75"
           id={'name-'+ this.props.cartItem._id}>
           {this.props.cartItem.product}
       </td>
-      <td className="align-middle">
-        <input className = "show-component"
+      <td
+          className="align-middle w-50 ">
+          {this.props.cartItem.description}
+      </td>
+      <td
+          className="align-middle text-center w-25">
+          {this.props.cartItem.uom}
+      </td>
+      <td className="align-middle  text-center">
+        <input className = "show-component text-center w-75"
               id={this.props.cartItem._id} type="number"
               data-quantity-id = {this.props.cartItem._id}
               min = "1" max = {this.props.stockQuantity}
               defaultValue = {this.props.cartItemQuantity}
               onChange = {this.validateQuantity}
-              ></input>
-
+              >
+        </input>
       </td>
       <td className="align-middle">
         <DeleteCartItemBtn  cartItem = {this.props.cartItem}
@@ -116,14 +132,24 @@ validateQuantity = (event) => {
 }
 export function DeleteCartItemBtn(props){
   return(
-    <button
+    <MDBTooltip
+      placement="top"
+      tag="button"
       color="red"
       size="sm"
       id = {props.cartItem._id}
       className=" xbtn "
       data-cart-item-id= {props.cartItem._id}
       onClick= {props.delCartItems}
-      >X</button>
+      tooltipContent=" Remove Item">
+      <span
+        id = {props.cartItem._id}
+        className=" xbtn "
+        data-cart-item-id= {props.cartItem._id}
+        onClick= {props.delCartItems}
+        >X
+      </span>
+    </MDBTooltip>
   );
 }
 

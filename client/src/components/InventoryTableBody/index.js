@@ -14,15 +14,15 @@ export function InventoryTableBody(props) {
               <MDBTableHead className="w-100" color="aqua-gradient">
                 <tr>
                   <th>Item</th>
-                  <th className="text-center">Category</th>
                   <th className="text-center">Description</th>
-                  <MDBTooltip   placement="top"
+                  <MDBTooltip   placement="bottom"
                                 tag="th"
                                 className="text-center"
                                 tooltipContent="Unit of Measure">
                                 UOM
                 </MDBTooltip>
-                <MDBTooltip     placement="top"
+                <th className="text-center">Category</th>
+                <MDBTooltip     placement="bottom"
                                 tag="th"
                                 className="text-center"
                                 tooltipContent="Stock Quantity">
@@ -57,9 +57,9 @@ export function InventoryTableItem(props){
   return(
     <tr id="invtable">
       <td className="align-middle" id={'name-'+props.product._id}>{props.product.productName}</td>
-      <td className="align-middle text-center">{props.product.category}</td>
       <td className="align-middle text-center">{props.product.description}</td>
       <td className="align-middle text-center">{props.product.uom}</td>
+      <td className="align-middle text-center">{props.product.category}</td>
       <td className="align-middle text-center" id={'prod-stock-quantity-'+props.product._id}>{props.product.stockQuantity}</td>
       {props.currentId?<td><AddInventoryBtn product = {props.product} listener = {props.listener} disabled = {props.disableAddBtn(props.product.stockQuantity)}></AddInventoryBtn></td>:<td className = "hide-component"></td>}
     </tr>
