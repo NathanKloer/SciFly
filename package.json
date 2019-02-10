@@ -55,6 +55,13 @@
     "mdbreact": "^4.10.0",
     "mongoose": "^5.4.6",
     "node": "^11.7.0",
-    "nodemailer": "^5.1.1"
+    "nodemailer": "^5.1.1",
+    "react": "^16.7.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.3",
+    "concurrently": "^4.1.0"
   }
 }
