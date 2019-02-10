@@ -51,7 +51,6 @@ export function CartItem(props) {
   let validateQuantity = (event) => {
     //Validate Whether the Quantity is in stock
     props.updateItem(event.target.id, event.target.value);
-    console.log(event.target.value)
     let quantityInputElements = document.querySelectorAll('[data-quantity-id]');
     let isQuantityAvailable = true;
     let shouldCartBeSubmitted = true;

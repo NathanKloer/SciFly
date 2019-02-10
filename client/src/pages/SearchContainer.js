@@ -142,8 +142,8 @@ class SearchContainer extends Component {
 
   handleCatSearch = event =>{
     this.isCatBtnClicked = true;
-    var ddlCatElem = document.getElementById("ddlCatList");
-    var category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
+    const ddlCatElem = document.getElementById("ddlCatList");
+    const category = ddlCatElem.options[ddlCatElem.selectedIndex].text;
     this.setState({category: category});
     if (category && category !== "All"){
       event.preventDefault();
@@ -212,28 +212,14 @@ class SearchContainer extends Component {
       };
       this.cartItems.push(cartItem);
       this.setState({ cartItems: this.cartItems} );
-      console.log("Cart Items" + JSON.stringify(this.cartItems))
-     console.log(res.data)
     })
     .catch(err => console.log(err));
     this.toggleCart();
   }
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
-  // disableAddBtn = (stockQuantity) => {
-  //   if(parseInt(stockQuantity) < 1){
-  //     return true;
-  //   }
-  //   else
-  //     return false;
-  // }//disabledAddBtn
-
-  //Delete Cart Items
   delCartItems = (event) =>{
     event.preventDefault();
-    console.log(event.target);
-    console.log(event.target.id);
-
     let cartItemToDel = event.target.id;
     let curCart = this.state.cartItems;
     let filteredCart = curCart.filter(eachItem => eachItem._id !== cartItemToDel);
@@ -274,15 +260,12 @@ class SearchContainer extends Component {
 
   sendOrder = (order) =>{
     if (order){
-
       const baseURL = "/order";
       this.loadOrder(baseURL, order, this.displayOrder);
     }//if
   };
 
   loadOrder = (baseURL, order, displayOrder) => {
-  //  let data = {...orer};
-
     API.postOrder(baseURL, order)
       .then(res => {
         /*********************/
@@ -325,7 +308,6 @@ class SearchContainer extends Component {
     return newStockQuantity;
   }
 updateItem = (id, quantity) =>{
-  console.log(`id: ${id} qty: ${quantity}`)
   for(let i = 0; i < this.cartItems.length; i++){
     if ( this.cartItems[i]._id === id){
       this.cartItems[i].productQuantity = quantity;
