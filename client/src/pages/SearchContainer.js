@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import {UserConsumer} from "../providers";
 import { Col, Row } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
+import { CartModal} from "../components/CartModal";
 import API from "../utils/API";
 import readCookie from "../utils/RCAPI";
 import CategorySearchList from "../components/CategorySearchList";
-import {CartBody} from "../components/CartBody";
-import { MDBCard, MDBIcon, MDBBtn, MDBModal, MDBModalFooter,
-        MDBModalBody, MDBModalHeader } from "mdbreact";
+import { MDBCard, MDBIcon } from "mdbreact";
 import history from "../history";
 import "../style.css";
 
@@ -90,6 +89,7 @@ class SearchContainer extends Component {
     //   // this.disableCartSubmitBtn();
     // }
   }
+
   //Open Cart
   toggleCart = () =>{
     this.setState({
@@ -224,7 +224,7 @@ class SearchContainer extends Component {
   delCartItems = (event) =>{
     event.preventDefault();
     let cartItemToDel = event.target.id;
-    let curCart = this.state.cartItems;
+    let curCart = this.cartItems;
     let filteredCart = curCart.filter(eachItem => eachItem._id !== cartItemToDel);
 
     //Error Handling: If item deleted from cart then enable the add to cart button:
@@ -408,38 +408,16 @@ disableSubmitBtn = () => {
                       this.isCatBtnClicked && !this.products.length && <h3>No Results to Display</h3>
                     )}
                 </Col>
-                  <MDBModal size="lg" isOpen={this.state.sideModal} toggle={this.toggleCart} fullHeight position="top">
-                    <MDBModalHeader
-                                    toggle={this.toggleCart}
-
-                                    >
-                                    <MDBIcon icon="shopping-cart"> Shopping Cart
-                                    </MDBIcon>
-
-                    </MDBModalHeader>
-                    <MDBModalBody>
-                      <CartBody
+                  <CartModal
+                        sideModal={this.state.sideModal}
+                        toggleCart={this.toggleCart}
                         updateItem={this.updateItem}
                         cartItems={this.cartItems}
                         currentId={this.props.currentId}
                         delCartItems={this.delCartItems}
-                      />
-                    </MDBModalBody>
-                    <MDBModalFooter>
-                      <MDBBtn
-                        color="secondary"
-                        onClick={this.toggleCart}
-                        >Close
-                      </MDBBtn>
-                      <MDBBtn
-                        color="primary"
-                        id="checkout-btn"
-                        disabled = {this.state.cartItems.length === 0 ? (true):(false)}
-                        onClick={this.submitOrder}
-                        >Submit
-                        </MDBBtn>
-                    </MDBModalFooter>
-                  </MDBModal>
+                        submitOrder={this.submitOrder}
+                    >
+                  </CartModal>
               </Row>
             </div>
           </MDBCard>):<MDBCard className="main-confirmation text-center my-5 px-5 pb-5"><h1>Please select an <a href='/'>organization</a></h1></MDBCard>}

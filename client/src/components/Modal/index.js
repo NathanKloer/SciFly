@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Dropdown, DropdownList } from "../LogIn";
 import { MDBTooltip, MDBBtn, MDBModal, MDBModalBody,
-         MDBModalHeader, MDBModalFooter } from 'mdbreact';
+         MDBModalHeader, MDBModalFooter,MDBInput } from 'mdbreact';
 import "../../style.css";
 
 export function ModalComponent(props) {
