@@ -3,6 +3,7 @@ import {UserConsumer} from "../providers";
 import { Col, Row } from "../components/Grid";
 import { InventoryTableBody} from "../components/InventoryTableBody";
 import API from "../utils/API";
+import readCookie from "../utils/RCAPI";
 import CategorySearchList from "../components/CategorySearchList";
 import {CartBody} from "../components/CartBody";
 import { MDBCard, MDBIcon, MDBBtn, MDBModal, MDBModalFooter,
@@ -52,7 +53,9 @@ class SearchContainer extends Component {
 
     organization: '',
 
-    sideModal: false
+    sideModal: false,
+
+    _id:''
   };
 
   componentDidMount() {
@@ -67,7 +70,8 @@ class SearchContainer extends Component {
     this.orgSearch(this.urlOrganization);
     // console.log('PROPS.ORG = ' + this.urlOrganization);
     /**************************************************************/
-
+    const cookieUserId = readCookie("_uid");
+    this.setState({_id: cookieUserId});
     //Load Category Values
     this.getDDLCategoryValues(this.urlOrganization, this.loadDDLCategoryValues);
     // if(this.props.organization){
@@ -80,6 +84,7 @@ class SearchContainer extends Component {
   //in check if there is anything in his cart.  If not disable the submit
   //button
   componentDidUpdate() {
+
     // if (this.props.currentId) {
     //   // this.disableSubmitBtn();
     //   // this.disableCartSubmitBtn();
@@ -199,10 +204,10 @@ class SearchContainer extends Component {
       //callback to store state variables
       const cartItem =
       {
-        id: res.data._id,
-        name: res.data.productName,
+        _id: res.data._id,
+        product: res.data.productName,
         stockQuantity: res.data.stockQuantity,
-        quantity: 1
+        productQuantity: 1
       };
       this.cartItems.push(cartItem);
       this.setState({ cartItems: this.cartItems} );
@@ -210,28 +215,7 @@ class SearchContainer extends Component {
      console.log(res.data)
     })
     .catch(err => console.log(err));
-    // let productIdClicked = event.target.getAttribute('data-product-id');
-    // let productNameClicked = document.getElementById('name-'+productIdClicked).innerText;
-    // let stockQuantityAvailable = document.getElementById('prod-stock-quantity-'+productIdClicked).innerText;
-
-    //Error Handling: If item has been added to cart, don't add it to the cart again
-    // let addButton = document.getElementById(productIdClicked);
-    // addButton.disabled = true;
-
-    //Assemble cart
-    // let cartItem =
-    // {
-    //   id: productIdClicked,
-    //   name: productNameClicked,
-    //   stockQuantity: stockQuantityAvailable,
-    //   quantity: 1
-    // };
-    // this.cartItems.push(cartItem);
-    /*****************************
-    * SET CARTITEMS STATE VARIABLE
-    *******************************/
-    // this.setState({ cartItems: this.cartItems} );
-    // console.log("Cart Items" + JSON.stringify(this.state.cartItems))
+    this.toggleCart();
   }
 
   //ERROR HANDLING: If A Product is not avaialbe disable the add button;
@@ -251,10 +235,10 @@ class SearchContainer extends Component {
 
     let cartItemToDel = event.target.id;
     let curCart = this.state.cartItems;
-    let filteredCart = curCart.filter(eachItem => eachItem.id !== cartItemToDel);
+    let filteredCart = curCart.filter(eachItem => eachItem._id !== cartItemToDel);
 
     //Error Handling: If item deleted from cart then enable the add to cart button:
-    let addButton = document.getElementById(cartItemToDel );
+    let addButton = document.getElementById( cartItemToDel );
 
     //ErrorHandling: Disable the addButton only when it is on the page.
     if(addButton){
@@ -272,23 +256,14 @@ class SearchContainer extends Component {
 /******************************************************************
  **Submit Completed Order:
  ******************************************************************/
-  submitOrder = (event, sendOrder) => {
+  submitOrder = (event) => {
     event.preventDefault();
-    this.orders.push(...this.cartItems);
-    //Add the Quantity to the cart
-    let completedOrder = this.orders.map(order =>{
-      var productId = order.id;
-      if(document.getElementById("quantity-"+productId)){
-        var  productQty= document.getElementById("quantity-"+productId).value;
-        return ({...order, quantity: productQty, userId: this.props.currentId});
-      }
-      return ({...order, productQuantity: productQty});
-    });//map
-    let jsonOrder = {
-      data: {...completedOrder}
-    };
+    let completedOrder = {
+                          _id: this.state._id,
+                          data: this.cartItems
+                          };
 
-    this.sendOrder(jsonOrder);
+    this.sendOrder(completedOrder);
 
     //Reset the cart after order submitted
     this.cartItems = [];
@@ -298,14 +273,16 @@ class SearchContainer extends Component {
 
   sendOrder = (order) =>{
     if (order){
+
       const baseURL = "/order";
       this.loadOrder(baseURL, order, this.displayOrder);
     }//if
   };
 
   loadOrder = (baseURL, order, displayOrder) => {
-   let data = {...order};
-    API.postOrder(baseURL, data)
+  //  let data = {...orer};
+
+    API.postOrder(baseURL, order)
       .then(res => {
         /*********************/
         //API CALL
@@ -349,8 +326,8 @@ class SearchContainer extends Component {
 updateItem = (id, quantity) =>{
   console.log(`id: ${id} qty: ${quantity}`)
   for(let i = 0; i < this.cartItems.length; i++){
-    if ( this.cartItems[i].id === id){
-      this.cartItems[i].quantity = quantity;
+    if ( this.cartItems[i]._id === id){
+      this.cartItems[i].productQuantity = quantity;
     }
   }
 }

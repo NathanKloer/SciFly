@@ -69,9 +69,6 @@ export function InventoryTableItem(props){
 export function AddInventoryBtn(props){
 
   return(
-    <MDBTooltip   placement="right"
-    tag="div"
-    tooltipContent= "Add to Cart">
     <MDBBtn
             id={props.product._id}
             className="addButton black-text"
@@ -84,6 +81,5 @@ export function AddInventoryBtn(props){
             >
       Add
     </MDBBtn>
-    </MDBTooltip>
   );
 }

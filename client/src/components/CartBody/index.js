@@ -23,13 +23,13 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
                 </MDBTableHead>
                 <MDBTableBody>
                 {props.cartItems.map(cartItem => {
-                  console.log(`this item: ${JSON.stringify(cartItem)}`)
                   return (
 
                     <CartItem
-                              key={cartItem.id}
+                              key={cartItem._id}
                               updateItem = {props.updateItem}
-                              cartItemQuantity= {cartItem.quantity}
+                              cartItemQuantity= {cartItem.productQuantity}
+                              stockQuantity={cartItem.stockQuantity}
                               cartItem= {cartItem}
                               delCartItems= {props.delCartItems}></CartItem>
                   );
@@ -91,11 +91,11 @@ export function CartItem(props) {
       }
   }
   return (
-    <tr id = {'row-'+props.cartItem.id} key= {props.cartItem.id}>
-      <td  className="align-middle" id={'name-'+props.cartItem.id}>{props.cartItem.name}</td>
+    <tr id = {'row-'+props.cartItem._id} key= {props.cartItem._id}>
+      <td  className="align-middle" id={'name-'+props.cartItem._id}>{props.cartItem.product}</td>
       <td className="align-middle">
         <input className = "show-component"
-              id={props.cartItem.id} type="number"
+              id={props.cartItem._id} type="number"
               data-quantity-id = {props.id}
               min = "1" max = {props.stockQuantity}
               defaultValue = {props.cartItemQuantity}
@@ -116,9 +116,9 @@ export function DeleteCartItemBtn(props){
     <button
       color="red"
       size="sm"
-      id = {props.cartItem.id}
+      id = {props.cartItem._id}
       className=" xbtn "
-      data-cart-item-id= {props.cartItem.id}
+      data-cart-item-id= {props.cartItem._id}
       onClick= {props.delCartItems}
       >X</button>
   );
