@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "dotenv": "^6.2.0",
     "bootstrap": "^4.2.1",
     "express": "^4.16.4",
     "if-env": "^1.0.4",
