@@ -63,25 +63,18 @@ validateQuantity = (event) => {
       for(let i = 0; i<  quantityInputElements.length; i++){
         let maxValue = parseInt(quantityInputElements[i].getAttribute('max'));
         let minValue = parseInt(quantityInputElements[i].getAttribute('min'));
-        let quantityId = quantityInputElements[i].getAttribute('data-quantity-id');
-        let delBtnElem = document.getElementById(quantityId);
-        let addButton = document.getElementById(quantityId);
         let quantityInputValue = parseInt(quantityInputElements[i].value);
-
         isQuantityAvailable = minValue <= quantityInputValue && maxValue >= quantityInputValue && maxValue !== 0;
 
-        //if quantity not available stop loop
+        // if quantity not available stop loop
         if (!isQuantityAvailable){
           shouldCartBeSubmitted = false;
-          delBtnElem.disabled = true;
-          if(addButton){
-            addButton.disabled = true;
-          }
           quantityInputElements[i].style.color = 'red';
         }
         else{
-          delBtnElem.disabled = false;
+          if(event){
           quantityInputElements[i].style.color = '';
+          }
         }
       }//for
 
