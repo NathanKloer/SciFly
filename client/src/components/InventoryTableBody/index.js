@@ -2,6 +2,7 @@ import React from "react";
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard,
          MDBTable, MDBTableBody, MDBTableHead, MDBTooltip
         } from "mdbreact";
+import Touchable from 'rc-touchable';
 import "./style.css";
 
 export function InventoryTableBody(props) {
@@ -10,19 +11,19 @@ export function InventoryTableBody(props) {
       <MDBRow className="py-3">
         <MDBCol md="12">
           <MDBCard>
-            <MDBTable striped>
+            <MDBTable responsive striped>
               <MDBTableHead className="w-100" color="aqua-gradient">
                 <tr>
                   <th>Item</th>
-                  <th className="text-center">Category</th>
                   <th className="text-center">Description</th>
-                  <MDBTooltip   placement="top"
+                  <MDBTooltip   placement="bottom"
                                 tag="th"
                                 className="text-center"
                                 tooltipContent="Unit of Measure">
                                 UOM
                 </MDBTooltip>
-                <MDBTooltip     placement="top"
+                <th className="text-center">Category</th>
+                <MDBTooltip     placement="bottom"
                                 tag="th"
                                 className="text-center"
                                 tooltipContent="Stock Quantity">
@@ -57,9 +58,9 @@ export function InventoryTableItem(props){
   return(
     <tr id="invtable">
       <td className="align-middle" id={'name-'+props.product._id}>{props.product.productName}</td>
-      <td className="align-middle text-center">{props.product.category}</td>
       <td className="align-middle text-center">{props.product.description}</td>
       <td className="align-middle text-center">{props.product.uom}</td>
+      <td className="align-middle text-center">{props.product.category}</td>
       <td className="align-middle text-center" id={'prod-stock-quantity-'+props.product._id}>{props.product.stockQuantity}</td>
       {props.currentId?<td><AddInventoryBtn product = {props.product} listener = {props.listener} disabled = {props.disableAddBtn(props.product.stockQuantity)}></AddInventoryBtn></td>:<td className = "hide-component"></td>}
     </tr>
@@ -69,10 +70,10 @@ export function InventoryTableItem(props){
 export function AddInventoryBtn(props){
 
   return(
+    <Touchable onPress={props.listener}>
     <MDBBtn
             id={props.product._id}
             className="addButton black-text"
-            onClick={props.listener}
             data-product-id = {props.product._id}
             key= {props.product._id+"btn"}
             disabled = {props.disabled}
@@ -81,5 +82,6 @@ export function AddInventoryBtn(props){
             >
       Add
     </MDBBtn>
+    </Touchable>
   );
 }
