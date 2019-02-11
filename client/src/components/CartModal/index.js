@@ -4,6 +4,7 @@ import { MDBBtn, MDBModal, MDBModalHeader, MDBIcon, MDBModalBody,
         } from "mdbreact";
 import Touchable from "rc-touchable";
 import {CartBody} from "../CartBody";
+import "../../style.css";
 
 export function CartModal (props) {
 
@@ -23,7 +24,8 @@ export function CartModal (props) {
       <MDBModalFooter>
       <Touchable onPress={props.toggleCart}>
         <MDBBtn
-                color="secondary"
+                color="primary"
+                id="close-btn"
                 >Close
         </MDBBtn>
       </Touchable>

@@ -196,7 +196,7 @@ class NavBar extends Component {
   render() {
       return (
         <div>
-        <MDBNavbar  color="default-color"
+        <MDBNavbar  color="stylish-color"
                     dark
                     expand="md"
                     style={{ marginBottom: "20px" }}>
