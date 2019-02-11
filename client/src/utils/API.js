@@ -16,11 +16,13 @@ export default {
   getUser: function (id) {
     return axios.get("/api/users" + id);
   },
+  getItem: function (id) {
+    return axios.get("/api/items/" + id);
+  },
   createUser: function (userData) {
     return axios.post("/api/users/", userData);
   },
   userLogin: function (userData) {
-    console.log(userData)
     return axios.post("/api/login/", userData);
   },
 

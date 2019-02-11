@@ -1,32 +1,19 @@
 const nodemailer = require('nodemailer');
+require("dotenv").config();
 const db = require("../models");
 
 // Defining methods for the OrdersController
 module.exports = {
   createOrder: function (req, res) {
-    let prodIds = [];
-    let prodNames = [];
-    let prodQtys = [];
-    let userId;
-    let prodArr = [];
+    let id = req.body._id;
     const productData = [];
-    for (var key in req.body.data) {
+    for (let i = 0; i< req.body.data.length;i++) {
       productData.push({
-        productQuantity: req.body.data[key].productQuantity,
-        product: req.body.data[key].id
+        productQuantity: req.body.data[i].productQuantity,
+        product: req.body.data[i]._id
       })
-      var val = req.body.data[key];
-      prodIds.push(val.id);
-      prodNames.push(val.name);
-      prodQtys.push(parseInt(val.quantity));
-      userId = val.userId;
-      prodArr.push(
-        {
-          "productQuantity": prodQtys[key],
-          "product": prodIds[key]
-        }
-      );
     }
+
     db.Order.create({ "ordered": true })
       .then(function (newOrder) {
         orderId = newOrder._id;
@@ -36,33 +23,12 @@ module.exports = {
           },
           {
             $push: {
-              user: userId,
-              products: prodArr
+              user: id,
+              products: productData
             },//define user
           },
         )//return
           .then(function (dataUpdate) {
-              // Send Email
-                  const transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      user: 'parts2pieces.info@gmail.com',
-                      pass: 'SciFly19'
-                    }
-                  });
-                  const mailOptions = {
-                    from: 'parts2pieces.info@gmail.com',
-                    to: 'marychoi13@gmail.com',
-                    subject: 'Sending Email using Node.js',
-                    text: `That was easy! ${JSON.stringify(newOrder)}`
-                  };
-                  transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                      console.log(error);
-                    } else {
-                      console.log('Email sent: ' + info.response);
-                    }
-                  });
             res.json(newOrder._id);
           })
       });//orderCreate thenable
@@ -76,6 +42,29 @@ module.exports = {
       .populate("products.product")
       .then(function (data) {
         if (data.length > 0) {
+    //********** */ Send Email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'parts2pieces.info@gmail.com',
+        pass: process.env.gmailPassword
+      }
+    });
+
+    const mailOptions = {
+      from: 'parts2pieces.info@gmail.com',
+      to: `phillip.grider@gmail.com , ${data[0].user.email}`,
+      subject: `Your Recent Order ID#: ${data[0]._id}`,
+      text:`Your order has been submited \n\n
+            Someone will be in touch to schedule an appoitment`
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
           res.json(data);
         }
         else {

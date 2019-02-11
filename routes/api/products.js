@@ -13,6 +13,8 @@ const productsController = require("../../controllers/productsController");
 router.route('/:organization')
 .get(productsController.findInventoryByOrganization);
 
+router.route('/:id')
+.get(productsController.findInventoryItem);
 /********************************************
  DESCRIPTION: Search by Inventory By Category and Organization:
  ROUTE: /api/products/:category/:organization
