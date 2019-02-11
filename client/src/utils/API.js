@@ -23,7 +23,6 @@ export default {
     return axios.post("/api/users/", userData);
   },
   userLogin: function (userData) {
-    console.log(userData)
     return axios.post("/api/login/", userData);
   },
 

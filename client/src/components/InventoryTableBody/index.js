@@ -2,6 +2,7 @@ import React from "react";
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard,
          MDBTable, MDBTableBody, MDBTableHead, MDBTooltip
         } from "mdbreact";
+import Touchable from 'rc-touchable';
 import "./style.css";
 
 export function InventoryTableBody(props) {
@@ -69,10 +70,10 @@ export function InventoryTableItem(props){
 export function AddInventoryBtn(props){
 
   return(
+    <Touchable onPress={props.listener}>
     <MDBBtn
             id={props.product._id}
             className="addButton black-text"
-            onClick={props.listener}
             data-product-id = {props.product._id}
             key= {props.product._id+"btn"}
             disabled = {props.disabled}
@@ -81,5 +82,6 @@ export function AddInventoryBtn(props){
             >
       Add
     </MDBBtn>
+    </Touchable>
   );
 }

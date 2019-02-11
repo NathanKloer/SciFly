@@ -10,7 +10,7 @@ class DonateContainer extends Component {
     return (
       <React.Fragment>
         <MDBContainer>
-          <PartnerBlock onClick={this.handleFormSearch}/>
+          <PartnerBlock/>
         </MDBContainer>
       </React.Fragment>
     );

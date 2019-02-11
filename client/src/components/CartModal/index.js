@@ -2,6 +2,7 @@ import React from "react";
 import { MDBBtn, MDBModal, MDBModalHeader, MDBIcon, MDBModalBody,
         MDBModalFooter
         } from "mdbreact";
+import Touchable from "rc-touchable";
 import {CartBody} from "../CartBody";
 
 export function CartModal (props) {
@@ -13,25 +14,27 @@ export function CartModal (props) {
       </MDBModalHeader>
       <MDBModalBody  >
         <CartBody
-          updateItem={props.updateItem}
-          cartItems={props.cartItems}
-          currentId={props.currentId}
-          delCartItems={props.delCartItems}
+                  updateItem={props.updateItem}
+                  cartItems={props.cartItems}
+                  currentId={props.currentId}
+                  delCartItems={props.delCartItems}
         />
       </MDBModalBody>
       <MDBModalFooter>
+      <Touchable onPress={props.toggleCart}>
         <MDBBtn
-          color="secondary"
-          onClick={props.toggleCart}
-          >Close
+                color="secondary"
+                >Close
         </MDBBtn>
+      </Touchable>
+      <Touchable onPress={props.submitOrder}>
         <MDBBtn
-          color="primary"
-          id="checkout-btn"
-          disabled = {props.cartItems.length === 0 ? (true):(false)}
-          onClick={props.submitOrder}
-          >Submit
-          </MDBBtn>
+                color="primary"
+                id="checkout-btn"
+                disabled = {props.cartItems.length === 0 ? (true):(false)}
+                >Submit
+        </MDBBtn>
+      </Touchable>
       </MDBModalFooter>
     </MDBModal>
     )}

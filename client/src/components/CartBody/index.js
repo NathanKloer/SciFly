@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Touchable from "rc-touchable";
 import "./style.css";
 import { MDBContainer, MDBCard, MDBTable, MDBRow,
         MDBCol, MDBTableHead, MDBBtn, MDBTableBody,
@@ -14,9 +15,9 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
       <MDBRow>
         <MDBCol md="12">
           <MDBCard>
-            <MDBTable className="w-100">
+            <MDBTable responsive className="w-100">
                 <MDBTableHead>
-                  <tr>
+                  <tr >
                     <th className="align-middle w-75">Item</th>
                     <th className="align-middle w-50">Description</th>
                     <MDBTooltip
@@ -133,22 +134,24 @@ validateQuantity = (event) => {
 export function DeleteCartItemBtn(props){
   return(
     <MDBTooltip
-      placement="top"
-      tag="button"
-      color="red"
-      size="sm"
-      id = {props.cartItem._id}
-      className=" xbtn "
-      data-cart-item-id= {props.cartItem._id}
-      onClick= {props.delCartItems}
-      tooltipContent=" Remove Item">
-      <span
-        id = {props.cartItem._id}
-        className=" xbtn "
-        data-cart-item-id= {props.cartItem._id}
-        onClick= {props.delCartItems}
-        >X
-      </span>
+                placement="top"
+                tag="button"
+                color="red"
+                size="sm"
+                id = {props.cartItem._id}
+                className=" xbtn "
+                data-cart-item-id= {props.cartItem._id}
+                onClick= {props.delCartItems}
+                tooltipContent=" Remove Item">
+      <Touchable  onPress={props.submitOrder}>
+          <span
+                id = {props.cartItem._id}
+                className=" xbtn "
+                data-cart-item-id= {props.cartItem._id}
+                onClick= {props.delCartItems}>
+                X
+          </span>
+      </Touchable>
     </MDBTooltip>
   );
 }
@@ -156,8 +159,13 @@ export function DeleteCartItemBtn(props){
 // This is the checkout button
 export function CheckOutBtn(props) {
   return (
-    <MDBBtn type="submit" id = "checkout-btn" className="btn btn-success fas fa-shopping-cart" onClick= {props.submitOrder}>
-     <span>  Submit</span>
-    </MDBBtn>
+    <Touchable onPress={props.submitOrder}>
+      <MDBBtn type="submit"
+              id = "checkout-btn"
+              className="btn btn-success fas fa-shopping-cart"
+            >
+      <span>  Submit</span>
+      </MDBBtn>
+    </Touchable>
   );
 }
