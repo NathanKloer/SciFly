@@ -93,6 +93,7 @@ class NavBar extends Component {
           registerError: false,
           invalidEmail: false
           });
+          window.location.reload();
       }else{
         this.setState({loginError: true})
       }

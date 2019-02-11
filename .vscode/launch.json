@@ -20,7 +20,7 @@
             "type": "node",
             "request": "launch",
             "name": "Seed Database",
-            "program": "${workspaceFolder}/scripts/seedDB.js"
+            "program": "${workspaceFolder}/scripts/seedProductsDB.js"
       },
         {
           "name": "Chrome",
