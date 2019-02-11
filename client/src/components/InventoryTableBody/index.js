@@ -4,6 +4,7 @@ import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard,
         } from "mdbreact";
 import Touchable from 'rc-touchable';
 import "./style.css";
+//import "../../style.css";
 
 export function InventoryTableBody(props) {
   return (
@@ -12,7 +13,7 @@ export function InventoryTableBody(props) {
         <MDBCol md="12">
           <MDBCard>
             <MDBTable responsive striped>
-              <MDBTableHead className="w-100" color="aqua-gradient">
+              <MDBTableHead className="w-100" color="blue-gradient">
                 <tr>
                   <th>Item</th>
                   <th className="text-center">Description</th>
@@ -77,7 +78,7 @@ export function AddInventoryBtn(props){
             data-product-id = {props.product._id}
             key= {props.product._id+"btn"}
             disabled = {props.disabled}
-            color= "#1de9b6 teal accent-3"
+            color= "primary"
             size="sm"
             >
       Add
