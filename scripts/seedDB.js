@@ -19,6 +19,25 @@ mongoose.connect(
 //Product Data:
 /*****************/
 let productIdArr = [];
+db.products.insertMany([
+  {
+    "productName": "Petri Dishes",
+    "description": "100 x 15 mm Round",
+    "stockQuantity": 1000,
+    "uom": "Unit",
+    "category": "Culturing",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+   },
+   {
+    "productName": "Microcentrifuge Tubes",
+    "description": "1.5mL",
+    "stockQuantity": 500,
+    "uom": "Unit",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  ])
 const productSeed = [
   {
     "productName": "Petri Dishes",
@@ -28,329 +47,349 @@ const productSeed = [
     "category": "Culturing",
     "organization": "Georgia BioEd",
     "date": new Date(Date.now())
+   },
+   {
+    "productName": "Microcentrifuge Tubes",
+    "description": "1.5mL",
+    "stockQuantity": 500,
+    "uom": "Unit",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+   },
+  {
+    "productName": "Sterile Serological Pipettes",
+    "description": "10 uL",
+    "stockQuantity": 200,
+    "uom": "Unit",
+    "category": "Pipettes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
   }
-  //  {
-  //   "productName": "Microcentrifuge Tubes",
-  //   "description": "1.5mL",
-  //   "stockQuantity": 500,
-  //   "uom": "Unit",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  //  }
-  // },
-  // {
-  //   "productName": "Sterile Serological Pipettes",
-  //   "description": "10 uL",
-  //   "stockQuantity": 200,
-  //   "uom": "Unit",
-  //   "category": "Pipettes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Culture Flasks",
-  //   "description": "175 mL",
-  //   "stockQuantity": 50,
-  //   "uom": "Box",
-  //   "category": "Culturing",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Aerosol Resistant Tips",
-  //   "description": "50 mL",
-  //   "stockQuantity": 50,
-  //   "uom": "Box",
-  //   "category": "Pipettes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Pasteur Pipettes",
-  //   "description": "50 mL",
-  //   "stockQuantity": 500,
-  //   "uom": "Box",
-  //   "category": "Pipettes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Racked Tip Refills",
-  //   "description": "10 uL",
-  //   "stockQuantity": 550,
-  //   "uom": "Box",
-  //   "category": "Pipettes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Volumetric Pipets",
-  //   "description": "10 mL",
-  //   "stockQuantity": 250,
-  //   "uom": "Box",
-  //   "category": "Pipettes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Acrylic Water Bottles",
-  //   "description": "20 oz",
-  //   "stockQuantity": 150,
-  //   "uom": "Box",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Centrifuge Tubes",
-  //   "description": "1 mL",
-  //   "stockQuantity": 150,
-  //   "uom": "Bag",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Falcon Tubes",
-  //   "description": "50 mL",
-  //   "stockQuantity": 1000,
-  //   "uom": "Tray",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Flat Bottom Vials",
-  //   "description": "20 mL",
-  //   "stockQuantity": 1500,
-  //   "uom": "Box",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Luer Lock Syringes",
-  //   "description": "20 mL",
-  //   "stockQuantity": 700,
-  //   "uom": "Box",
-  //   "category": "Syringes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Pd Syringe Tips",
-  //   "description": "50 mL",
-  //   "stockQuantity": 200,
-  //   "uom": "Box",
-  //   "category": "Syringes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Syringes",
-  //   "description": "1 mL",
-  //   "stockQuantity": 400,
-  //   "uom": "Box",
-  //   "category": "Syringes",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Glass Amber Bottles",
-  //   "description": "30cc",
-  //   "stockQuantity": 300,
-  //   "uom": "Box",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // },
-  // {
-  //   "productName": "Glass Baking Tray",
-  //   "description": "10 oz",
-  //   "stockQuantity": 100,
-  //   "uom": "Storage",
-  //   "category": "",
-  //   "organization": "Georgia BioEd",
-  //   "date": new Date(Date.now())
-  // }
-  // },
-  // {
-  //   "productName": "Glass Clear Jars",
-  //   "description": "2000 mL",
-  //   "stockQuantity": 250,
-  //   "uom": "Box",
-  //   "category": "Storage",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Beverage Micro Filter Funnel",
-  //   "description": "1 mm",
-  //   "stockQuantity": 6000,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Bottle Top Filter Funnel",
-  //   "description": "0.1 mm",
-  //   "stockQuantity": 3000,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Circle Filter Paper 150mm",
-  //   "description": "150 mm",
-  //   "stockQuantity": 1000,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Circle Filter Paper 90mm",
-  //   "description": "90 mm",
-  //   "stockQuantity": 500,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Glass fiber filter",
-  //   "description": "150 mm",
-  //   "stockQuantity": 3000,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Magnetic Filter Funnel",
-  //   "description": "150 mm",
-  //   "stockQuantity": 1000,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Membrane Filter",
-  //   "description": "66 mm",
-  //   "stockQuantity": 1350,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "ZapCap Bottle-top Filters",
-  //   "description": "9mm",
-  //   "stockQuantity": 1800,
-  //   "uom": "Box",
-  //   "category": "Filters",
-  //   "organization": "Georgia BioEd"
-  // },
-  // {
-  //   "productName": "Peerless Transaxle",
-  //   "description": " 10 lb",
-  //   "stockQuantity": 100,
-  //   "uom": " Unit",
-  //   "category": " Axles",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Lossless Pro Axle",
-  //   "description": " 7 lb",
-  //   "stockQuantity": 150,
-  //   "uom": " Unit",
-  //   "category": " Axles",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Guidance Wheels",
-  //   "description": " 1.5 lb",
-  //   "stockQuantity": 180,
-  //   "uom": " Unit",
-  //   "category": " Axles",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Pillow Block Bearings",
-  //   "description": " 1 lb",
-  //   "stockQuantity": 1000,
-  //   "uom": " Box",
-  //   "category": " Spares",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Flange Bearings",
-  //   "description": " 0.5 lb",
-  //   "stockQuantity": 1095,
-  //   "uom": " Box",
-  //   "category": " Spares",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Fuel Shut-off V-Belt",
-  //   "description": " 10x10m",
-  //   "stockQuantity": 1000,
-  //   "uom": " Unit",
-  //   "category": " Spares",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Spark Plug Wire Set",
-  //   "description": " 2 pcs",
-  //   "stockQuantity": 1000,
-  //   "uom": " Kit",
-  //   "category": " Spares",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Condensed Capacitor",
-  //   "description": " 30 oz",
-  //   "stockQuantity": 1800,
-  //   "uom": " Box",
-  //   "category": " Spares",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Tie Rod Ends",
-  //   "description": " 10 m",
-  //   "stockQuantity": 1000,
-  //   "uom": "Unit",
-  //   "category": " Spares",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Solenoid",
-  //   "description": " 10 oz",
-  //   "stockQuantity": 2000,
-  //   "uom": " Unit",
-  //   "category": " Tractor Supply",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Throttle Control",
-  //   "description": " 8.99 oz",
-  //   "stockQuantity": 1500,
-  //   "uom": " Unit",
-  //   "category": " Tractor Supply",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Turnbuckles",
-  //   "description": " 0.99 oz",
-  //   "stockQuantity": 600,
-  //   "uom": " Unit",
-  //   "category": " Tractor Supply",
-  //   "organization": " Specialty Charity"
-  // },
-  // {
-  //   "productName": "Excel Alternator",
-  //   "description": " 100 lb",
-  //   "stockQuantity": 1235,
-  //   "uom": " Box",
-  //   "category": " Tractor Supply",
-  //   "organization": " Specialty Charity"
-  // }
+  {
+    "productName": "Culture Flasks",
+    "description": "175 mL",
+    "stockQuantity": 50,
+    "uom": "Box",
+    "category": "Culturing",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Aerosol Resistant Tips",
+    "description": "50 mL",
+    "stockQuantity": 50,
+    "uom": "Box",
+    "category": "Pipettes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Pasteur Pipettes",
+    "description": "50 mL",
+    "stockQuantity": 500,
+    "uom": "Box",
+    "category": "Pipettes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Racked Tip Refills",
+    "description": "10 uL",
+    "stockQuantity": 550,
+    "uom": "Box",
+    "category": "Pipettes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Volumetric Pipets",
+    "description": "10 mL",
+    "stockQuantity": 250,
+    "uom": "Box",
+    "category": "Pipettes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Acrylic Water Bottles",
+    "description": "20 oz",
+    "stockQuantity": 150,
+    "uom": "Box",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Centrifuge Tubes",
+    "description": "1 mL",
+    "stockQuantity": 150,
+    "uom": "Bag",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Falcon Tubes",
+    "description": "50 mL",
+    "stockQuantity": 1000,
+    "uom": "Tray",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Flat Bottom Vials",
+    "description": "20 mL",
+    "stockQuantity": 1500,
+    "uom": "Box",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Luer Lock Syringes",
+    "description": "20 mL",
+    "stockQuantity": 700,
+    "uom": "Box",
+    "category": "Syringes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Pd Syringe Tips",
+    "description": "50 mL",
+    "stockQuantity": 200,
+    "uom": "Box",
+    "category": "Syringes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Syringes",
+    "description": "1 mL",
+    "stockQuantity": 400,
+    "uom": "Box",
+    "category": "Syringes",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Glass Amber Bottles",
+    "description": "30cc",
+    "stockQuantity": 300,
+    "uom": "Box",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Glass Baking Tray",
+    "description": "10 oz",
+    "stockQuantity": 100,
+    "uom": "Storage",
+    "category": "",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+    },
+  {
+    "productName": "Glass Clear Jars",
+    "description": "2000 mL",
+    "stockQuantity": 250,
+    "uom": "Box",
+    "category": "Storage",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Beverage Micro Filter Funnel",
+    "description": "1 mm",
+    "stockQuantity": 6000,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Bottle Top Filter Funnel",
+    "description": "0.1 mm",
+    "stockQuantity": 3000,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Circle Filter Paper 150mm",
+    "description": "150 mm",
+    "stockQuantity": 1000,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Circle Filter Paper 90mm",
+    "description": "90 mm",
+    "stockQuantity": 500,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Glass fiber filter",
+    "description": "150 mm",
+    "stockQuantity": 3000,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Magnetic Filter Funnel",
+    "description": "150 mm",
+    "stockQuantity": 1000,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Membrane Filter",
+    "description": "66 mm",
+    "stockQuantity": 1350,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "ZapCap Bottle-top Filters",
+    "description": "9mm",
+    "stockQuantity": 1800,
+    "uom": "Box",
+    "category": "Filters",
+    "organization": "Georgia BioEd",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Peerless Transaxle",
+    "description": "10 lb",
+    "stockQuantity": 100,
+    "uom": "Unit",
+    "category": "Axles",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Lossless Pro Axle",
+    "description": "7 lb",
+    "stockQuantity": 150,
+    "uom": "Unit",
+    "category": "Axles",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Guidance Wheels",
+    "description": "1.5 lb",
+    "stockQuantity": 180,
+    "uom": "Unit",
+    "category": "Axles",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Pillow Block Bearings",
+    "description": "1 lb",
+    "stockQuantity": 1000,
+    "uom": "Box",
+    "category": "Spares",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Flange Bearings",
+    "description": "0.5 lb",
+    "stockQuantity": 1095,
+    "uom": "Box",
+    "category": "Spares",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Fuel Shut-off V-Belt",
+    "description": "10x10m",
+    "stockQuantity": 1000,
+    "uom": "Unit",
+    "category": "Spares",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Spark Plug Wire Set",
+    "description": "2 pcs",
+    "stockQuantity": 1000,
+    "uom": "Kit",
+    "category": "Spares",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Condensed Capacitor",
+    "description": "30 oz",
+    "stockQuantity": 1800,
+    "uom": "Box",
+    "category": "Spares",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Tie Rod Ends",
+    "description": "10 m",
+    "stockQuantity": 1000,
+    "uom": "Unit",
+    "category": "Spares",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Solenoid",
+    "description": "10 oz",
+    "stockQuantity": 2000,
+    "uom": "Unit",
+    "category": "Tractor Supply",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Throttle Control",
+    "description": "8.99 oz",
+    "stockQuantity": 1500,
+    "uom": "Unit",
+    "category": "Tractor Supply",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Turnbuckles",
+    "description": "0.99 oz",
+    "stockQuantity": 600,
+    "uom": "Unit",
+    "category": "Tractor Supply",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  },
+  {
+    "productName": "Excel Alternator",
+    "description": "100 lb",
+    "stockQuantity": 12350,
+    "uom": "Box",
+    "category": "Tractor Supply",
+    "organization": "Specialty Charity",
+    "date": new Date(Date.now())
+  }
 ];
 
 //User Data
@@ -396,9 +435,9 @@ function handleConnect(){
 
 function main(){
 
-  // db.Product.remove({});
+  db.Product.remove({});
   try{
-    db.Product.insertMany(productSeed, function(error, products){
+    db.Product.insertMany(productSeed, function(products){
 
       for(var i = 0; i < products.length; i++)
       {

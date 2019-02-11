@@ -1,32 +1,13 @@
-//TO RUN: go to the scripts directory and run
-//node seedDB.js
+## How to Seed your Data
 
-const mongoose = require("mongoose");
-const db = require("../models");
-const prototype = (process.env.MONGODB_URI ||"mongodb://localhost/scifly");
+1. Open the Robo 3T app
+2. Make sure you are connected to the server
+3. Select the database `scifly`
+4. Select `products` collection
+5. Copy and paste the following code/query in the Scripts Area and execute the script.
 
-//CONNECTION STRING:
-/*******************/
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/scifly", {useNewUrlParser: true},
-  handleConnect
-);
++++++++++++
 
-
-//Product Data:
-/*****************/
-let productIdArr = [];
-const productSeed = [
-  db.inventory.insertMany([
-    { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
-    { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
-    { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }
- ])
-// ++++++++++++++++
 db.products.insertMany([
 {
   productName: "Culture Flasks",
@@ -605,137 +586,129 @@ db.products.insertMany([
   date: new Date(Date.now())
 },
 {
-  "productName": "Peerless Transaxle",
-  "description": " 10 lb",
-  "stockQuantity": 100,
-  "uom": " Unit",
-  "category": " Axles",
-  "organization": " Specialty Charity",
+  productName: "Peerless Transaxle",
+  description: " 10 lb",
+  stockQuantity: 100,
+  uom: " Unit",
+  category: " Axles",
+  organization: " Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Lossless Pro Axle",
-  "description": " 7 lb",
-  "stockQuantity": 150,
-  "uom": " Unit",
-  "category": " Axles",
-  "organization": " Specialty Charity"
+  productName:"Peerless Transaxle",
+  description:" 10 lb",
+  stockQuantity: 100,
+  uom:" Unit",
+  category:" Axles",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Guidance Wheels",
-  "description": " 1.5 lb",
-  "stockQuantity": 180,
-  "uom": " Unit",
-  "category": " Axles",
-  "organization": " Specialty Charity"
+  productName:"Lossless Pro Axle",
+  description:" 7 lb",
+  stockQuantity: 150,
+  uom:" Unit",
+  category:" Axles",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Pillow Block Bearings",
-  "description": " 1 lb",
-  "stockQuantity": 1000,
-  "uom": " Box",
-  "category": " Spares",
-  "organization": " Specialty Charity"
+  productName:"Guidance Wheels",
+  description:" 1.5 lb",
+  stockQuantity: 180,
+  uom:" Unit",
+  category:" Axles",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Flange Bearings",
-  "description": " 0.5 lb",
-  "stockQuantity": 1095,
-  "uom": " Box",
-  "category": " Spares",
-  "organization": " Specialty Charity"
+  productName:"Pillow Block Bearings",
+  description:" 1 lb",
+  stockQuantity: 1000,
+  uom:" Box",
+  category:" Spares",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Fuel Shut-off V-Belt",
-  "description": " 10x10m",
-  "stockQuantity": 1000,
-  "uom": " Unit",
-  "category": " Spares",
-  "organization": " Specialty Charity"
+  productName:"Flange Bearings",
+  description:" 0.5 lb",
+  stockQuantity: 1095,
+  uom:" Box",
+  category:" Spares",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Spark Plug Wire Set",
-  "description": " 2 pcs",
-  "stockQuantity": 1000,
-  "uom": " Kit",
-  "category": " Spares",
-  "organization": " Specialty Charity"
+  productName:"Fuel Shut-off V-Belt",
+  description:" 10x10m",
+  stockQuantity: 1000,
+  uom:" Unit",
+  category:" Spares",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Condensed Capacitor",
-  "description": " 30 oz",
-  "stockQuantity": 1800,
-  "uom": " Box",
-  "category": " Spares",
-  "organization": " Specialty Charity"
+  productName:"Spark Plug Wire Set",
+  description:" 2 pcs",
+  stockQuantity: 1000,
+  uom:" Kit",
+  category:" Spares",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Tie Rod Ends",
-  "description": " 10 m",
-  "stockQuantity": 1000,
-  "uom": "Unit",
-  "category": " Spares",
-  "organization": " Specialty Charity"
+  productName:"Condensed Capacitor",
+  description:" 30 oz",
+  stockQuantity: 1800,
+  uom:" Box",
+  category:" Spares",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Solenoid",
-  "description": " 10 oz",
-  "stockQuantity": 2000,
-  "uom": " Unit",
-  "category": " Tractor Supply",
-  "organization": " Specialty Charity"
+  productName:"Tie Rod Ends",
+  description:" 10 m",
+  stockQuantity: 1000,
+  uom:"Unit",
+  category:" Spares",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Throttle Control",
-  "description": " 8.99 oz",
-  "stockQuantity": 1500,
-  "uom": " Unit",
-  "category": " Tractor Supply",
-  "organization": " Specialty Charity"
+  productName:"Solenoid",
+  description:" 10 oz",
+  stockQuantity:2000,
+  uom:" Unit",
+  category:" Tractor Supply",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Turnbuckles",
-  "description": " 0.99 oz",
-  "stockQuantity": 600,
-  "uom": " Unit",
-  "category": " Tractor Supply",
-  "organization": " Specialty Charity"
+  productName:"Throttle Control",
+  description:" 8.99 oz",
+  stockQuantity: 1500,
+  uom:" Unit",
+  category:" Tractor Supply",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 },
 {
-  "productName": "Excel Alternator",
-  "description": " 100 lb",
-  "stockQuantity": 1235,
-  "uom": " Box",
-  "category": " Tractor Supply",
-  "organization": " Specialty Charity"
+  productName:"Turnbuckles",
+  description:" 0.99 oz",
+  stockQuantity:600,
+  uom:" Unit",
+  category:" Tractor Supply",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
+},
+{
+  productName:"Excel Alternator",
+  description:" 100 lb",
+  stockQuantity: 12350,
+  uom:" Box",
+  category:" Tractor Supply",
+  organization:" Specialty Charity",
+  date: new Date(Date.now())
 }
 ])
-
-//STEP 1: LOAD PRODUCT DATA:
-/***************************/
-function handleConnect(){
-  let db = mongoose.connection;
-  /// mongoose.connection.prototype.dropCollection(products);
-      db.dropCollection("products", function(){
-        main();
-      });
-}
-
-
-function main(){
-
-  // db.Product.remove({});
-  try{
-    db.Product.insertMany(productSeed, function(error, products){
-      console.log("PRODUCTLENGTH= " + products);
-      for(var i = 0; i < products.length; i++)
-      {
-        productIdArr[i] = products[i]._id;
-        console.log("ProductID-" + i + " " + productIdArr[i]);
-      }
-    });
-  }
-  catch(e){
-    console.log("error = "+e);
-    process.exit(1);
-  }
-}
