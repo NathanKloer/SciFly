@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import Touchable from "rc-touchable";
 import {UserConsumer} from "../../providers";
 import {ModalComponent} from "../Modal";
 import OrganizationSearchList from "../OrganizationSearchList";
 import API from "../../utils/API";
 import readCookie from "../../utils/RCAPI";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,
+import { MDBContainer, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler,
         MDBCollapse, MDBNavItem, MDBNavLink, MDBDropdown,
         MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem,
         MDBIcon} from 'mdbreact';
@@ -63,9 +64,9 @@ class NavBar extends Component {
   }
 
   handleSubmit = () => {
-    const newUserLogin = {   userName: this.state.userName,
-      password: this.state.password
-      }
+    const newUserLogin = {  userName: this.state.userName,
+                            password: this.state.password
+                          }
     API.userLogin(newUserLogin)
     .then(res => {
       if(res.data !== "Incorrect Password"){
@@ -183,6 +184,7 @@ class NavBar extends Component {
     this.setState({_id: null})
     this.props.idChanged("", "");
     document.cookie = `_uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+    window.location.reload();
   }
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -198,17 +200,30 @@ class NavBar extends Component {
                     dark
                     expand="md"
                     style={{ marginBottom: "20px" }}>
+          <MDBContainer>
           <MDBNavbarBrand>
-            <a href="/"><strong className="white-text" >Parts-to-Purpose</strong>
-            <img className="navicon d-inline-block align-top" alt="P2P" src={window.location.origin + "/img/p2pnticon.png"}
-                  href="/" style={{marginTop: 0, marginLeft: 10}}/>
+            <a href="/">
+            <strong className="white-text" >Parts-to-Purpose</strong>
+              <img  className="navicon d-inline-block align-top"
+                    alt="P2P"
+                    src={window.location.origin + "/img/p2pnticon.png"}
+                    href="/"
+                    style={{marginTop: 0, marginLeft: 10}}/>
             </a>
           </MDBNavbarBrand>
-          <MDBNavbarToggler onClick={this.toggleCollapse} />
-          <MDBCollapse id="navbarCollapse" isOpen={this.state.isOpen} navbar>
+          <Touchable onPress={this.toggleCollapse}>
+            <MDBNavbarToggler />
+          </Touchable>
+          <MDBCollapse
+                        id="navbarCollapse"
+                        isOpen={this.state.isOpen}
+                        navbar>
           <MDBNavbarNav right>
             <MDBNavItem>
-              <OrganizationSearchList eventKey={1} orgSearchEvent={this.props.orgSearchEvent}></OrganizationSearchList>
+              <OrganizationSearchList
+                                      eventKey={1}
+                                      orgSearchEvent={this.props.orgSearchEvent}>
+              </OrganizationSearchList>
             </MDBNavItem>
             <MDBNavItem >
               <MDBNavLink to="/donate">Donate</MDBNavLink>
@@ -216,34 +231,44 @@ class NavBar extends Component {
             <MDBNavItem>
                   <MDBDropdown>
                     <MDBDropdownToggle nav caret>
-                      <MDBIcon icon="user" />
+                      {this.state._id ? (<MDBIcon icon="user-check"/>
+                                        ):(
+                                        <MDBIcon icon="user" />
+                                        )}
                     </MDBDropdownToggle>
                     {this.state._id ? (
                         <MDBDropdownMenu className="dropdown-default" right>
-                          <MDBDropdownItem onClick={this.handleSignOut}>Sign Out</MDBDropdownItem>
+                          <Touchable onPress={this.handleSignOut}>
+                            <MDBDropdownItem>Sign Out</MDBDropdownItem>
+                          </Touchable>
                         </MDBDropdownMenu>
                     ) : (
                         <MDBDropdownMenu className="dropdown-default" right>
-                          <MDBDropdownItem onClick={this.handleShow}>Login</MDBDropdownItem>
-                          <MDBDropdownItem onClick={this.handleRegister}>Register</MDBDropdownItem>
+                          <Touchable onPress={this.handleShow}>
+                            <MDBDropdownItem>Login</MDBDropdownItem>
+                          </Touchable>
+                          <Touchable onPress={this.handleRegister}>
+                            <MDBDropdownItem>Register</MDBDropdownItem>
+                          </Touchable>
                         </MDBDropdownMenu>
                       )}
                   </MDBDropdown>
           </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
+        </MDBContainer>
         </MDBNavbar>
 
+
        <ModalComponent
-        state = {this.state}
-        handleClose = {this.handleClose}
-        handleShow = {this.handleShow}
-        handleSubmit = {this.handleSubmit}
-        handleInputChange = {this.handleInputChange}
-        handleUserLogIn = {this.handleUserLogIn}
-        handleRegister = {this.handleRegister}
-        handleRegisterSubmit = {this.handleRegisterSubmit}
-        />
+                        state = {this.state}
+                        handleClose = {this.handleClose}
+                        handleShow = {this.handleShow}
+                        handleSubmit = {this.handleSubmit}
+                        handleInputChange = {this.handleInputChange}
+                        handleUserLogIn = {this.handleUserLogIn}
+                        handleRegister = {this.handleRegister}
+                        handleRegisterSubmit = {this.handleRegisterSubmit}/>
         </div>
       )
     }
@@ -257,10 +282,10 @@ const NavUpdate = props => (
   <UserConsumer>
     {({ id, userName, idChanged  }) => (
       <NavBar
-      {...props}
-        currentId={id}
-        currentUserName={userName}
-        idChanged={idChanged}
+              {...props}
+              currentId={id}
+              currentUserName={userName}
+              idChanged={idChanged}
       />
     )}
   </UserConsumer>

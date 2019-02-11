@@ -8,9 +8,9 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  school: { type: String, required: true },
-  district: { type: String, required: true },
-  course: { type: String, required: true },
+  school: { type: String, required: false },
+  district: { type: String, required: false },
+  course: { type: String, required: false },
   //I want to see a user's orders when a query a user _id
   order:[
     {

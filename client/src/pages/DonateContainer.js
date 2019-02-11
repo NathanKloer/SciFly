@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../style.css";
 import {  MDBContainer } from "mdbreact";
 import PartnerBlock from "../components/PartnerBlock";
 
@@ -9,7 +10,7 @@ class DonateContainer extends Component {
     return (
       <React.Fragment>
         <MDBContainer>
-          <PartnerBlock onClick={this.handleFormSearch}/>
+          <PartnerBlock/>
         </MDBContainer>
       </React.Fragment>
     );

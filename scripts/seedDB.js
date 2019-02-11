@@ -16,7 +16,6 @@ mongoose.connect(
   handleConnect
 );
 
-
 //Product Data:
 /*****************/
 let productIdArr = [];
