@@ -101,6 +101,10 @@ th {
     width: auto;
     font-size: 19px;
 }
+
+#close-btn, #checkout-btn, #register-btn, #login-btn {
+  border-radius: 30px !important;
+}
 /* img.bg {
 
   min-height: 100%;

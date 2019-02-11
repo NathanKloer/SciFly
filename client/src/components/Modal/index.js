@@ -5,6 +5,7 @@ import { MDBTooltip, MDBBtn, MDBModal, MDBModalBody,
          MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import "../../style.css";
 
+
 export function ModalComponent(props) {
 
     const tooltip = `${props.state.registerUser ? ("Click to Login"):("Click here to register new user.")}`
@@ -126,13 +127,15 @@ export function ModalComponent(props) {
                           && props.state.firstName
                           && props.state.lastName)}
               color="primary"
+              id="register-btn"
       >
       Register
       </MDBBtn>
      </Touchable>
      <Touchable onPress={props.handleClose}>
         <MDBBtn
-                color="secondary"
+                color="primary"
+                id="close-btn"
         >
         Close
         </MDBBtn>
@@ -181,13 +184,15 @@ export function ModalComponent(props) {
         <MDBBtn
                 disabled={!(props.state.userName && props.state.password)}
                 color="primary"
+                id="login-btn"
         >
         Login
         </MDBBtn>
      </Touchable>
      <Touchable onPress={props.handleClose}>
         <MDBBtn
-                color="secondary"
+                color="primary"
+                id="close-btn"
         >
         Close
         </MDBBtn>
