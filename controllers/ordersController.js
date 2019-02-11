@@ -52,7 +52,7 @@ module.exports = {
                   });
                   const mailOptions = {
                     from: 'parts2pieces.info@gmail.com',
-                    to: 'phillip.grider@gmail.com',
+                    to: 'marychoi13@gmail.com',
                     subject: 'Sending Email using Node.js',
                     text: `That was easy! ${JSON.stringify(newOrder)}`
                   };
