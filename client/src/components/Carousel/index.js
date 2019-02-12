@@ -33,8 +33,7 @@ const CarouselPage = () => {
             </MDBView>
             <MDBCarouselCaption>
               <h3 className="h3-responsive">Our Goal</h3>
-              <p>To help nonprofits meet their mission by immediately connecting the “purpose” in need to the “part” that’s needed
-</p>
+              <p>To help nonprofits meet their mission by immediately connecting the “purpose” in need to the “part” that’s needed</p>
             </MDBCarouselCaption>
           </MDBCarouselItem>
         </MDBCarouselInner>
