@@ -150,7 +150,6 @@ export function ModalComponent(props) {
           name="userName"
           placeholder="Enter User Name"
           label="User Name"
-          // pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
           smallname="form-text text-muted"
           smalltext="We'll never share your information with anyone else."
           required="required"
