@@ -243,9 +243,7 @@ class SearchContainer extends Component {
       _id: this.state._id,
       data: this.cartItems
     };
-
     this.sendOrder(completedOrder);
-
     //Reset the cart after order submitted
     this.orders = [];
   }//function
@@ -313,7 +311,6 @@ class SearchContainer extends Component {
   ****************************/
   //Disables the add button for items already in the cart
   disableCartItemsAddBtn = () => {
-    // let cartItems = document.querySelectorAll("button[data-cart-item-id]");
     for (let i = 0; i < this.cartItems.length; i++) {
       let addBtnId = this.cartItems[i]._id;
       let addBtnElement = document.getElementById(addBtnId);
@@ -322,7 +319,8 @@ class SearchContainer extends Component {
       }//if
     }//for
   }
-  //Disable the submit button if any delete buttons on the page are disabled
+  //Disable the submit button if any delete buttons on
+  //the page are disabled
   disableCartSubmitBtn = () => {
     let shouldDisableSubmitBtn = false;
     let deleteBtnElem = document.querySelectorAll("button[data-cart-item-id]");
