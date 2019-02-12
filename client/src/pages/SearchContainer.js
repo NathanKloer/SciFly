@@ -375,8 +375,10 @@ class SearchContainer extends Component {
                           </Touchable>
                         </span>:("")}
             <br />
-            <h3>Organization: {this.state.organization.split('_').join(' ')}</h3>
-            <h5>Search by Category</h5>
+            <h3 className="font-weight-bold">Organization: {this.state.organization.split('_').join(' ')} Inventory</h3>
+            <br />
+            <h6 className="font-italic">Please feel free to browse the available inventory below. Inventories can be filtered by Category. If there is an item of interest, it can be added to the cart once logged in.</h6>
+            <br />
             <CategorySearchList catSearchEvent={this.handleCatSearch} />
             <div className="top-margin">
               <Row>
