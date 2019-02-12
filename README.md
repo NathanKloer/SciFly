@@ -32,14 +32,16 @@ Our goal is to provide an IT solution that would make the process easier for sma
 ### **Technologies Used**
 
 - React
-- React-Modal
 - HTML
 - CSS
+- Bootstrap
 - MDBootstrap (Material Design for Bootstrap)
+- RC Touchable (To enable touch capabilities on mobile devices)
+- NodeMailer (To enable e-mails)
+- Bcrypt (Login encryption)
 - Express
 - Mongoose /MongoDB
 - Node
-- Bycrypt (Login encryption)
 - Javascript/JQuery
 - ESLint
 - Heroku
