@@ -4,7 +4,6 @@ import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard,
         } from "mdbreact";
 import Touchable from 'rc-touchable';
 import "./style.css";
-//import "../../style.css";
 
 export function InventoryTableBody(props) {
   return (

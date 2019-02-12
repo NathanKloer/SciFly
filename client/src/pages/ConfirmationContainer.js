@@ -47,17 +47,24 @@ class ConfirmationContainer extends Component {
         <MDBContainer>
           {this.props.location.state?(
           <MDBCard className="main-confirmation my-5 px-5 pb-5">
-            <h1>Request Confirmation</h1>
-            <h3>User: {this.props.location.state.order[0].userName}</h3>
-            <h3>Organization: {this.props.location.state.order[0].organization}</h3>
-            <h3>Order ID: {this.props.location.state.order[0].orderId}</h3>
+            <h3 className="font-weight-bold">Request Confirmation</h3>
+            <br />
+            <h6 className="font-italic">Thank you for your order request! You will receive an email confirmation with your Order ID. Please print this page for your records. Someone from {this.props.location.state.order[0].organization} will be in touch with you to schedule an appointment or delivery.</h6>
+            <br />
+            <h6 className="font-italic">Thank you for using Parts-to-Purpose; we hope that you will be able to put these parts to good purpose!</h6>
+            <hr />
+            <h6 className="font-weight-normal">User: &nbsp; {this.props.location.state.order[0].userName}</h6>
+            <h6 className="font-weight-normal">Organization: &nbsp; {this.props.location.state.order[0].organization}</h6>
+            <h6 className="font-weight-normal">Order ID: &nbsp; {this.props.location.state.order[0].orderId}</h6>
+            <hr />
             <div>
-              <h3>Items Ordered:</h3>
+              <h6 className="text-uppercase font-weight-bold">Items Ordered:</h6>
+              <br />
               <ol>
                 {this.props.location.state.order.map(product => {
 
                   return (
-                    <p key={product._id}><li>Name: {product.productName} | Quantity: {product.orderQuantity}</li></p>
+                    <p key={product._id}><li>&nbsp;&nbsp;Item Name: &nbsp;{product.productName} &nbsp;| &nbsp;Quantity: {product.orderQuantity}</li></p>
                   )
                 })
                 }
