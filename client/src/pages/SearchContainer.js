@@ -58,7 +58,7 @@ class SearchContainer extends Component {
     _id: ''
   };
 
-  componentDidMount() {
+  componentWillMount() {
     /************************************************************
      * Determine the correct organization: Pull the organization
      * directly from the URL(/search/Georgia_BioEd)
@@ -122,6 +122,8 @@ class SearchContainer extends Component {
   loadInventoryByOrganization = (baseURL, organization, cb) => {
     API.getInventoryByOrganization(baseURL, organization)
       .then(res => {
+        this.cartItems = [];
+        this.setState({ cartItems: [] });
         //callback to store state variables
         cb(res);
       })
