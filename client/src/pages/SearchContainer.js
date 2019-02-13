@@ -58,7 +58,7 @@ class SearchContainer extends Component {
     _id: ''
   };
 
-  componentDidMount() {
+  componentWillMount() {
     /************************************************************
      * Determine the correct organization: Pull the organization
      * directly from the URL(/search/Georgia_BioEd)

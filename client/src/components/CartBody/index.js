@@ -21,7 +21,7 @@ import { MDBContainer, MDBCard, MDBTable, MDBRow,
                     <th className="align-middle w-75">Item</th>
                     <th className="align-middle w-50">Description</th>
                     <MDBTooltip
-                      placement="top"
+                      placement="bottom"
                       tag="th"
                       className="align-middle text-center w-50"
                       tooltipContent="Unit of Measure">
