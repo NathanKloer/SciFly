@@ -40,4 +40,3 @@ export function CartModal (props) {
       </MDBModalFooter>
     </MDBModal>
     )}
-// }
