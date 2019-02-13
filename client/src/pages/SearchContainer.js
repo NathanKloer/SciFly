@@ -122,6 +122,8 @@ class SearchContainer extends Component {
   loadInventoryByOrganization = (baseURL, organization, cb) => {
     API.getInventoryByOrganization(baseURL, organization)
       .then(res => {
+        this.cartItems = [];
+        this.setState({ cartItems: [] });
         //callback to store state variables
         cb(res);
       })
