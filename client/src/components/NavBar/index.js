@@ -69,17 +69,21 @@ class NavBar extends Component {
                           }
     API.userLogin(newUserLogin)
     .then(res => {
+
       if(res.data !== "Incorrect Password"){
+       console.log(res.data);
         this.props.idChanged(res.data._id, res.data.userName);
         this.setState({
           login: true,
           loggedInUser: res.data.firstName + " " + res.data.lastName,
           _id: res.data._id
             })
-        document.cookie = `_uid=${this.props.currentId};`;
-        this.handleClose();
+
         this.setState({
+          show: false,
+          registerUser: false,
           login: true,
+          loginError: false,
           loggedInUser: this.state.firstName + " " + this.state.lastName,
           email: "",
           password: "",
@@ -89,11 +93,12 @@ class NavBar extends Component {
           school: "",
           district: "",
           selectedCourse: "",
-          loginError: false,
           registerError: false,
           invalidEmail: false
           });
-      }else{
+        document.cookie = `_uid=${res.data._id};`;
+          window.location.reload();
+      }else if(res.data === "Incorrect Password"){
         this.setState({loginError: true})
       }
     })
@@ -206,7 +211,7 @@ class NavBar extends Component {
             <strong className="white-text" >Parts-to-Purpose</strong>
               <img  className="navicon d-inline-block align-top"
                     alt="P2P"
-                    src={window.location.origin + "/img/p2pnticon.png"}
+                    src={"/img/p2pnticon.png"}
                     href="/"
                     style={{marginTop: 0, marginLeft: 10}}/>
             </a>
