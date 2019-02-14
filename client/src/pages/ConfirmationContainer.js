@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import ReactToPrint from "react-to-print";
 import API from "../utils/API";
-import {  MDBContainer, MDBCard, MDBRow } from "mdbreact";
+import {  MDBContainer, MDBCard, MDBRow, MDBIcon } from "mdbreact";
+
 import "../style.css";
 
-class ConfirmationContainer extends Component {
+class ConfirmationContainerToPrint extends Component {
     constructor(){
       super();
 
@@ -83,6 +85,31 @@ class ConfirmationContainer extends Component {
 
     );//return
   }//render
+}
+
+class ConfirmationContainer extends Component {
+  render() {
+    return (
+      <div>
+        <ReactToPrint
+          trigger={() =>
+                        <div className="text-center">
+                            <button
+                                    className="link-button"
+                                    color="info"
+                                    size="sm">
+                                    <MDBIcon icon="print" /> Print Confirmation
+                            </button>
+                        </div>
+                    }
+          content={() => this.componentRef}
+        />
+        <ConfirmationContainerToPrint
+          {...this.props}
+          ref={el => (this.componentRef = el)} />
+      </div>
+    );
+  }
 }
 
 export default ConfirmationContainer;
