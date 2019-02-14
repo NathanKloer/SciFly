@@ -48,6 +48,9 @@ class App extends Component {
     //IMPORTANT: Automatically reset the selection, so the page
     //will be refreshed if the same organization is selected.
     document.getElementById('ddlOrgList').selectedIndex = 0;
+
+    //refresh page when new org selected.
+    window.location.reload();
   };
 //Populates the ddlOrgList values
   getDDLOrganizationValues = (cb) => {
@@ -82,7 +85,7 @@ class App extends Component {
               <Route exact path="/home/:organization" component={HomeContainer} />
               {/* Pass the selected organization to the SearchContainer Page for a re-render*/}
               <Route exact path="/search/:organization"
-                component={() => <SearchUpdate organization = {this.state.organization}/>} />
+                render={() => <SearchUpdate organization = {this.state.organization}/>} />
               <Route exact path="/confirmation/:orderId" component={ConfirmationContainer} />
               <Route exact path="/donate" component={DonateContainer} />
               <Route component={NoMatch} />
